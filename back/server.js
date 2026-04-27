@@ -38,7 +38,8 @@ app.use(cors({
   origin: [
     'http://localhost:4200',
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://localhost:3001',
+    'https://distrisport.vercel.app'
   ],
   credentials: true
 }));
