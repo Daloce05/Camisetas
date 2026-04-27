@@ -1,0 +1,57 @@
+// Letra blanca en zonas oscuras
+.section-dark, .navbar, .sidebar, .footer, .hero, .category-card, .product-card {
+  color: #fff !important;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f9f7fc;
+  color: #181818;
+  line-height: 1.7;
+  font-weight: 500;
+  font-size: 1.08rem;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+a, h1, h2, h3, h4, h5, h6, label, p, span, button, input, textarea, select {
+  color: #181818;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f0ecf5;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #b388ff, #ff80ab);
+  border-radius: 4px;
+}
+
+::selection {
+  background: rgba(179, 136, 255, 0.3);
+  color: white;
+}
+
+input, textarea, select, button {
+  font-family: 'Inter', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
