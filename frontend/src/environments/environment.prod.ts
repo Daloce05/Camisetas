@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3001/api'
+  apiUrl: 'https://camisetas-fc0o.onrender.com/api'
 };
