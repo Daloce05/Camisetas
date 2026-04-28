@@ -61,12 +61,23 @@ import { Category } from '../../models/category.model';
     <!-- Logos Decorativos de Equipos -->
     <section class="logos-equipos-section">
       <div class="logos-equipos-container">
-        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM.jpeg" alt="Equipo 1" class="logo-equipo" />
-        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (1).jpeg" alt="Equipo 2" class="logo-equipo" />
-        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (2).jpeg" alt="Equipo 3" class="logo-equipo" />
-        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (3).jpeg" alt="Equipo 4" class="logo-equipo" />
+          <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM.jpeg" alt="Equipo 1" class="logo-equipo" />
+          <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (1).jpeg" alt="Equipo 2" class="logo-equipo" />
+          <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (2).jpeg" alt="Equipo 3" class="logo-equipo" />
+          <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (3).jpeg" alt="Equipo 4" class="logo-equipo" />
       </div>
     </section>
+      .logos-equipos-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 1.5rem 0 0.5rem 0;
+        flex-wrap: wrap;
+        max-width: 1100px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 0;
+      }
 
     <!-- Why Us -->
     <section class="section">
