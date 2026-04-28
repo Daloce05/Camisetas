@@ -50,7 +50,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
         <div class="about-bottom-block">
           <div class="about-bottom-line"></div>
           <div class="about-bottom-cta">
-            <span>¿Quieres saber más o unirte a la comunidad?</span>
+            <span class="about-bottom-question">¿Quieres saber más o unirte a la comunidad?</span>
             <button class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</button>
           </div>
         </div>
@@ -58,6 +58,14 @@ import { CommonModule, DecimalPipe } from '@angular/common';
     </section>
   `,
   styles: [`
+        .about-bottom-question {
+          color: #fff !important;
+          font-size: 1.35rem;
+          font-weight: 500;
+          text-shadow: 0 1px 8px #0006;
+          display: block;
+          margin-bottom: 1.5rem;
+        }
     .about-section-dark {
       background: #181f2a;
       color: #f2f2f2;
