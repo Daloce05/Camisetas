@@ -60,6 +60,12 @@ import { Category } from '../../models/category.model';
     </section>
   `,
   styles: [`
+        .hero .highlight {
+          color: #fff !important;
+        }
+        .section-title {
+          color: #fff !important;
+        }
     /* Forzar color blanco y negrita en el hero */
     :host ::ng-deep .hero-title,
     .hero .hero-title,

@@ -59,7 +59,7 @@ import { WhatsappService } from '../../services/whatsapp.service';
       <div class="footer-container">
         <div class="footer-grid">
           <div>
-            <h3 class="footer-logo"><img src="assets/logo.png" alt="Distrisports" class="footer-logo-img"> Distrisports</h3>
+            <h3 class="footer-logo"><img src="assets/logo.png" alt="Distrisports" class="footer-logo-img"></h3>
             <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
