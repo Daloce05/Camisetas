@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { CartService } from '../../services/cart.service';
-import { OrderService } from '../../services/order.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({

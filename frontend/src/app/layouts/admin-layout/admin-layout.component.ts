@@ -25,9 +25,6 @@ import { AuthService } from '../../services/auth.service';
           <a routerLink="/admin/categorias" routerLinkActive="active">
             <span class="nav-icon">🏷️</span> Categorías
           </a>
-          <a routerLink="/admin/pedidos" routerLinkActive="active">
-            <span class="nav-icon">🛒</span> Pedidos
-          </a>
           <a routerLink="/admin/usuarios" routerLinkActive="active">
             <span class="nav-icon">👥</span> Usuarios
           </a>
