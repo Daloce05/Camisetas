@@ -91,7 +91,7 @@ import { Category } from '../../models/category.model';
       padding: 6rem 1.5rem;
       text-align: center;
       overflow: hidden;
-      background: linear-gradient(135deg, #0a1833 0%, #1e335c 100%);
+      background: none;
       color: #fff;
     }
     .hero-bg-logo {
