@@ -387,7 +387,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
-      this.featuredProducts = res.data.products;
+      this.featuredProducts = res.data.products.map(p => ({
+        ...p,
+        precio: typeof p.precio === 'number' ? p.precio : Number(p.precio) || 0
+      }));
     });
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res.data;
