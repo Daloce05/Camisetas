@@ -51,7 +51,7 @@ import { CommonModule, DecimalPipe } from '@angular/common';
           <div class="about-bottom-line"></div>
           <div class="about-bottom-cta">
             <span class="about-bottom-question">¿Quieres saber más o unirte a la comunidad?</span>
-            <button class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</button>
+            <a class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</a>
           </div>
         </div>
       </div>
