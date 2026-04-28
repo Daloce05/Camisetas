@@ -15,7 +15,8 @@ import { Category } from '../../models/category.model';
   template: `
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-bg-logo"></div>
+      <div class="hero-bg-camisetas"></div>
+      <div class="hero-overlay"></div>
       <div class="hero-content">
         <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
         <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
@@ -94,23 +95,31 @@ import { Category } from '../../models/category.model';
       background: none;
       color: #fff;
     }
-    .hero-bg-logo {
+    .hero-bg-camisetas {
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: url('/assets/images/distrisport.png') center center no-repeat;
+      background: url('/assets/images/camisetas.jpg') center center no-repeat;
       background-size: cover;
       width: 100%;
       height: 100%;
-      opacity: 0.13;
-      filter: brightness(0.3) grayscale(1);
+      filter: brightness(0.5) grayscale(0.2);
+      pointer-events: none;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(90deg, rgba(10,24,51,0.85) 0%, rgba(10,24,51,0.45) 50%, rgba(10,24,51,0.05) 100%);
       pointer-events: none;
     }
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       max-width: 700px;
       margin: 0 auto;
+      text-align: left;
+      padding-left: 2rem;
     }
     .hero-title, .hero-desc {
       color: #fff !important;
