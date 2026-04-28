@@ -28,6 +28,12 @@ import { CommonModule } from '@angular/common';
             <a class="contact-link" href="mailto:Distrisportcamisetasdefutbol@gmail.com">Distrisportcamisetasdefutbol&#64;gmail.com</a>
             <div class="contact-card-desc">Respuestas en menos de 24 horas.</div>
           </div>
+          <div class="contact-card">
+            <div class="contact-icon">📘</div>
+            <div class="contact-card-title">Facebook</div>
+            <a class="contact-link" href="https://lacanchatiendadeportiva.com.co/?srsltid=AfmBOorf_GadhpAejo2PSwFqj8t7f03wi2SwUtoVK2KT01jycBsphPgw" target="_blank" rel="noopener">La Cancha Tienda Deportiva</a>
+            <div class="contact-card-desc">Síguenos y contáctanos por Facebook.</div>
+          </div>
         </div>
         <div class="contact-bottom-block">
           <div class="contact-bottom-line"></div>
