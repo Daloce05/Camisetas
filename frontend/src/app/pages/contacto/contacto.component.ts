@@ -38,13 +38,21 @@ import { CommonModule } from '@angular/common';
         <div class="contact-bottom-block">
           <div class="contact-bottom-line"></div>
           <div class="contact-bottom-cta">
-            <span>¡Te responderemos lo más pronto posible!</span>
+            <span class="contact-bottom-message">¡Te responderemos lo más pronto posible!</span>
           </div>
         </div>
       </div>
     </section>
   `,
   styles: [`
+        .contact-bottom-message {
+          color: #fff !important;
+          font-size: 1.35rem;
+          font-weight: 500;
+          text-shadow: 0 1px 8px #0006;
+          display: block;
+          margin-top: 1.5rem;
+        }
     .contact-section-dark {
       background: #181f2a;
       color: #f2f2f2;
