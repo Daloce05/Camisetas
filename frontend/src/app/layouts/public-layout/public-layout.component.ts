@@ -79,6 +79,11 @@ import { WhatsappService } from '../../services/whatsapp.service';
           <small style="display:block; margin-top:4px; color:#fff; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
         </div>
       </div>
+      <div class="envio-banner">
+        <div class="envio-banner-track">
+          <span>ENVIOS GRATIS A PARTIR DE $200.000 COP 🚚 Aplican TyC</span>
+        </div>
+      </div>
     </footer>
   `,
   styles: [`
@@ -254,6 +259,40 @@ import { WhatsappService } from '../../services/whatsapp.service';
       text-align: center;
       color: #fff;
       font-size: 0.85rem;
+    }
+    .envio-banner {
+      width: 100vw;
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      z-index: 2000;
+      background: linear-gradient(90deg, #d3ed05 60%, #3a5ba0 100%);
+      color: #1e335c;
+      font-weight: bold;
+      font-size: 1.1rem;
+      overflow: hidden;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 -2px 10px rgba(10,24,51,0.08);
+      border-top: 2px solid #3a5ba0;
+    }
+    .envio-banner-track {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      animation: banner-move 18s linear infinite;
+      width: max-content;
+      padding-left: 100vw;
+    }
+    .envio-banner-track span {
+      padding: 0 2rem;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 2px #fff8, 0 0 2px #3a5ba044;
+    }
+    @keyframes banner-move {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100vw); }
     }
   `]
 })
