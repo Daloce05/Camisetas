@@ -11,7 +11,7 @@ import { UserService } from '../../../services/user.service';
   imports: [CommonModule, RouterLink],
   template: `
     <div class="dashboard">
-      <h1>Dashboard — Sabina Medicina</h1>
+      <h1>Dashboard — Distrisports</h1>
 
       <div class="stats-grid">
         <div class="stat-card highlight">

@@ -59,22 +59,22 @@ import { WhatsappService } from '../../services/whatsapp.service';
         <div class="footer-grid">
           <div>
             <h3 class="footer-logo"><img src="assets/images/distrisport.png" alt="Distrisports" class="footer-logo-img"></h3>
-            <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
+            <p style="color: #fff;">Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
-            <h4 style="color: #d3ed05;">Enlaces</h4>
-            <a routerLink="/" style="color: #d3ed05;">Inicio</a>
-            <a routerLink="/productos" style="color: #d3ed05;">Productos</a>
+            <h4 style="color: #fff;">Enlaces</h4>
+            <a routerLink="/" style="color: #fff;">Inicio</a>
+            <a routerLink="/productos" style="color: #fff;">Productos</a>
           </div>
           <div>
-            <h4 style="color: #d3ed05;">Contacto</h4>
-            <p style="color: #d3ed05;">info&#64;camisetas.com</p>
-            <p style="color: #d3ed05;">3177239970</p>
+            <h4 style="color: #fff;">Contacto</h4>
+            <p style="color: #fff;">info&#64;camisetas.com</p>
+            <p style="color: #fff;">3177239970</p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p style="color: #d3ed05;">&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
-          <small style="display:block; margin-top:4px; color:#b0b6c3; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
+          <p style="color: #fff;">&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
+          <small style="display:block; margin-top:4px; color:#fff; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
         </div>
       </div>
     </footer>
