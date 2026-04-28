@@ -9,6 +9,7 @@ export const routes: Routes = [
       { path: '', loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent) },
       { path: 'productos', loadComponent: () => import('./pages/products/products.component').then(m => m.ProductsComponent) },
       { path: 'producto/:id', loadComponent: () => import('./pages/product-detail/product-detail.component').then(m => m.ProductDetailComponent) },
+      { path: 'quienes-somos', loadComponent: () => import('./pages/about/about.component').then(m => m.AboutComponent) },
       { path: 'login', loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent), canActivate: [guestGuard] },
       { path: 'registro', loadComponent: () => import('./pages/register/register.component').then(m => m.RegisterComponent), canActivate: [guestGuard] },
     ]

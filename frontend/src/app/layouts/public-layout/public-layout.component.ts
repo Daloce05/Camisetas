@@ -20,6 +20,7 @@ import { WhatsappService } from '../../services/whatsapp.service';
         <div class="nav-links">
           <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: #d3ed05;">Inicio</a>
           <a routerLink="/productos" routerLinkActive="active" style="color: #d3ed05;">Productos</a>
+          <a routerLink="/quienes-somos" routerLinkActive="active" style="color: #d3ed05;">¿Quiénes Somos?</a>
         </div>
 
         <div class="nav-actions">
