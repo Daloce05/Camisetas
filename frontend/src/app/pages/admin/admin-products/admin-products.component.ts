@@ -289,3 +289,10 @@ export class AdminProductsComponent implements OnInit {
     }
   }
 }
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Product } from '../../models/product.model';
+import { Category } from '../../models/category.model';
+import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
