@@ -1,30 +1,4 @@
 
-  tallaInput: string = '';
-  stockInput: number = 0;
-  tallasPredefinidas: string[] = ['S', 'M', 'L', 'XL', 'Única'];
-
-  addTalla() {
-    if (!this.tallaInput || this.stockInput < 0) return;
-    const exists = this.form.tallas.some(t => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
-    if (exists) return;
-    this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
-
-  tallaInput: string = '';
-  stockInput: number = 0;
-  tallasPredefinidas: string[] = ['S', 'M', 'L', 'XL', 'Única'];
-
-  addTalla() {
-    if (!this.tallaInput || this.stockInput < 0) return;
-    const exists = this.form.tallas.some((t: any) => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
-    if (exists) return;
-    this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
-    this.tallaInput = '';
-    this.stockInput = 0;
-  }
-
-  removeTalla(index: number) {
-    this.form.tallas.splice(index, 1);
-  }
 @Component({
   selector: 'app-admin-products',
   standalone: true,
