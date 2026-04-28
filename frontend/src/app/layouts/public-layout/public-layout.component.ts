@@ -14,7 +14,6 @@ import { WhatsappService } from '../../services/whatsapp.service';
       <div class="nav-container">
         <a routerLink="/" class="logo">
           <img src="assets/logo.png" alt="Distrisports" class="logo-img">
-          <span class="logo-text">Distrisports</span>
         </a>
 
         <div class="nav-links">
@@ -70,11 +69,12 @@ import { WhatsappService } from '../../services/whatsapp.service';
           <div>
             <h4>Contacto</h4>
             <p>info&#64;camisetas.com</p>
-            <p>+1 234 567 890</p>
+            <p>3177239970</p>
           </div>
         </div>
         <div class="footer-bottom">
           <p>&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
+          <small style="display:block; margin-top:4px; color:#b0b6c3; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
         </div>
       </div>
     </footer>
