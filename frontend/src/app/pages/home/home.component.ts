@@ -42,8 +42,6 @@ import { Category } from '../../models/category.model';
         <div class="circle c3"></div>
       </div>
     </section>
-      </div>
-    </section>
 
     <!-- Why Us -->
     <section class="section">
