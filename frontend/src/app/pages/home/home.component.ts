@@ -386,12 +386,21 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
-      this.featuredProducts = res.data.products.map(p => ({
-        ...p,
-        precio: typeof p.precio === 'number' ? p.precio : Number(p.precio) || 0
-      }));
-    });
+      this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
+        this.featuredProducts = res.data.products.map(p => {
+          let precioNum: number | null = null;
+          if (typeof p.precio === 'number') {
+            precioNum = p.precio;
+          } else if (typeof p.precio === 'string' && p.precio.trim() !== '' && !isNaN(Number(p.precio))) {
+            precioNum = Number(p.precio);
+          }
+          // Si sigue siendo null o NaN, no asignar 0 por defecto
+          return {
+            ...p,
+            precio: (typeof precioNum === 'number' && !isNaN(precioNum)) ? precioNum : null
+          };
+        });
+      });
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res.data;
     });
