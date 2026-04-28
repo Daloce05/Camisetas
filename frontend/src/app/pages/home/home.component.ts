@@ -15,6 +15,7 @@ import { Category } from '../../models/category.model';
   template: `
     <!-- Hero Section -->
     <section class="hero">
+      <div class="hero-bg-logo"></div>
       <div class="hero-content">
         <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
         <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
@@ -92,6 +93,26 @@ import { Category } from '../../models/category.model';
       overflow: hidden;
       background: linear-gradient(135deg, #0a1833 0%, #1e335c 100%);
       color: #fff;
+    }
+    .hero-bg-logo {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: url('assets/images/distrisport.png') center center no-repeat;
+      background-size: 400px 400px;
+      opacity: 0.13;
+      filter: brightness(0.3) grayscale(1);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .hero-title, .hero-desc {
+      color: #fff !important;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.7), 0 1px 0 #000;
     }
     .hero-content {
       position: relative;
