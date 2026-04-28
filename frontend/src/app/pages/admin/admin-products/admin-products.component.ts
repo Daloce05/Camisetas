@@ -8,6 +8,16 @@
     const exists = this.form.tallas.some(t => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
     if (exists) return;
     this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
+
+  tallaInput: string = '';
+  stockInput: number = 0;
+  tallasPredefinidas: string[] = ['S', 'M', 'L', 'XL', 'Única'];
+
+  addTalla() {
+    if (!this.tallaInput || this.stockInput < 0) return;
+    const exists = this.form.tallas.some((t: any) => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
+    if (exists) return;
+    this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
     this.tallaInput = '';
     this.stockInput = 0;
   }
@@ -15,14 +25,6 @@
   removeTalla(index: number) {
     this.form.tallas.splice(index, 1);
   }
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ProductService } from '../../../services/product.service';
-import { CategoryService } from '../../../services/category.service';
-import { Product } from '../../../models/product.model';
-import { Category } from '../../../models/category.model';
-
 @Component({
   selector: 'app-admin-products',
   standalone: true,
@@ -145,7 +147,7 @@ import { Category } from '../../../models/category.model';
       color: #181818;
       background: none;
               <th>Tallas/Stock</th>
-      -webkit-text-fill-color: unset;
+
     }
     .section-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
