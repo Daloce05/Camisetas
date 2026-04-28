@@ -34,7 +34,7 @@ import { Product } from '../../models/product.model';
               <button (click)="quantity < product.stock && quantity = quantity + 1" class="qty-btn">+</button>
             </div>
             <button class="btn-add-lg" (click)="contactWhatsApp()" [disabled]="product.stock === 0">
-              {{ product.stock > 0 ? 'Consultar por WhatsApp 💬' : 'Sin Stock' }}
+              {{ product.stock > 0 ? 'Cotizar por WhatsApp 💬' : 'Sin Stock' }}
             </button>
           </div>
         </div>
@@ -58,13 +58,13 @@ import { Product } from '../../models/product.model';
     .detail-img img { width: 100%; height: 100%; object-fit: cover; }
     .placeholder { font-size: 6rem; }
     .category-tag {
-      color: #ff80ab; font-size: 0.85rem; font-weight: 600;
+      color: #d3ed05; font-size: 0.85rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: 1px;
     }
     .detail-info h1 { color: #2d2d3f; font-size: 1.8rem; margin: 0.5rem 0; }
     .price {
       font-size: 2rem; font-weight: 700; margin: 0.5rem 0;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }

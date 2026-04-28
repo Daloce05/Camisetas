@@ -260,7 +260,7 @@ import { Category } from '../../models/category.model';
     }
     .product-info { padding: 1.2rem; }
     .product-category {
-      color: #ff80ab;
+      color: #d3ed05;
       font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
@@ -284,7 +284,7 @@ import { Category } from '../../models/category.model';
     .product-price {
       font-size: 1.3rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
