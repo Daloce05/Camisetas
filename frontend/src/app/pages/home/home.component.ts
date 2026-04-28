@@ -32,6 +32,7 @@ import { Category } from '../../models/category.model';
       </div>
     </section>
 
+
     <!-- Featured Products -->
     <section class="section">
       <div class="container">
@@ -54,6 +55,16 @@ import { Category } from '../../models/category.model';
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Logos Decorativos de Equipos -->
+    <section class="logos-equipos-section">
+      <div class="logos-equipos-container">
+        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM.jpeg" alt="Equipo 1" class="logo-equipo" />
+        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (1).jpeg" alt="Equipo 2" class="logo-equipo" />
+        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (2).jpeg" alt="Equipo 3" class="logo-equipo" />
+        <img src="assets/images/WhatsApp Image 2026-04-28 at 2.58.58 PM (3).jpeg" alt="Equipo 4" class="logo-equipo" />
       </div>
     </section>
 
