@@ -61,47 +61,22 @@ import { Category } from '../../models/category.model';
         <div class="circle c2"></div>
         <div class="circle c3"></div>
       </div>
-    </section>
-
-    <!-- Categories -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Nuestras Categorías</h2>
-        <div class="categories-grid">
-          <a *ngFor="let cat of categories" [routerLink]="['/productos']" [queryParams]="{categoryId: cat.id}" class="category-card">
-            <div class="category-icon">👕</div>
-            <h3>{{ cat.nombre }}</h3>
-            <p>{{ cat.descripcion }}</p>
-          </a>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
+        <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
+        <div class="hero-buttons">
+          <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
+          <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
         </div>
       </div>
+      <div class="hero-decoration">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="circle c3"></div>
+      </div>
     </section>
-
-    <!-- Featured Products -->
-    <section class="section section-dark">
-      <div class="container">
-        <h2 class="section-title">Camisetas Destacadas</h2>
-        <div class="products-grid">
-          <div *ngFor="let product of featuredProducts" class="product-card">
-            <div class="product-img">
-              <img *ngIf="product.imagen" [src]="product.imagen.startsWith('http') ? product.imagen : 'https://camisetas-utf1.onrender.com' + product.imagen" [alt]="product.nombre">
-              <div *ngIf="!product.imagen" class="product-placeholder">👕</div>
-              <span class="product-badge" *ngIf="product.destacado">Destacada</span>
-            </div>
-            <div class="product-info">
-              <span class="product-category">{{ product.categoria?.nombre }}</span>
-              <h3>{{ product.nombre }}</h3>
-              <p class="product-desc">{{ product.descripcion | slice:0:80 }}...</p>
-              <div class="product-footer">
-                <span class="product-price">\${{ product.precio }}</span>
-                <button class="btn-add" (click)="contactWhatsApp(product)">Consultar 💬</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center" style="margin-top: 2rem;">
-          <a routerLink="/productos" class="btn-primary-lg">Ver Todas las Camisetas</a>
-        </div>
       </div>
     </section>
 
