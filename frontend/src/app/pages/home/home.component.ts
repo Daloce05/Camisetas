@@ -379,6 +379,39 @@ import { Category } from '../../models/category.model';
     }
     .btn-add:hover { opacity: 0.85; }
 
+    .logos-equipos-section {
+      width: 100%;
+      background: none;
+      margin: 0;
+      padding: 0 0 2.5rem 0;
+      display: flex;
+      justify-content: center;
+    }
+    .logos-equipos-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 1.5rem 0 0.5rem 0;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      gap: 0;
+    }
+    .logo-equipo {
+      height: 70px;
+      width: auto;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #0002;
+      background: #fff;
+      object-fit: contain;
+      padding: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .logo-equipo:hover {
+      transform: scale(1.08) rotate(-2deg);
+      box-shadow: 0 8px 32px #b388ff33;
+    }
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
