@@ -188,14 +188,22 @@ export class ProductsComponent implements OnInit {
 
     this.productService.getProducts(params).subscribe(res => {
       this.products = res.data.products.map((p: any) => {
+        // Normalizar tallas
         if (!Array.isArray(p.tallas)) {
-          try {
-            p.tallas = JSON.parse(p.tallas);
-          } catch {
-            p.tallas = [];
-          }
+          try { p.tallas = JSON.parse(p.tallas); } catch { p.tallas = []; }
         }
         if (!Array.isArray(p.tallas)) p.tallas = [];
+        // Normalizar campos críticos
+        p.id = typeof p.id === 'number' ? p.id : 0;
+        p.nombre = typeof p.nombre === 'string' ? p.nombre : '';
+        p.descripcion = typeof p.descripcion === 'string' ? p.descripcion : '';
+        p.precio = typeof p.precio === 'number' ? p.precio : 0;
+        p.imagen = typeof p.imagen === 'string' ? p.imagen : null;
+        p.categoryId = typeof p.categoryId === 'number' ? p.categoryId : 0;
+        p.destacado = typeof p.destacado === 'boolean' ? p.destacado : false;
+        p.activo = typeof p.activo === 'boolean' ? p.activo : true;
+        p.categoria = p.categoria && typeof p.categoria === 'object' ? p.categoria : { id: 0, nombre: '' };
+        p.createdAt = typeof p.createdAt === 'string' ? p.createdAt : '';
         return p;
       });
       this.totalPages = res.data.totalPages;
