@@ -187,7 +187,17 @@ export class ProductsComponent implements OnInit {
     if (this.selectedCategory) params.categoryId = this.selectedCategory;
 
     this.productService.getProducts(params).subscribe(res => {
-      this.products = res.data.products;
+      this.products = res.data.products.map((p: any) => {
+        if (!Array.isArray(p.tallas)) {
+          try {
+            p.tallas = JSON.parse(p.tallas);
+          } catch {
+            p.tallas = [];
+          }
+        }
+        if (!Array.isArray(p.tallas)) p.tallas = [];
+        return p;
+      });
       this.totalPages = res.data.totalPages;
     });
   }
