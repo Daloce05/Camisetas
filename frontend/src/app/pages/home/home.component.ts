@@ -49,7 +49,7 @@ import { Category } from '../../models/category.model';
               <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
               <div class="product-footer">
                 <span class="product-price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
-                <a [routerLink]="['/producto', product.id]" class="btn-add">Ver</a>
+                <button class="btn-add" (click)="contactWhatsApp(product)">Cotizar 💬</button>
               </div>
             </div>
           </div>
