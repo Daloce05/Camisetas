@@ -87,6 +87,13 @@ import { WhatsappService } from '../../services/whatsapp.service';
     </footer>
   `,
   styles: [`
+        /* Botón de contacto especial */
+        .contact-btn {
+          color: #fff !important;
+          font-weight: bold;
+          font-size: 1.15rem;
+          text-shadow: 0 1px 8px #0008;
+        }
     .navbar {
       background: rgba(10, 24, 51, 0.98);
       color: #fff;
