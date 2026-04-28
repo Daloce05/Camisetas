@@ -31,41 +31,6 @@ import { Category } from '../../models/category.model';
       <div class="hero-content">
         <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
         <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
-            .hero-title {
-              color: #fff;
-              font-size: 2.7rem;
-              font-weight: 800;
-              text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-              margin-bottom: 1.2rem;
-            }
-            .hero-desc {
-              color: #fff;
-              font-size: 1.25rem;
-              font-weight: 600;
-              text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-              margin-bottom: 2rem;
-            }
-            .btn-primary-lg, .btn-outline-lg {
-              font-size: 1.1rem;
-              font-weight: 700;
-              box-shadow: 0 2px 8px rgba(30,51,92,0.18);
-              letter-spacing: 0.02em;
-            }
-        <div class="hero-buttons">
-          <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
-          <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
-        </div>
-      </div>
-      <div class="hero-decoration">
-        <div class="circle c1"></div>
-        <div class="circle c2"></div>
-        <div class="circle c3"></div>
-      </div>
-    <!-- Hero Section -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
-        <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
         <div class="hero-buttons">
           <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
           <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
