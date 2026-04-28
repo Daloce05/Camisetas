@@ -128,13 +128,14 @@ export class ProductDetailComponent implements OnInit {
   }
 
   hasStock(): boolean {
-    if (!this.product?.tallas || this.product.tallas.length === 0) return false;
+    const tallas = Array.isArray(this.product?.tallas) ? this.product.tallas : [];
+    if (tallas.length === 0) return false;
     if (!this.selectedTalla) {
       // Si no seleccionó talla, hay stock si alguna talla tiene stock
-      return this.product.tallas.some(t => t.stock > 0);
+      return tallas.some(t => t && typeof t.stock === 'number' && t.stock > 0);
     }
-    const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
-    return !!t && t.stock > 0;
+    const t = tallas.find(t => t && t.talla === this.selectedTalla);
+    return !!t && typeof t.stock === 'number' && t.stock > 0;
   }
 
   incrementQty() {

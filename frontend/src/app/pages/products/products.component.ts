@@ -198,7 +198,8 @@ export class ProductsComponent implements OnInit {
   }
 
   hasStock(product: Product): boolean {
-    return product.tallas && product.tallas.some(t => t.stock > 0);
+    const tallas = Array.isArray(product.tallas) ? product.tallas : [];
+    return tallas.some(t => t && typeof t.stock === 'number' && t.stock > 0);
   }
 
   contactWhatsApp(product: Product) {
