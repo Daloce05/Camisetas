@@ -98,7 +98,7 @@ import { Category } from '../../models/category.model';
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: url('assets/images/distrisport.png') center center no-repeat;
+      background: url('/assets/images/distrisport.png') center center no-repeat;
       background-size: 400px 400px;
       opacity: 0.13;
       filter: brightness(0.3) grayscale(1);
