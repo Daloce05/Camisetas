@@ -13,8 +13,8 @@ import { WhatsappService } from '../../services/whatsapp.service';
     <nav class="navbar">
       <div class="nav-container">
         <a routerLink="/" class="logo">
-          <img src="assets/logo.png" alt="Camisetas" class="logo-img">
-          <span class="logo-text">Camisetas</span>
+          <img src="assets/logo.png" alt="Distrisports" class="logo-img">
+          <span class="logo-text">Distrisports</span>
         </a>
 
         <div class="nav-links">
@@ -59,8 +59,8 @@ import { WhatsappService } from '../../services/whatsapp.service';
       <div class="footer-container">
         <div class="footer-grid">
           <div>
-            <h3 class="footer-logo"><img src="assets/logo.png" alt="Camisetas" class="footer-logo-img"> Camisetas</h3>
-            <p>Tu tienda de camisetas originales, réplicas y accesorios para fanáticos del fútbol.</p>
+            <h3 class="footer-logo"><img src="assets/logo.png" alt="Distrisports" class="footer-logo-img"> Distrisports</h3>
+            <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
             <h4>Enlaces</h4>
@@ -74,7 +74,7 @@ import { WhatsappService } from '../../services/whatsapp.service';
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 Camisetas Ecommerce. Todos los derechos reservados.</p>
+          <p>&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
         </div>
       </div>
     </footer>
