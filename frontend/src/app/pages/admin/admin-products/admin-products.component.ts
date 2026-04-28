@@ -260,11 +260,21 @@ export class AdminProductsComponent implements OnInit {
       return;
     }
 
+    // Validar tallas: solo objetos válidos { talla, stock }
+    let tallas = Array.isArray(this.form.tallas)
+      ? this.form.tallas.filter(t => t && typeof t.talla === 'string' && t.talla.length > 0 && typeof t.stock === 'number' && t.stock >= 0)
+      : [];
+
+    // Si no hay tallas válidas, advertir
+    if (tallas.length === 0) {
+      if (!confirm('No se han agregado tallas válidas. ¿Deseas continuar y crear el producto sin tallas?')) return;
+    }
+
     const formData = new FormData();
     formData.append('nombre', this.form.nombre);
     formData.append('descripcion', this.form.descripcion);
     formData.append('precio', this.form.precio.toString());
-    formData.append('tallas', JSON.stringify(this.form.tallas));
+    formData.append('tallas', JSON.stringify(tallas));
     formData.append('categoryId', this.form.categoryId!.toString());
     formData.append('destacado', this.form.destacado.toString());
     if (this.selectedFile) formData.append('imagen', this.selectedFile);
