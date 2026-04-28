@@ -63,8 +63,20 @@ const productController = {
   // POST /api/products (admin)
   async crear(req, res) {
     try {
-      const { nombre, descripcion, precio, tallas, categoryId, destacado } = req.body;
+      const { nombre, descripcion, precio, categoryId, destacado } = req.body;
+      let { tallas } = req.body;
       let imagen = null;
+
+      // Normalizar tallas: debe ser array de objetos { talla, stock }
+      if (typeof tallas === 'string') {
+        try {
+          tallas = JSON.parse(tallas);
+        } catch {
+          tallas = [];
+        }
+      }
+      if (!Array.isArray(tallas)) tallas = [];
+      tallas = tallas.filter(t => t && typeof t.talla === 'string' && typeof t.stock === 'number');
 
       if (req.file) {
         try {
@@ -75,7 +87,6 @@ const productController = {
         }
       }
 
-      // tallas debe ser un array de objetos { talla, stock }
       const product = await Product.create({
         nombre, descripcion, precio, tallas, categoryId, destacado, imagen
       });
@@ -95,7 +106,20 @@ const productController = {
         return res.status(404).json({ success: false, message: 'Producto no encontrado.' });
       }
 
-      const { nombre, descripcion, precio, tallas, categoryId, destacado, activo } = req.body;
+      const { nombre, descripcion, precio, categoryId, destacado, activo } = req.body;
+      let { tallas } = req.body;
+
+      // Normalizar tallas: debe ser array de objetos { talla, stock }
+      if (typeof tallas === 'string') {
+        try {
+          tallas = JSON.parse(tallas);
+        } catch {
+          tallas = [];
+        }
+      }
+      if (!Array.isArray(tallas)) tallas = [];
+      tallas = tallas.filter(t => t && typeof t.talla === 'string' && typeof t.stock === 'number');
+
       const updateData = { nombre, descripcion, precio, tallas, categoryId, destacado, activo };
 
       if (req.file) {
