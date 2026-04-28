@@ -4,81 +4,225 @@ import { Component } from '@angular/core';
   selector: 'app-about',
   standalone: true,
   template: `
-    <section class="about-section">
-      <div class="container">
-        <h2 class="about-title">¿Quiénes Somos?</h2>
-        <div class="about-cards-grid">
-          <div class="about-card" *ngFor="let card of cards" tabindex="0">
-            <div class="about-icon">{{ card.icon }}</div>
-            <h3 class="about-card-title">{{ card.title }}</h3>
-            <p class="about-card-desc">{{ card.desc }}</p>
+    <section class="about-section-dark">
+      <div class="about-container">
+        <div class="about-header-block">
+          <span class="about-label">¿QUIÉNES <span class="about-accent">SOMOS</span>?</span>
+          <h1 class="about-main-title">Camisetas: Pasión, Calidad y Comunidad</h1>
+          <p class="about-main-desc">
+            En <b>Camisetas</b> unimos la pasión por el fútbol con la autenticidad y la atención personalizada. Creamos experiencias para hinchas que buscan calidad, historia y cercanía en cada camiseta.
+          </p>
+        </div>
+
+        <div class="about-mvv-grid">
+          <div class="about-mvv-card">
+            <div class="about-mvv-title">Nuestro Propósito</div>
+            <div class="about-mvv-sub">Por qué vestimos fútbol</div>
+            <div class="about-mvv-desc">Cada camiseta cuenta una historia. Queremos que sientas la pasión, la cultura y la comunidad en cada prenda que ofrecemos.</div>
+          </div>
+          <div class="about-mvv-card">
+            <div class="about-mvv-title">Nuestra Misión</div>
+            <div class="about-mvv-sub">Inspirar y conectar hinchas</div>
+            <div class="about-mvv-desc">Ofrecer productos auténticos y experiencias únicas, conectando a los fanáticos del fútbol con su pasión y sus equipos.</div>
+          </div>
+          <div class="about-mvv-card">
+            <div class="about-mvv-title">Nuestra Visión</div>
+            <div class="about-mvv-sub">Ser la referencia en camisetas</div>
+            <div class="about-mvv-desc">Convertirnos en la tienda de referencia para hinchas en Colombia, reconocidos por calidad, cercanía y comunidad.</div>
           </div>
         </div>
-        <div class="about-bottom-text">
-          <p>
-            En <b>Camisetas</b> somos fanáticos del fútbol y la cultura deportiva. Nos dedicamos a ofrecer camisetas originales, réplicas y accesorios para verdaderos hinchas. Nuestro equipo está comprometido con la calidad, la autenticidad y la atención personalizada.
-          </p>
-          <button class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</button>
+
+        <div class="about-values-block">
+          <h2 class="about-values-title">Nuestros Valores</h2>
+          <div class="about-values-list">
+            <div class="about-value-item" *ngFor="let v of valores; let i = index">
+              <div class="about-value-icon">{{ v.icon }}</div>
+              <div>
+                <div class="about-value-name"><span class="about-value-num">{{ (i+1) | number:'2.0' }}</span> {{ v.name }}</div>
+                <div class="about-value-desc">{{ v.desc }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-bottom-block">
+          <div class="about-bottom-line"></div>
+          <div class="about-bottom-cta">
+            <span>¿Quieres saber más o unirte a la comunidad?</span>
+            <button class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</button>
+          </div>
         </div>
       </div>
     </section>
   `,
   styles: [`
-    .about-section { padding: 4rem 1.5rem; background: #f8f9fa; min-height: 80vh; }
-    .about-title { text-align: center; font-size: 2.5rem; font-weight: 900; color: #3a5ba0; margin-bottom: 3rem; letter-spacing: -1px; }
-    .about-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2.5rem;
+    .about-section-dark {
+      background: #181f2a;
+      color: #f2f2f2;
+      min-height: 100vh;
+      padding: 0;
+      width: 100vw;
+    }
+    .about-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3.5rem 1.5rem 2.5rem 1.5rem;
+    }
+    .about-header-block {
       margin-bottom: 2.5rem;
+      text-align: left;
     }
-    .about-card {
-      background: linear-gradient(135deg, #fff 70%, #e3f0ff 100%);
-      border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(30,51,92,0.08);
-      padding: 2.2rem 1.5rem 1.7rem 1.5rem;
-      text-align: center;
-      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-      cursor: pointer;
-      outline: none;
-    }
-    .about-card:hover, .about-card:focus {
-      transform: translateY(-8px) scale(1.03);
-      box-shadow: 0 8px 32px rgba(30,51,92,0.16);
-      background: linear-gradient(135deg, #e3f0ff 60%, #fff 100%);
-    }
-    .about-icon {
-      font-size: 3.2rem;
-      margin-bottom: 1.1rem;
-      color: #3a5ba0;
-      filter: drop-shadow(0 2px 8px #b388ff33);
-      transition: color 0.2s;
-    }
-    .about-card-title {
-      font-size: 1.25rem;
+    .about-label {
+      font-size: 1.1rem;
       font-weight: 700;
-      color: #1e335c;
+      letter-spacing: 2px;
+      color: #b388ff;
+      text-transform: uppercase;
+      display: block;
       margin-bottom: 0.7rem;
     }
-    .about-card-desc {
-      color: #444;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 0;
+    .about-accent {
+      color: #ffe066;
+      font-weight: 900;
     }
-    .about-bottom-text {
+    .about-main-title {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: #ffe066;
+      margin-bottom: 1.1rem;
+      letter-spacing: -1px;
+    }
+    .about-main-desc {
+      font-size: 1.18rem;
+      color: #e0e0e0;
       max-width: 700px;
-      margin: 2.5rem auto 0 auto;
+    }
+    .about-mvv-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin: 2.5rem 0 2.5rem 0;
+      flex-wrap: wrap;
+    }
+    .about-mvv-card {
+      background: #232b3a;
+      border-radius: 16px;
+      box-shadow: 0 2px 16px #0002;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      flex: 1 1 260px;
+      min-width: 240px;
+      max-width: 340px;
+      margin-bottom: 1rem;
+      border-left: 5px solid #ffe066;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .about-mvv-card:hover {
+      box-shadow: 0 8px 32px #ffe06633;
+      transform: translateY(-6px) scale(1.03);
+    }
+    .about-mvv-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffe066;
+      margin-bottom: 0.3rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .about-mvv-sub {
+      font-size: 1.05rem;
+      color: #b388ff;
+      margin-bottom: 0.7rem;
+      font-weight: 600;
+    }
+    .about-mvv-desc {
+      color: #e0e0e0;
+      font-size: 1.01rem;
+    }
+    .about-values-block {
+      margin: 2.5rem 0 2.5rem 0;
+    }
+    .about-values-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #ffe066;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+    .about-values-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .about-value-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      background: #232b3a;
+      border-radius: 14px;
+      padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+      box-shadow: 0 2px 12px #0002;
+      border-left: 4px solid #b388ff;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .about-value-item:hover {
+      box-shadow: 0 8px 32px #b388ff33;
+      border-color: #ffe066;
+    }
+    .about-value-icon {
+      font-size: 2.2rem;
+      color: #ffe066;
+      margin-top: 0.1rem;
+      filter: drop-shadow(0 2px 8px #ffe06633);
+    }
+    .about-value-name {
+      font-size: 1.08rem;
+      font-weight: 700;
+      color: #b388ff;
+      margin-bottom: 0.2rem;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .about-value-num {
+      background: linear-gradient(135deg, #ffe066 60%, #b388ff 100%);
+      color: #232b3a;
+      border-radius: 50%;
+      font-size: 0.95rem;
+      font-weight: 900;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+    }
+    .about-value-desc {
+      color: #e0e0e0;
+      font-size: 1.01rem;
+    }
+    .about-bottom-block {
+      margin-top: 3.5rem;
       text-align: center;
     }
-    .about-bottom-text p {
-      font-size: 1.15rem;
-      color: #222;
+    .about-bottom-line {
+      height: 3px;
+      width: 120px;
+      background: linear-gradient(90deg, #ffe066 60%, #b388ff 100%);
+      margin: 0 auto 1.5rem auto;
+      border-radius: 2px;
+    }
+    .about-bottom-cta {
+      font-size: 1.18rem;
+      color: #fff;
       margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
     }
     .about-contact-btn {
-      background: linear-gradient(135deg, #1e335c, #3a5ba0);
-      color: #fff;
+      background: linear-gradient(135deg, #ffe066, #b388ff);
+      color: #232b3a;
       border: none;
       border-radius: 25px;
       padding: 0.8rem 2.2rem;
@@ -86,44 +230,48 @@ import { Component } from '@angular/core';
       font-weight: 700;
       cursor: pointer;
       transition: opacity 0.3s, box-shadow 0.2s;
-      box-shadow: 0 2px 12px #b388ff22;
+      box-shadow: 0 2px 12px #ffe06622;
     }
     .about-contact-btn:hover {
       opacity: 0.85;
-      box-shadow: 0 6px 24px #b388ff33;
+      box-shadow: 0 6px 24px #ffe06633;
+    }
+    @media (max-width: 900px) {
+      .about-mvv-grid { flex-direction: column; }
+      .about-mvv-card { max-width: 100%; }
     }
     @media (max-width: 700px) {
-      .about-cards-grid { grid-template-columns: 1fr; }
-      .about-section { padding: 2rem 0.5rem; }
+      .about-section-dark { padding: 0.5rem; }
+      .about-container { padding: 2rem 0.2rem 1.5rem 0.2rem; }
     }
   `]
 })
 export class AboutComponent {
-  cards = [
+  valores = [
     {
       icon: '⚽',
-      title: 'Pasión por el Fútbol',
-      desc: 'Vivimos y compartimos la pasión por el fútbol, conectando a hinchas de todo el país con productos auténticos.'
+      name: 'Pasión',
+      desc: 'Vivimos y compartimos la pasión por el fútbol, conectando a hinchas de todo el país.'
     },
     {
-      icon: '🌎',
-      title: 'Envíos Nacionales',
-      desc: 'Llevamos camisetas y accesorios a cada rincón del país, con envíos rápidos y seguros.'
-    },
-    {
-      icon: '🎁',
-      title: 'Ediciones Exclusivas',
-      desc: 'Ofrecemos ediciones limitadas y coleccionables para verdaderos fanáticos y coleccionistas.'
+      icon: '🎯',
+      name: 'Autenticidad',
+      desc: 'Solo productos originales y réplicas de calidad, sin imitaciones.'
     },
     {
       icon: '🤝',
-      title: 'Atención Personalizada',
-      desc: 'Nuestro equipo brinda soporte real y cercano, resolviendo tus dudas y acompañándote en cada compra.'
+      name: 'Cercanía',
+      desc: 'Atención personalizada y soporte real en cada compra.'
+    },
+    {
+      icon: '🚚',
+      name: 'Compromiso',
+      desc: 'Envíos rápidos y seguros a todo el país.'
     },
     {
       icon: '⭐',
-      title: 'Calidad Garantizada',
-      desc: 'Revisamos cada producto para asegurar la mejor experiencia y satisfacción en cada pedido.'
+      name: 'Excelencia',
+      desc: 'Revisamos cada producto para asegurar la mejor experiencia.'
     }
   ];
 }
