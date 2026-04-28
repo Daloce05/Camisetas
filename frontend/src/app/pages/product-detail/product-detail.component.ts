@@ -21,7 +21,7 @@ import { Product } from '../../models/product.model';
           <div class="detail-info">
             <span class="category-tag">{{ product.categoria?.nombre }}</span>
             <h1>{{ product.nombre }}</h1>
-            <p class="price">\${{ product.precio }}</p>
+            <p class="price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
             <p class="description">{{ product.descripcion }}</p>
             <div class="stock-info">
               <span [class]="product.stock > 0 ? 'in-stock' : 'out-stock'">
@@ -58,15 +58,13 @@ import { Product } from '../../models/product.model';
     .detail-img img { width: 100%; height: 100%; object-fit: cover; }
     .placeholder { font-size: 6rem; }
     .category-tag {
-      color: #d3ed05; font-size: 0.85rem; font-weight: 600;
+      color: #181818; font-size: 0.85rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: 1px;
     }
     .detail-info h1 { color: #2d2d3f; font-size: 1.8rem; margin: 0.5rem 0; }
     .price {
       font-size: 2rem; font-weight: 700; margin: 0.5rem 0;
-      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #181818;
     }
     .description { color: #666; line-height: 1.7; margin: 1rem 0; }
     .stock-info { margin: 1rem 0; }

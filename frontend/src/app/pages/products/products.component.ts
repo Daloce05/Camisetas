@@ -42,7 +42,7 @@ import { Category } from '../../models/category.model';
               </div>
             </a>
             <div class="product-actions">
-              <span class="price">\${{ product.precio }}</span>
+              <span class="price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
               <button class="btn-add" (click)="contactWhatsApp(product)" [disabled]="product.stock === 0">
                 {{ product.stock > 0 ? 'Cotizar 💬' : 'Sin Stock' }}
               </button>
@@ -121,7 +121,7 @@ import { Category } from '../../models/category.model';
       border-radius: 15px; font-size: 0.75rem; font-weight: 600;
     }
     .product-info { padding: 1rem 1.2rem 0.5rem; }
-    .product-category { color: #d3ed05; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
+    .product-category { color: #181818; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
     .product-info h3 { color: #fff; margin: 0.3rem 0; font-size: 1rem; }
     .product-info p { color: #e0e0e0; font-size: 0.85rem; line-height: 1.4; }
     .product-actions {
@@ -130,9 +130,7 @@ import { Category } from '../../models/category.model';
     }
     .price {
       font-size: 1.3rem; font-weight: 700;
-      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #181818;
     }
     .btn-add {
       padding: 0.5rem 1rem;
