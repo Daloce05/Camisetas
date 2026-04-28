@@ -51,13 +51,18 @@ import { CommonModule, DecimalPipe } from '@angular/common';
           <div class="about-bottom-line"></div>
           <div class="about-bottom-cta">
             <span class="about-bottom-question">¿Quieres saber más o unirte a la comunidad?</span>
-            <a class="about-contact-btn" routerLink="/contacto">¡Contáctanos!</a>
+            <a class="about-contact-btn about-contact-link" routerLink="/contacto">¡Contáctanos!</a>
           </div>
         </div>
       </div>
     </section>
   `,
   styles: [`
+            .about-contact-link {
+              display: inline-block;
+              pointer-events: auto;
+              text-decoration: none;
+            }
         .about-bottom-question {
           color: #fff !important;
           font-size: 1.35rem;
