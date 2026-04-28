@@ -43,9 +43,12 @@ import { Category } from '../../models/category.model';
             </a>
             <div class="product-actions">
               <span class="price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
-              <button class="btn-add" (click)="contactWhatsApp(product)" [disabled]="product.stock === 0">
-                {{ product.stock > 0 ? 'Cotizar 💬' : 'Sin Stock' }}
+              <button class="btn-add" (click)="contactWhatsApp(product)" [disabled]="!hasStock(product)">
+                {{ hasStock(product) ? 'Cotizar 💬' : 'Sin Stock' }}
               </button>
+              hasStock(product: Product): boolean {
+                return product.tallas && product.tallas.some(t => t.stock > 0);
+              }
             </div>
           </div>
         </div>

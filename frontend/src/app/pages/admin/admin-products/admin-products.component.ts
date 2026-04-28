@@ -1,6 +1,8 @@
-  tallaInput = '';
-  stockInput = 0;
-  tallasPredefinidas = ['S', 'M', 'L', 'XL', 'Única'];
+
+  tallaInput: string = '';
+  stockInput: number = 0;
+  tallasPredefinidas: string[] = ['S', 'M', 'L', 'XL', 'Única'];
+
   addTalla() {
     if (!this.tallaInput || this.stockInput < 0) return;
     const exists = this.form.tallas.some(t => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
