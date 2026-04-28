@@ -123,10 +123,11 @@ import { UserService } from '../../../services/user.service';
   `,
   styles: [`
     .dashboard h1 {
-      color: #2d2d3f; margin-bottom: 2rem;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #181818;
+      margin-bottom: 2rem;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
     }
     .stats-grid {
       display: grid;
