@@ -38,7 +38,6 @@ import { WhatsappService } from '../../services/whatsapp.service';
               </button>
               <div class="dropdown" *ngIf="menuOpen">
                 <span class="dropdown-name">{{ authService.currentUser?.nombre }} {{ authService.currentUser?.apellido }}</span>
-                <a routerLink="/mis-pedidos" (click)="menuOpen = false">Mis Pedidos</a>
                 <a routerLink="/admin" *ngIf="authService.isAdmin" (click)="menuOpen = false">Panel Admin</a>
                 <button (click)="logout()">Cerrar Sesión</button>
               </div>
