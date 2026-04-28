@@ -104,7 +104,8 @@ const productController = {
       await product.update(updateData);
       res.json({ success: true, message: 'Producto actualizado.', data: product });
     } catch (error) {
-      res.status(500).json({ success: false, message: 'Error al actualizar producto.' });
+      console.error('Error al actualizar producto:', error);
+      res.status(500).json({ success: false, message: error.message || 'Error al actualizar producto.', error });
     }
   },
 
