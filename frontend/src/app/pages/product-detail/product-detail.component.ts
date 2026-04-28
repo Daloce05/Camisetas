@@ -49,33 +49,7 @@ import { Product, TallaStock } from '../../models/product.model';
             <button class="btn-add-lg" (click)="contactWhatsApp()" [disabled]="!hasStock()">
               {{ hasStock() ? 'Cotizar por WhatsApp 💬' : 'Sin Stock' }}
             </button>
-            selectedTalla: string = '';
-            quantity: number = 1;
-
-            hasStock(): boolean {
-              if (!this.product?.tallas || this.product.tallas.length === 0) return false;
-              if (!this.selectedTalla) {
-                // Si no seleccionó talla, hay stock si alguna talla tiene stock
-                return this.product.tallas.some(t => t.stock > 0);
-              }
-              const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
-              return !!t && t.stock > 0;
-            }
-
-            incrementQty() {
-              let max = 99;
-              if (this.selectedTalla) {
-                const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
-                if (t) max = t.stock;
-              } else if (this.product.tallas && this.product.tallas.length > 0) {
-                max = Math.max(...this.product.tallas.map(t => t.stock));
-              }
-              if (this.quantity < max) this.quantity++;
-            }
-
-            decrementQty() {
-              if (this.quantity > 1) this.quantity--;
-            }
+            
           </div>
         </div>
       </div>
@@ -136,7 +110,8 @@ import { Product, TallaStock } from '../../models/product.model';
 })
 export class ProductDetailComponent implements OnInit {
   product!: Product;
-  quantity = 1;
+  selectedTalla: string = '';
+  quantity: number = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -149,6 +124,31 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(id).subscribe(res => {
       this.product = res.data;
     });
+  }
+
+  hasStock(): boolean {
+    if (!this.product?.tallas || this.product.tallas.length === 0) return false;
+    if (!this.selectedTalla) {
+      // Si no seleccionó talla, hay stock si alguna talla tiene stock
+      return this.product.tallas.some(t => t.stock > 0);
+    }
+    const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
+    return !!t && t.stock > 0;
+  }
+
+  incrementQty() {
+    let max = 99;
+    if (this.selectedTalla) {
+      const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
+      if (t) max = t.stock;
+    } else if (this.product.tallas && this.product.tallas.length > 0) {
+      max = Math.max(...this.product.tallas.map(t => t.stock));
+    }
+    if (this.quantity < max) this.quantity++;
+  }
+
+  decrementQty() {
+    if (this.quantity > 1) this.quantity--;
   }
 
   contactWhatsApp() {

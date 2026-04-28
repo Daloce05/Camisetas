@@ -46,9 +46,7 @@ import { Category } from '../../models/category.model';
               <button class="btn-add" (click)="contactWhatsApp(product)" [disabled]="!hasStock(product)">
                 {{ hasStock(product) ? 'Cotizar 💬' : 'Sin Stock' }}
               </button>
-              hasStock(product: Product): boolean {
-                return product.tallas && product.tallas.some(t => t.stock > 0);
-              }
+
             </div>
           </div>
         </div>
@@ -197,6 +195,10 @@ export class ProductsComponent implements OnInit {
   goToPage(p: number) {
     this.page = p;
     this.loadProducts();
+  }
+
+  hasStock(product: Product): boolean {
+    return product.tallas && product.tallas.some(t => t.stock > 0);
   }
 
   contactWhatsApp(product: Product) {

@@ -120,8 +120,6 @@
     .admin-section h1 {
       color: #181818;
       background: none;
-              <th>Tallas/Stock</th>
-
     }
     .section-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;
@@ -132,14 +130,6 @@
       border: none; border-radius: 10px;
       color: white; cursor: pointer; font-weight: 600;
     }
-              <td>
-                <ng-container *ngIf="p.tallas && p.tallas.length > 0; else noTallas">
-                  <span *ngFor="let t of p.tallas" style="display:inline-block; background:#f3e8ff; color:#3a5ba0; border-radius:8px; padding:0.1rem 0.5rem; margin-right:0.3rem; margin-bottom:0.2rem;">
-                    {{ t.talla }}: {{ t.stock }}
-                  </span>
-                </ng-container>
-                <ng-template #noTallas><span style="color:#aaa">-</span></ng-template>
-              </td>
       background: #ffffff;
       border: 1px solid rgba(179, 136, 255, 0.12);
       border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
@@ -211,11 +201,21 @@ export class AdminProductsComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService
-  ) {}
+    ) {
+      // Additional constructor logic can go here
+    }
+  
+  import { Component, OnInit } from '@angular/core';
+  import { CommonModule } from '@angular/common';
+  import { FormsModule } from '@angular/forms';
+  import { Product } from 'src/app/models/product.model';
+  import { Category } from 'src/app/models/category.model';
+  import { ProductService } from 'src/app/services/product.service';
+  import { CategoryService } from 'src/app/services/category.service';
 
   ngOnInit(): void {
     this.loadProducts();
-    this.categoryService.getCategories().subscribe(res => {
+    this.categoryService.getCategories().subscribe((res: any) => {
       this.categories = res.data;
     });
   }
