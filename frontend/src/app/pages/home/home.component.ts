@@ -1,17 +1,4 @@
-    :host ::ng-deep .hero-title {
-      color: #fff !important;
-      font-size: 2.7rem;
-      font-weight: 900 !important;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.35);
-      margin-bottom: 1.2rem;
-    }
-    :host ::ng-deep .hero-desc {
-      color: #fff !important;
-      font-size: 1.25rem;
-      font-weight: 700 !important;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.25);
-      margin-bottom: 2rem;
-    }
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
