@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-about',
   standalone: true,
+  imports: [CommonModule, DecimalPipe],
   template: `
     <section class="about-section-dark">
       <div class="about-container">
