@@ -11,7 +11,7 @@ import { UserService } from '../../../services/user.service';
   imports: [CommonModule, RouterLink],
   template: `
     <div class="dashboard">
-      <h1>Dashboard — Distrisports</h1>
+      <h1 style="color: #181818;">Dashboard — Distrisports</h1>
 
       <div class="stats-grid">
         <div class="stat-card highlight">
@@ -171,7 +171,7 @@ import { UserService } from '../../../services/user.service';
     }
     .method-bar {
       height: 100%;
-      background: linear-gradient(90deg, #b388ff, #ff80ab);
+      background: linear-gradient(90deg, #d3ed05 60%, #fff 100%);
       border-radius: 4px; min-width: 4px;
     }
     .method-count { color: #2d2d3f; font-weight: 600; font-size: 0.9rem; min-width: 30px; text-align: right; }
@@ -185,9 +185,9 @@ import { UserService } from '../../../services/user.service';
     }
     .product-rank {
       width: 24px; height: 24px; border-radius: 50%;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
       display: flex; align-items: center; justify-content: center;
-      color: white; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
+      color: #181818; font-size: 0.75rem; font-weight: 700; flex-shrink: 0;
     }
     .product-name { flex: 1; color: #555; font-size: 0.9rem; }
     .product-count { color: #888; font-size: 0.8rem; white-space: nowrap; }
@@ -202,7 +202,7 @@ import { UserService } from '../../../services/user.service';
     }
     .day-bar {
       width: 100%; min-height: 4px;
-      background: linear-gradient(180deg, #b388ff, #ff80ab);
+      background: linear-gradient(180deg, #d3ed05 60%, #fff 100%);
       border-radius: 4px 4px 0 0;
     }
     .day-count { color: #2d2d3f; font-size: 0.8rem; font-weight: 600; margin-top: 0.3rem; }

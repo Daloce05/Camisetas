@@ -84,9 +84,10 @@ import { AuthService } from '../../services/auth.service';
     .logo-text {
       font-size: 1.2rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #d3ed05 !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: unset !important;
     }
     .sidebar-nav {
       padding: 1rem 0;
