@@ -235,21 +235,27 @@ import { CommonModule, DecimalPipe } from '@angular/common';
       align-items: center;
       gap: 1.2rem;
     }
-    .about-contact-btn {
+    .about-contact-btn,
+    .about-contact-btn:visited {
       background: linear-gradient(135deg, #ffe066, #b388ff);
       color: #232b3a;
-      border: none;
       border-radius: 25px;
       padding: 0.8rem 2.2rem;
       font-size: 1.1rem;
       font-weight: 700;
-      cursor: pointer;
       transition: opacity 0.3s, box-shadow 0.2s;
       box-shadow: 0 2px 12px #ffe06622;
+      text-align: center;
+      text-decoration: none;
+      border: none;
+      outline: none;
+      display: inline-block;
+      cursor: pointer;
     }
     .about-contact-btn:hover {
       opacity: 0.85;
       box-shadow: 0 6px 24px #ffe06633;
+      text-decoration: none;
     }
     @media (max-width: 900px) {
       .about-mvv-grid { flex-direction: column; }
