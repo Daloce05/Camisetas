@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
       <!-- Sidebar -->
       <aside class="sidebar">
         <div class="sidebar-header">
-          <img src="assets/logo.png" alt="Camisetas" class="logo-img">
+          <img src="assets/images/distrisport.png" alt="Camisetas" class="logo-img">
           <span class="logo-text">Camisetas Admin</span>
         </div>
         <nav class="sidebar-nav">

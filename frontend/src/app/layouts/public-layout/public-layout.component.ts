@@ -12,8 +12,9 @@ import { WhatsappService } from '../../services/whatsapp.service';
     <!-- Navbar -->
     <nav class="navbar">
       <div class="nav-container">
-        <a routerLink="/" class="logo">
-          <img src="assets/logo.png" alt="Distrisports" class="logo-img">
+        <a routerLink="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+          <img src="assets/images/distrisport.png" alt="Distrisports" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;" />
+          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -1px; color: #fff;">Distrisports</span>
         </a>
 
         <div class="nav-links">
@@ -57,7 +58,7 @@ import { WhatsappService } from '../../services/whatsapp.service';
       <div class="footer-container">
         <div class="footer-grid">
           <div>
-            <h3 class="footer-logo"><img src="assets/logo.png" alt="Distrisports" class="footer-logo-img"></h3>
+            <h3 class="footer-logo"><img src="assets/images/distrisport.png" alt="Distrisports" class="footer-logo-img"></h3>
             <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
