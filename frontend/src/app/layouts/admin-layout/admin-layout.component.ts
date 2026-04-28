@@ -13,29 +13,29 @@ import { AuthService } from '../../services/auth.service';
       <aside class="sidebar">
         <div class="sidebar-header">
           <img src="assets/images/distrisport.png" alt="Camisetas" class="logo-img">
-          <span class="logo-text">Camisetas Admin</span>
+          <span class="logo-text" style="color: #d3ed05;">Camisetas Admin</span>
         </div>
         <nav class="sidebar-nav">
-          <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: #d3ed05;">
             <span class="nav-icon">📊</span> Dashboard
           </a>
-          <a routerLink="/admin/productos" routerLinkActive="active">
+          <a routerLink="/admin/productos" routerLinkActive="active" style="color: #d3ed05;">
             <span class="nav-icon">📦</span> Productos
           </a>
-          <a routerLink="/admin/categorias" routerLinkActive="active">
+          <a routerLink="/admin/categorias" routerLinkActive="active" style="color: #d3ed05;">
             <span class="nav-icon">🏷️</span> Categorías
           </a>
-          <a routerLink="/admin/usuarios" routerLinkActive="active">
+          <a routerLink="/admin/usuarios" routerLinkActive="active" style="color: #d3ed05;">
             <span class="nav-icon">👥</span> Usuarios
           </a>
-          <a routerLink="/admin/configuracion" routerLinkActive="active">
+          <a routerLink="/admin/configuracion" routerLinkActive="active" style="color: #d3ed05;">
             <span class="nav-icon">⚙️</span> Configuración
           </a>
           <div class="sidebar-divider"></div>
-          <a routerLink="/">
+          <a routerLink="/" style="color: #d3ed05;">
             <span class="nav-icon">🏪</span> Ver Tienda
           </a>
-          <button class="logout-btn" (click)="logout()">
+          <button class="logout-btn" (click)="logout()" style="color: #d3ed05;">
             <span class="nav-icon">🚪</span> Cerrar Sesión
           </button>
         </nav>
@@ -44,9 +44,9 @@ import { AuthService } from '../../services/auth.service';
       <!-- Main Content -->
       <main class="admin-main">
         <header class="admin-header">
-          <h2>Panel de Administración</h2>
+          <h2 style="color: #d3ed05;">Panel de Administración</h2>
           <div class="admin-user">
-            <span>{{ authService.currentUser?.nombre }} {{ authService.currentUser?.apellido }}</span>
+            <span style="color: #d3ed05;">{{ authService.currentUser?.nombre }} {{ authService.currentUser?.apellido }}</span>
             <div class="user-avatar">{{ authService.currentUser?.nombre?.charAt(0) }}</div>
           </div>
         </header>

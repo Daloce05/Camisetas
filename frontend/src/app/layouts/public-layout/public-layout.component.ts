@@ -14,12 +14,12 @@ import { WhatsappService } from '../../services/whatsapp.service';
       <div class="nav-container">
         <a routerLink="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
           <img src="assets/images/distrisport.png" alt="Distrisports" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;" />
-          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -1px; color: #fff;">Distrisports</span>
+          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -1px; color: #d3ed05;">Distrisports</span>
         </a>
 
         <div class="nav-links">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inicio</a>
-          <a routerLink="/productos" routerLinkActive="active">Productos</a>
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: #d3ed05;">Inicio</a>
+          <a routerLink="/productos" routerLinkActive="active" style="color: #d3ed05;">Productos</a>
         </div>
 
         <div class="nav-actions">
@@ -62,18 +62,18 @@ import { WhatsappService } from '../../services/whatsapp.service';
             <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
-            <h4>Enlaces</h4>
-            <a routerLink="/">Inicio</a>
-            <a routerLink="/productos">Productos</a>
+            <h4 style="color: #d3ed05;">Enlaces</h4>
+            <a routerLink="/" style="color: #d3ed05;">Inicio</a>
+            <a routerLink="/productos" style="color: #d3ed05;">Productos</a>
           </div>
           <div>
-            <h4>Contacto</h4>
-            <p>info&#64;camisetas.com</p>
-            <p>3177239970</p>
+            <h4 style="color: #d3ed05;">Contacto</h4>
+            <p style="color: #d3ed05;">info&#64;camisetas.com</p>
+            <p style="color: #d3ed05;">3177239970</p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
+          <p style="color: #d3ed05;">&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
           <small style="display:block; margin-top:4px; color:#b0b6c3; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
         </div>
       </div>
