@@ -105,10 +105,10 @@ import { Category } from '../../../models/category.model';
   `,
   styles: [`
     .admin-section h1 {
-      color: #2d2d3f;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #181818;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
     }
     .section-header {
       display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;

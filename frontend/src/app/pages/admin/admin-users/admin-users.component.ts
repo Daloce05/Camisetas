@@ -54,9 +54,11 @@ import { User } from '../../../models/user.model';
   `,
   styles: [`
     .admin-section h1 {
-      color: #2d2d3f; margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      color: #181818;
+      margin-bottom: 1.5rem;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: unset;
     }
     .table-container { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; background: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(179,136,255,0.06); }
