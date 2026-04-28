@@ -124,6 +124,15 @@ export class ProductDetailComponent implements OnInit {
     const id = +this.route.snapshot.params['id'];
     this.productService.getProduct(id).subscribe(res => {
       this.product = res.data;
+      // Normalizar tallas a array siempre
+      if (!Array.isArray(this.product.tallas)) {
+        try {
+          this.product.tallas = JSON.parse(this.product.tallas);
+        } catch {
+          this.product.tallas = [];
+        }
+      }
+      if (!Array.isArray(this.product.tallas)) this.product.tallas = [];
     });
   }
 
@@ -141,9 +150,9 @@ export class ProductDetailComponent implements OnInit {
   incrementQty() {
     let max = 99;
     if (this.selectedTalla) {
-      const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
+      const t = Array.isArray(this.product.tallas) ? this.product.tallas.find(t => t.talla === this.selectedTalla) : undefined;
       if (t) max = t.stock;
-    } else if (this.product.tallas && this.product.tallas.length > 0) {
+    } else if (Array.isArray(this.product.tallas) && this.product.tallas.length > 0) {
       max = Math.max(...this.product.tallas.map(t => t.stock));
     }
     if (this.quantity < max) this.quantity++;
