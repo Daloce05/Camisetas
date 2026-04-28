@@ -1,3 +1,18 @@
+  tallaInput = '';
+  stockInput = 0;
+  tallasPredefinidas = ['S', 'M', 'L', 'XL', 'Única'];
+  addTalla() {
+    if (!this.tallaInput || this.stockInput < 0) return;
+    const exists = this.form.tallas.some(t => t.talla.toLowerCase() === this.tallaInput.toLowerCase());
+    if (exists) return;
+    this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
+    this.tallaInput = '';
+    this.stockInput = 0;
+  }
+
+  removeTalla(index: number) {
+    this.form.tallas.splice(index, 1);
+  }
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -32,8 +47,21 @@ import { Category } from '../../../models/category.model';
             <input type="number" [(ngModel)]="form.precio" placeholder="0.00" step="0.01">
           </div>
           <div class="form-group">
-            <label>Stock</label>
-            <input type="number" [(ngModel)]="form.stock" placeholder="0">
+            <label>Tallas y stock</label>
+            <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+              <select [(ngModel)]="tallaInput" style="width: 100px;">
+                <option value="">Talla</option>
+                <option *ngFor="let t of tallasPredefinidas" [value]="t">{{ t }}</option>
+              </select>
+              <input type="number" [(ngModel)]="stockInput" placeholder="Stock" style="width: 80px;">
+              <button type="button" (click)="addTalla()" [disabled]="!tallaInput || stockInput < 0">Agregar</button>
+            </div>
+            <div *ngIf="form.tallas.length > 0" style="margin-top: 0.5rem;">
+              <span *ngFor="let t of form.tallas; let i = index" style="display: inline-block; background: #f3e8ff; color: #3a5ba0; border-radius: 8px; padding: 0.2rem 0.7rem; margin-right: 0.5rem; margin-bottom: 0.3rem;">
+                {{ t.talla }}: {{ t.stock }}
+                <button type="button" (click)="removeTalla(i)" style="background: none; border: none; color: #e74c3c; margin-left: 4px; cursor: pointer;">x</button>
+              </span>
+            </div>
           </div>
           <div class="form-group">
             <label>Categoría</label>
@@ -77,7 +105,7 @@ import { Category } from '../../../models/category.model';
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-              <th>Stock</th>
+              <th>Tallas/Stock</th>
               <th>Destacado</th>
               <th>Activo</th>
               <th>Acciones</th>
@@ -89,7 +117,14 @@ import { Category } from '../../../models/category.model';
               <td>{{ p.nombre }}</td>
               <td>{{ p.categoria?.nombre }}</td>
               <td>\${{ p.precio }}</td>
-              <td>{{ p.stock }}</td>
+              <td>
+                <ng-container *ngIf="p.tallas && p.tallas.length > 0; else noTallas">
+                  <span *ngFor="let t of p.tallas" style="display:inline-block; background:#f3e8ff; color:#3a5ba0; border-radius:8px; padding:0.1rem 0.5rem; margin-right:0.3rem; margin-bottom:0.2rem;">
+                    {{ t.talla }}: {{ t.stock }}
+                  </span>
+                </ng-container>
+                <ng-template #noTallas><span style="color:#aaa">-</span></ng-template>
+              </td>
               <td><span [class]="p.destacado ? 'badge-yes' : 'badge-no'">{{ p.destacado ? 'Sí' : 'No' }}</span></td>
               <td><span [class]="p.activo ? 'badge-yes' : 'badge-no'">{{ p.activo ? 'Sí' : 'No' }}</span></td>
               <td class="actions">
@@ -107,7 +142,7 @@ import { Category } from '../../../models/category.model';
     .admin-section h1 {
       color: #181818;
       background: none;
-      -webkit-background-clip: unset;
+              <th>Tallas/Stock</th>
       -webkit-text-fill-color: unset;
     }
     .section-header {
@@ -119,7 +154,14 @@ import { Category } from '../../../models/category.model';
       border: none; border-radius: 10px;
       color: white; cursor: pointer; font-weight: 600;
     }
-    .form-card {
+              <td>
+                <ng-container *ngIf="p.tallas && p.tallas.length > 0; else noTallas">
+                  <span *ngFor="let t of p.tallas" style="display:inline-block; background:#f3e8ff; color:#3a5ba0; border-radius:8px; padding:0.1rem 0.5rem; margin-right:0.3rem; margin-bottom:0.2rem;">
+                    {{ t.talla }}: {{ t.stock }}
+                  </span>
+                </ng-container>
+                <ng-template #noTallas><span style="color:#aaa">-</span></ng-template>
+              </td>
       background: #ffffff;
       border: 1px solid rgba(179, 136, 255, 0.12);
       border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
@@ -186,7 +228,7 @@ export class AdminProductsComponent implements OnInit {
   search = '';
   error = '';
   selectedFile: File | null = null;
-  form = { nombre: '', descripcion: '', precio: 0, stock: 0, categoryId: null as number | null, destacado: false };
+  form = { nombre: '', descripcion: '', precio: 0, tallas: [] as { talla: string; stock: number }[], categoryId: null as number | null, destacado: false };
 
   constructor(
     private productService: ProductService,
@@ -211,7 +253,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   resetForm() {
-    this.form = { nombre: '', descripcion: '', precio: 0, stock: 0, categoryId: null, destacado: false };
+    this.form = { nombre: '', descripcion: '', precio: 0, tallas: [], categoryId: null, destacado: false };
     this.editingId = null;
     this.selectedFile = null;
     this.error = '';
@@ -227,7 +269,7 @@ export class AdminProductsComponent implements OnInit {
     formData.append('nombre', this.form.nombre);
     formData.append('descripcion', this.form.descripcion);
     formData.append('precio', this.form.precio.toString());
-    formData.append('stock', this.form.stock.toString());
+    formData.append('tallas', JSON.stringify(this.form.tallas));
     formData.append('categoryId', this.form.categoryId!.toString());
     formData.append('destacado', this.form.destacado.toString());
     if (this.selectedFile) formData.append('imagen', this.selectedFile);
@@ -248,7 +290,7 @@ export class AdminProductsComponent implements OnInit {
       nombre: product.nombre,
       descripcion: product.descripcion,
       precio: product.precio,
-      stock: product.stock,
+      tallas: product.tallas ? [...product.tallas] : [],
       categoryId: product.categoria?.id || null,
       destacado: product.destacado
     };

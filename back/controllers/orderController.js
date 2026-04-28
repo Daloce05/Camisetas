@@ -22,9 +22,11 @@ const orderController = {
           return res.status(400).json({ success: false, message: `Producto ${item.productId} no disponible.` });
         }
 
-        if (product.stock < item.cantidad) {
+        // Buscar la talla seleccionada
+        const tallaObj = (product.tallas || []).find(t => t.talla === item.talla);
+        if (!tallaObj || tallaObj.stock < item.cantidad) {
           await t.rollback();
-          return res.status(400).json({ success: false, message: `Stock insuficiente para ${product.nombre}.` });
+          return res.status(400).json({ success: false, message: `Stock insuficiente para ${product.nombre} en talla ${item.talla}.` });
         }
 
         const subtotal = parseFloat(product.precio) * item.cantidad;
@@ -34,11 +36,16 @@ const orderController = {
           productId: product.id,
           cantidad: item.cantidad,
           precioUnitario: product.precio,
-          subtotal
+          subtotal,
+          talla: item.talla
         });
 
+        // Actualizar stock de la talla seleccionada
+        const nuevasTallas = (product.tallas || []).map(t =>
+          t.talla === item.talla ? { ...t, stock: t.stock - item.cantidad } : t
+        );
         await product.update(
-          { stock: product.stock - item.cantidad },
+          { tallas: nuevasTallas },
           { transaction: t }
         );
       }

@@ -63,7 +63,7 @@ const productController = {
   // POST /api/products (admin)
   async crear(req, res) {
     try {
-      const { nombre, descripcion, precio, stock, categoryId, destacado } = req.body;
+      const { nombre, descripcion, precio, tallas, categoryId, destacado } = req.body;
       let imagen = null;
 
       if (req.file) {
@@ -75,8 +75,9 @@ const productController = {
         }
       }
 
+      // tallas debe ser un array de objetos { talla, stock }
       const product = await Product.create({
-        nombre, descripcion, precio, stock, categoryId, destacado, imagen
+        nombre, descripcion, precio, tallas, categoryId, destacado, imagen
       });
 
       res.status(201).json({ success: true, message: 'Producto creado.', data: product });
@@ -94,8 +95,8 @@ const productController = {
         return res.status(404).json({ success: false, message: 'Producto no encontrado.' });
       }
 
-      const { nombre, descripcion, precio, stock, categoryId, destacado, activo } = req.body;
-      const updateData = { nombre, descripcion, precio, stock, categoryId, destacado, activo };
+      const { nombre, descripcion, precio, tallas, categoryId, destacado, activo } = req.body;
+      const updateData = { nombre, descripcion, precio, tallas, categoryId, destacado, activo };
 
       if (req.file) {
         updateData.imagen = await uploadToSupabase(req.file, 'products');

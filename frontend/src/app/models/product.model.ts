@@ -1,9 +1,15 @@
+
+export interface TallaStock {
+  talla: string;
+  stock: number;
+}
+
 export interface Product {
   id: number;
   nombre: string;
   descripcion: string;
   precio: number;
-  stock: number;
+  tallas: TallaStock[];
   imagen: string | null;
   categoryId: number;
   destacado: boolean;

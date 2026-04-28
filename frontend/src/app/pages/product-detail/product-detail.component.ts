@@ -1,9 +1,10 @@
+
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { WhatsappService } from '../../services/whatsapp.service';
-import { Product } from '../../models/product.model';
+import { Product, TallaStock } from '../../models/product.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -24,18 +25,57 @@ import { Product } from '../../models/product.model';
             <p class="price" style="margin-bottom: 0.5rem;">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
             <p class="description">{{ product.descripcion }}</p>
             <div class="stock-info">
-              <span [class]="product.stock > 0 ? 'in-stock' : 'out-stock'">
-                {{ product.stock > 0 ? 'En stock (' + product.stock + ' disponibles)' : 'Sin stock' }}
-              </span>
+              <ng-container *ngIf="product.tallas && product.tallas.length > 0; else noTallas">
+                <span *ngFor="let t of product.tallas" [class]="t.stock > 0 ? 'in-stock' : 'out-stock'" style="margin-right: 0.5rem;">
+                  {{ t.talla }}: {{ t.stock > 0 ? t.stock + ' disponibles' : 'Sin stock' }}
+                </span>
+              </ng-container>
+              <ng-template #noTallas>
+                <span class="out-stock">Sin stock</span>
+              </ng-template>
+            </div>
+            <div *ngIf="product.tallas && product.tallas.length > 0" class="form-group" style="margin-bottom: 1rem;">
+              <label style="font-weight: 600;">Talla (opcional):</label>
+              <select [(ngModel)]="selectedTalla" style="margin-left: 0.5rem; min-width: 80px;">
+                <option value="">Seleccionar</option>
+                <option *ngFor="let t of product.tallas" [ngValue]="t.talla" [disabled]="t.stock === 0">{{ t.talla }}</option>
+              </select>
             </div>
             <div class="quantity-row">
-              <button (click)="quantity > 1 && quantity = quantity - 1" class="qty-btn">-</button>
+              <button (click)="decrementQty()" class="qty-btn">-</button>
               <span class="qty">{{ quantity }}</span>
-              <button (click)="quantity < product.stock && quantity = quantity + 1" class="qty-btn">+</button>
+              <button (click)="incrementQty()" class="qty-btn">+</button>
             </div>
-            <button class="btn-add-lg" (click)="contactWhatsApp()" [disabled]="product.stock === 0">
-              {{ product.stock > 0 ? 'Cotizar por WhatsApp 💬' : 'Sin Stock' }}
+            <button class="btn-add-lg" (click)="contactWhatsApp()" [disabled]="!hasStock()">
+              {{ hasStock() ? 'Cotizar por WhatsApp 💬' : 'Sin Stock' }}
             </button>
+            selectedTalla: string = '';
+            quantity: number = 1;
+
+            hasStock(): boolean {
+              if (!this.product?.tallas || this.product.tallas.length === 0) return false;
+              if (!this.selectedTalla) {
+                // Si no seleccionó talla, hay stock si alguna talla tiene stock
+                return this.product.tallas.some(t => t.stock > 0);
+              }
+              const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
+              return !!t && t.stock > 0;
+            }
+
+            incrementQty() {
+              let max = 99;
+              if (this.selectedTalla) {
+                const t = this.product.tallas.find(t => t.talla === this.selectedTalla);
+                if (t) max = t.stock;
+              } else if (this.product.tallas && this.product.tallas.length > 0) {
+                max = Math.max(...this.product.tallas.map(t => t.stock));
+              }
+              if (this.quantity < max) this.quantity++;
+            }
+
+            decrementQty() {
+              if (this.quantity > 1) this.quantity--;
+            }
           </div>
         </div>
       </div>

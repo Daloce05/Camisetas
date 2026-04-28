@@ -34,15 +34,15 @@ async function initDatabase() {
 
     // Crear productos de ejemplo
     await Product.bulkCreate([
-      { nombre: 'Camiseta Original Real Madrid 2024', descripcion: 'Camiseta oficial del Real Madrid temporada 2024, tecnología transpirable y escudo bordado.', precio: 89.99, stock: 50, categoryId: categorias[0].id, destacado: true },
-      { nombre: 'Camiseta Réplica Barcelona 2024', descripcion: 'Réplica de alta calidad de la camiseta del FC Barcelona 2024.', precio: 39.99, stock: 80, categoryId: categorias[1].id, destacado: true },
-      { nombre: 'Camiseta Retro Argentina 1986', descripcion: 'Camiseta retro de la selección Argentina, mundial 1986.', precio: 59.99, stock: 30, categoryId: categorias[2].id },
-      { nombre: 'Pulsera Fan Fútbol', descripcion: 'Pulsera de silicona con escudos de equipos populares.', precio: 5.00, stock: 100, categoryId: categorias[3].id },
-      { nombre: 'Camiseta Edición Especial Champions', descripcion: 'Camiseta edición limitada para la final de la Champions League.', precio: 99.99, stock: 20, categoryId: categorias[4].id, destacado: true },
-      { nombre: 'Camiseta Original Manchester United 2024', descripcion: 'Camiseta oficial del Manchester United temporada 2024.', precio: 89.99, stock: 40, categoryId: categorias[0].id },
-      { nombre: 'Camiseta Réplica Juventus 2024', descripcion: 'Réplica de la camiseta de la Juventus 2024.', precio: 39.99, stock: 60, categoryId: categorias[1].id },
-      { nombre: 'Camiseta Retro Brasil 1970', descripcion: 'Camiseta retro de la selección Brasil, mundial 1970.', precio: 59.99, stock: 25, categoryId: categorias[2].id },
-      { nombre: 'Bufanda Edición Especial', descripcion: 'Bufanda edición especial conmemorativa.', precio: 19.99, stock: 35, categoryId: categorias[4].id },
+      { nombre: 'Camiseta Original Real Madrid 2024', descripcion: 'Camiseta oficial del Real Madrid temporada 2024, tecnología transpirable y escudo bordado.', precio: 89.99, tallas: [ { talla: 'S', stock: 10 }, { talla: 'M', stock: 20 }, { talla: 'L', stock: 20 } ], categoryId: categorias[0].id, destacado: true },
+      { nombre: 'Camiseta Réplica Barcelona 2024', descripcion: 'Réplica de alta calidad de la camiseta del FC Barcelona 2024.', precio: 39.99, tallas: [ { talla: 'S', stock: 30 }, { talla: 'M', stock: 30 }, { talla: 'L', stock: 20 } ], categoryId: categorias[1].id, destacado: true },
+      { nombre: 'Camiseta Retro Argentina 1986', descripcion: 'Camiseta retro de la selección Argentina, mundial 1986.', precio: 59.99, tallas: [ { talla: 'M', stock: 15 }, { talla: 'L', stock: 15 } ], categoryId: categorias[2].id },
+      { nombre: 'Pulsera Fan Fútbol', descripcion: 'Pulsera de silicona con escudos de equipos populares.', precio: 5.00, tallas: [ { talla: 'Única', stock: 100 } ], categoryId: categorias[3].id },
+      { nombre: 'Camiseta Edición Especial Champions', descripcion: 'Camiseta edición limitada para la final de la Champions League.', precio: 99.99, tallas: [ { talla: 'S', stock: 5 }, { talla: 'M', stock: 10 }, { talla: 'L', stock: 5 } ], categoryId: categorias[4].id, destacado: true },
+      { nombre: 'Camiseta Original Manchester United 2024', descripcion: 'Camiseta oficial del Manchester United temporada 2024.', precio: 89.99, tallas: [ { talla: 'S', stock: 10 }, { talla: 'M', stock: 15 }, { talla: 'L', stock: 15 } ], categoryId: categorias[0].id },
+      { nombre: 'Camiseta Réplica Juventus 2024', descripcion: 'Réplica de la camiseta de la Juventus 2024.', precio: 39.99, tallas: [ { talla: 'S', stock: 20 }, { talla: 'M', stock: 20 }, { talla: 'L', stock: 20 } ], categoryId: categorias[1].id },
+      { nombre: 'Camiseta Retro Brasil 1970', descripcion: 'Camiseta retro de la selección Brasil, mundial 1970.', precio: 59.99, tallas: [ { talla: 'M', stock: 10 }, { talla: 'L', stock: 15 } ], categoryId: categorias[2].id },
+      { nombre: 'Bufanda Edición Especial', descripcion: 'Bufanda edición especial conmemorativa.', precio: 19.99, tallas: [ { talla: 'Única', stock: 35 } ], categoryId: categorias[4].id },
     ]);
 
     // Crear configuraciones por defecto

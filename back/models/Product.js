@@ -20,11 +20,12 @@ const Product = sequelize.define('Product', {
     allowNull: false,
     validate: { min: 0 }
   },
-  stock: {
-    type: DataTypes.INTEGER,
+  // Eliminamos stock global y agregamos tallas (array de objetos { talla, stock })
+  tallas: {
+    type: DataTypes.JSONB,
     allowNull: false,
-    defaultValue: 0,
-    validate: { min: 0 }
+    defaultValue: [],
+    // Ejemplo: [{ talla: 'S', stock: 10 }, { talla: 'M', stock: 5 }]
   },
   imagen: {
     type: DataTypes.STRING(255),

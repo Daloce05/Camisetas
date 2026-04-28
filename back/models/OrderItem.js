@@ -28,6 +28,10 @@ const OrderItem = sequelize.define('OrderItem', {
     allowNull: false,
     validate: { min: 1 }
   },
+  talla: {
+    type: DataTypes.STRING(10),
+    allowNull: false
+  },
   precioUnitario: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false
