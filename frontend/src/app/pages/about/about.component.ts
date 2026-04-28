@@ -61,8 +61,10 @@ import { RouterLink } from '@angular/router';
   styles: [`
             .about-contact-link {
               display: inline-block;
-              pointer-events: auto;
+              pointer-events: auto !important;
               text-decoration: none;
+              z-index: 10;
+              position: relative;
             }
         .about-bottom-question {
           color: #fff !important;
