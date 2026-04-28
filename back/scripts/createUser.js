@@ -8,7 +8,7 @@ async function createUser() {
       apellido: 'Daloce05',
       email: 'Daloce05@correo.com',
       password: 'Daloce05',
-      rol: 'cliente',
+      rol: 'admin',
       telefono: '',
       activo: true
     });
