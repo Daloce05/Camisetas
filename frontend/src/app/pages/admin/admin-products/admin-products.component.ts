@@ -1,3 +1,10 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Product } from '../../../models/product.model';
+import { Category } from '../../../models/category.model';
+import { ProductService } from '../../../services/product.service';
+import { CategoryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -116,6 +123,7 @@
       </div>
     </div>
   `,
+  providers: [ProductService, CategoryService],
   styles: [`
     .admin-section h1 {
       color: #181818;
@@ -130,6 +138,7 @@
       border: none; border-radius: 10px;
       color: white; cursor: pointer; font-weight: 600;
     }
+    .form-card {
       background: #ffffff;
       border: 1px solid rgba(179, 136, 255, 0.12);
       border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
@@ -198,20 +207,28 @@ export class AdminProductsComponent implements OnInit {
   selectedFile: File | null = null;
   form = { nombre: '', descripcion: '', precio: 0, tallas: [] as { talla: string; stock: number }[], categoryId: null as number | null, destacado: false };
 
+  // Para gestión de tallas
+  tallaInput: string = '';
+  stockInput: number = 0;
+  tallasPredefinidas: string[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '4XL', '5XL'];
+
+  addTalla() {
+    if (!this.tallaInput || this.stockInput < 0) return;
+    const exists = this.form.tallas.some(t => t.talla === this.tallaInput);
+    if (exists) return;
+    this.form.tallas.push({ talla: this.tallaInput, stock: this.stockInput });
+    this.tallaInput = '';
+    this.stockInput = 0;
+  }
+
+  removeTalla(index: number) {
+    this.form.tallas.splice(index, 1);
+  }
+
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService
-    ) {
-      // Additional constructor logic can go here
-    }
-  
-  import { Component, OnInit } from '@angular/core';
-  import { CommonModule } from '@angular/common';
-  import { FormsModule } from '@angular/forms';
-  import { Product } from 'src/app/models/product.model';
-  import { Category } from 'src/app/models/category.model';
-  import { ProductService } from 'src/app/services/product.service';
-  import { CategoryService } from 'src/app/services/category.service';
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -289,10 +306,3 @@ export class AdminProductsComponent implements OnInit {
     }
   }
 }
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Product } from '../../models/product.model';
-import { Category } from '../../models/category.model';
-import { ProductService } from '../../services/product.service';
-import { CategoryService } from '../../services/category.service';

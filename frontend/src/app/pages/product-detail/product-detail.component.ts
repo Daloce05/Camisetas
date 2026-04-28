@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import { WhatsappService } from '../../services/whatsapp.service';
@@ -9,7 +10,7 @@ import { Product, TallaStock } from '../../models/product.model';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink],
   template: `
     <div class="detail-page" *ngIf="product">
       <div class="container">
