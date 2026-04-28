@@ -60,6 +60,25 @@ import { Category } from '../../models/category.model';
     </section>
   `,
   styles: [`
+    /* Forzar color blanco y negrita en el hero */
+    :host ::ng-deep .hero-title,
+    .hero .hero-title,
+    .hero-title {
+      color: #fff !important;
+      font-weight: 900 !important;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.45) !important;
+    }
+    :host ::ng-deep .hero-desc,
+    .hero .hero-desc,
+    .hero-desc {
+      color: #fff !important;
+      font-weight: 800 !important;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.35) !important;
+    }
+    /* Evitar que .hero p sobreescriba el color */
+    .hero p.hero-desc {
+      color: #fff !important;
+    }
     .hero {
       position: relative;
       padding: 6rem 1.5rem;
