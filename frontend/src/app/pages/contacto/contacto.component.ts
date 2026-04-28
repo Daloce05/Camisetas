@@ -25,7 +25,7 @@ import { CommonModule } from '@angular/common';
           <div class="contact-card">
             <div class="contact-icon">📧</div>
             <div class="contact-card-title">Correo Electrónico</div>
-            <a class="contact-link" href="mailto:Distrisportcamisetasdefutbol@gmail.com">Distrisportcamisetasdefutbol@gmail.com</a>
+            <a class="contact-link" href="mailto:Distrisportcamisetasdefutbol@gmail.com">Distrisportcamisetasdefutbol&#64;gmail.com</a>
             <div class="contact-card-desc">Respuestas en menos de 24 horas.</div>
           </div>
         </div>
