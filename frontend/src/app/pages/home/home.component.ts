@@ -32,6 +32,31 @@ import { Category } from '../../models/category.model';
       </div>
     </section>
 
+    <!-- Featured Products -->
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Camisetas Destacadas</h2>
+        <div class="products-grid" *ngIf="featuredProducts.length > 0">
+          <div *ngFor="let product of featuredProducts" class="product-card">
+            <div class="product-img">
+              <img *ngIf="product.imagen" [src]="product.imagen.startsWith('http') ? product.imagen : 'https://sabina-utf1.onrender.com' + product.imagen" [alt]="product.nombre">
+              <div *ngIf="!product.imagen" class="product-placeholder">🍄</div>
+              <span class="product-badge" *ngIf="product.destacado">Destacado</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">{{ product.categoria?.nombre }}</span>
+              <h3>{{ product.nombre }}</h3>
+              <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
+              <div class="product-footer">
+                <span class="product-price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
+                <a [routerLink]="['/producto', product.id]" class="btn-add">Ver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Why Us -->
     <section class="section">
       <div class="container">
