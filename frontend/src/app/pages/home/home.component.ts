@@ -379,28 +379,49 @@ import { Category } from '../../models/category.model';
     }
     .logos-equipos-container {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 0 0.5rem 0;
-      flex-wrap: wrap;
+      padding: 2.5rem 0 2.5rem 0;
+      flex-wrap: nowrap;
       max-width: 1100px;
       margin: 0 auto;
       width: 100%;
       gap: 0;
     }
     .logo-equipo {
-      height: 70px;
-      width: auto;
-      border-radius: 16px;
+      width: 120px;
+      height: 120px;
+      min-width: 120px;
+      min-height: 120px;
+      max-width: 120px;
+      max-height: 120px;
+      border-radius: 50%;
       box-shadow: 0 2px 12px #0002;
       background: #fff;
-      object-fit: contain;
+      object-fit: cover;
       padding: 0.5rem;
+      margin: 0;
+      display: block;
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .logo-equipo:hover {
       transform: scale(1.08) rotate(-2deg);
       box-shadow: 0 8px 32px #b388ff33;
+    }
+    @media (max-width: 900px) {
+      .logos-equipos-container {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+      .logo-equipo {
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        min-height: 80px;
+        max-width: 80px;
+        max-height: 80px;
+      }
     }
     .logos-equipos-section {
       width: 100%;
