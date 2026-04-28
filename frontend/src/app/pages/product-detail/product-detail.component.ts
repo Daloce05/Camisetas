@@ -21,7 +21,7 @@ import { Product } from '../../models/product.model';
           <div class="detail-info">
             <span class="category-tag">{{ product.categoria?.nombre }}</span>
             <h1>{{ product.nombre }}</h1>
-            <p class="price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
+            <p class="price" style="margin-bottom: 0.5rem;">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
             <p class="description">{{ product.descripcion }}</p>
             <div class="stock-info">
               <span [class]="product.stock > 0 ? 'in-stock' : 'out-stock'">
