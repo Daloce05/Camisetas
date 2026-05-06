@@ -13,30 +13,17 @@ import { Category } from '../../models/category.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <!-- Hero en tres columnas: izquierda (bernabeu), centro (carrusel), derecha (distrisport+botones) -->
+    <!-- Hero en tres columnas: izquierda (bernabeu), centro (imágenes fijas), derecha (distrisport+botones) -->
     <section class="hero hero-redesign hero-grid">
       <!-- Izquierda: Imagen Bernabeu -->
       <div class="hero-col hero-left">
         <div class="hero-img-bg hero-bernabeu"></div>
       </div>
-      <!-- Centro: Carrusel (sin modificar) -->
-      <div class="hero-col hero-center">
-        <div class="hero-slides">
-          <div *ngFor="let img of heroImages; let i = index"
-               class="hero-slide"
-               [class.active]="i === heroIndex">
-            <img [src]="img" alt="Distrisports header" class="hero-slide-img redesign-img">
-          </div>
-        </div>
-        <div class="hero-overlay redesign-overlay"></div>
-        <button class="hero-arrow hero-prev" (click)="prevHero()" aria-label="Anterior">&#8249;</button>
-        <button class="hero-arrow hero-next" (click)="nextHero()" aria-label="Siguiente">&#8250;</button>
-        <div class="hero-dots">
-          <span *ngFor="let img of heroImages; let i = index"
-                class="hero-dot"
-                [class.active]="i === heroIndex"
-                (click)="goHero(i)"></span>
-        </div>
+      <!-- Centro: Imágenes fijas header 1, 2 y 3 -->
+      <div class="hero-col hero-center" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 1rem;">
+        <img src="assets/images/imagen header 1.jpg" alt="Camiseta header 1" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
+        <img src="assets/images/imagen header 2.jpg" alt="Camiseta header 2" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
+        <img src="assets/images/imagen header 3.jpg" alt="Camiseta header 3" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
       </div>
       <!-- Derecha: Imagen Distrisport + Botones -->
       <div class="hero-col hero-right">
@@ -666,15 +653,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   featuredProducts: Product[] = [];
   categories: Category[] = [];
 
-  heroImages = [
-    'assets/images/imagen header 1.jpg',
-    'assets/images/imagen header 2.jpg',
-    'assets/images/imagen header 3.jpg',
-    'assets/images/imagen header 4.jpg',
-    'assets/images/imagen header 5.jpg',
-  ];
-  heroIndex = 0;
-  private heroTimer: any;
+  // Eliminado carrusel, solo imágenes fijas en el hero
 
   constructor(
     private productService: ProductService,
@@ -683,58 +662,29 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.startHeroTimer();
-      this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
-        this.featuredProducts = res.data.products.map(p => {
-          let precioNum: number = 0;
-          if (typeof p.precio === 'number') {
-            precioNum = p.precio;
-          } else if (typeof p.precio === 'string') {
-            const precioStr = p.precio as string;
-            if (precioStr.trim() !== '' && !isNaN(Number(precioStr))) {
-              precioNum = Number(precioStr);
-            }
+    this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
+      this.featuredProducts = res.data.products.map(p => {
+        let precioNum: number = 0;
+        if (typeof p.precio === 'number') {
+          precioNum = p.precio;
+        } else if (typeof p.precio === 'string') {
+          const precioStr = p.precio as string;
+          if (precioStr.trim() !== '' && !isNaN(Number(precioStr))) {
+            precioNum = Number(precioStr);
           }
-          return {
-            ...p,
-            precio: (typeof precioNum === 'number' && !isNaN(precioNum)) ? precioNum : 0
-          };
-        });
+        }
+        return {
+          ...p,
+          precio: (typeof precioNum === 'number' && !isNaN(precioNum)) ? precioNum : 0
+        };
       });
+    });
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res.data;
     });
   }
 
-  startHeroTimer() {
-    this.heroTimer = setInterval(() => {
-      this.heroIndex = (this.heroIndex + 1) % this.heroImages.length;
-    }, 4500);
-  }
-
-  ngOnDestroy() {
-    if (this.heroTimer) clearInterval(this.heroTimer);
-  }
-
-  prevHero() {
-    this.heroIndex = (this.heroIndex - 1 + this.heroImages.length) % this.heroImages.length;
-    this.resetHeroTimer();
-  }
-
-  nextHero() {
-    this.heroIndex = (this.heroIndex + 1) % this.heroImages.length;
-    this.resetHeroTimer();
-  }
-
-  goHero(i: number) {
-    this.heroIndex = i;
-    this.resetHeroTimer();
-  }
-
-  resetHeroTimer() {
-    if (this.heroTimer) clearInterval(this.heroTimer);
-    this.startHeroTimer();
-  }
+  ngOnDestroy() {}
 
   contactWhatsApp(product: Product) {
     this.whatsappService.sendProductMessage(product);
