@@ -13,25 +13,20 @@ import { Category } from '../../models/category.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <!-- Hero en tres columnas: izquierda (bernabeu), centro (imágenes fijas), derecha (distrisport+botones) -->
+    <!-- Hero en tres columnas: izquierda (header 1), centro (header 2), derecha (header 3) -->
     <section class="hero hero-redesign hero-grid">
-      <!-- Izquierda: Imagen Bernabeu -->
+      <!-- Izquierda: Imagen header 1 -->
       <div class="hero-col hero-left">
-        <div class="hero-img-bg hero-bernabeu"></div>
+        <div class="hero-img-bg" style="background-image: url('assets/images/imagen header 1.jpg');"></div>
       </div>
-      <!-- Centro: Imágenes fijas header 1, 2 y 3 -->
-      <div class="hero-col hero-center" style="display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 1rem;">
-        <img src="assets/images/imagen header 1.jpg" alt="Camiseta header 1" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
-        <img src="assets/images/imagen header 2.jpg" alt="Camiseta header 2" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
-        <img src="assets/images/imagen header 3.jpg" alt="Camiseta header 3" class="hero-slide-img redesign-img" style="max-width: 32%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
+      <!-- Centro: Imagen header 2 -->
+      <div class="hero-col hero-center" style="display: flex; justify-content: center; align-items: center;">
+        <img src="assets/images/imagen header 2.jpg" alt="Camiseta header 2" class="hero-slide-img redesign-img" style="max-width: 90%; height: auto; border-radius: 12px; box-shadow: 0 2px 12px #0003;" />
       </div>
-      <!-- Derecha: Imagen Distrisport + Botones -->
+      <!-- Derecha: Imagen header 3 -->
       <div class="hero-col hero-right">
-        <div class="hero-img-bg hero-distrisport"></div>
-        <div class="hero-buttons hero-btns-right">
-          <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
-          <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
-        </div>
+        <div class="hero-img-bg" style="background-image: url('assets/images/imagen header 3.jpg');"></div>
+        <div class="hero-buttons hero-btns-right" style="display: none;"></div>
       </div>
     </section>
 
