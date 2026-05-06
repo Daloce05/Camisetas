@@ -13,27 +13,24 @@ import { Category } from '../../models/category.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <!-- Hero Carousel -->
-    <section class="hero">
-      <!-- Slides -->
+    <!-- Hero Carousel Rediseñado -->
+    <section class="hero hero-redesign">
       <div class="hero-slides">
         <div *ngFor="let img of heroImages; let i = index"
              class="hero-slide"
              [class.active]="i === heroIndex">
-          <img [src]="img" alt="Distrisports header" class="hero-slide-img">
+          <img [src]="img" alt="Distrisports header" class="hero-slide-img redesign-img">
         </div>
       </div>
-      <div class="hero-overlay"></div>
-      <!-- Content -->
-      <div class="hero-content">
-        <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
-        <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
-        <div class="hero-buttons">
+      <div class="hero-overlay redesign-overlay"></div>
+      <div class="hero-content redesign-content">
+        <h1 class="hero-title redesign-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
+        <p class="hero-desc redesign-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
+        <div class="hero-buttons redesign-buttons">
           <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
           <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
         </div>
       </div>
-      <!-- Controles del carrusel -->
       <button class="hero-arrow hero-prev" (click)="prevHero()" aria-label="Anterior">&#8249;</button>
       <button class="hero-arrow hero-next" (click)="nextHero()" aria-label="Siguiente">&#8250;</button>
       <div class="hero-dots">
@@ -136,51 +133,79 @@ import { Category } from '../../models/category.model';
     .hero p.hero-desc {
       color: #fff !important;
     }
-    .hero {
+    .hero.hero-redesign {
       position: relative;
-      height: 88vh;
-      min-height: 520px;
-      max-height: 820px;
+      height: 70vh;
+      min-height: 420px;
+      max-height: 700px;
+      background: #101c2c;
       overflow: hidden;
       color: #fff;
       display: flex;
       align-items: center;
+      justify-content: center;
     }
-    /* Slides */
     .hero-slides {
       position: absolute;
       inset: 0;
       z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
     .hero-slide {
       position: absolute;
-      inset: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       opacity: 0;
       transition: opacity 0.9s ease;
     }
     .hero-slide.active { opacity: 1; }
-    .hero-slide-img {
+    .hero-slide-img.redesign-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      max-width: 100vw;
+      max-height: 100%;
+      object-fit: contain;
+      object-position: center center;
       display: block;
-      filter: brightness(0.55);
+      background: #101c2c;
+      filter: brightness(0.97);
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0 auto;
+      transition: filter 0.3s;
     }
-    .hero-overlay {
+    .hero-overlay.redesign-overlay {
       position: absolute;
       inset: 0;
       z-index: 2;
-      background: linear-gradient(90deg, rgba(10,24,51,0.75) 0%, rgba(10,24,51,0.35) 60%, transparent 100%);
+      background: linear-gradient(90deg, rgba(10,24,51,0.60) 0%, rgba(10,24,51,0.18) 60%, transparent 100%);
       pointer-events: none;
     }
-    .hero-content {
-      position: relative;
+    .hero-content.redesign-content {
+      position: absolute;
       z-index: 3;
-      max-width: 640px;
-      padding: 0 2rem 0 4rem;
+      left: 0; right: 0; top: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 600px;
+      margin-left: 5vw;
+      padding: 0 2vw;
       text-align: left;
+      background: none;
     }
+    .redesign-title { font-size: 2.2rem; color: #fff; }
+    .redesign-desc { font-size: 1.15rem; color: #fff; margin-bottom: 1.5rem; }
+    .redesign-buttons { margin-top: 2rem; }
     .hero-buttons {
       display: flex;
       gap: 1rem;
@@ -510,33 +535,21 @@ import { Category } from '../../models/category.model';
 
     /* ===== RESPONSIVE HOME ===== */
     @media (max-width: 900px) {
-      .hero { height: 70vh; min-height: 420px; }
-      .hero-content { padding: 0 1rem 0 1.5rem; max-width: 100%; }
-      .hero-arrow { width: 40px; height: 40px; font-size: 1.6rem; }
+      .hero.hero-redesign { height: 50vh; min-height: 260px; max-height: 400px; }
+      .hero-content.redesign-content { max-width: 98vw; margin-left: 0; padding: 0 2vw; }
+      .redesign-title { font-size: 1.3rem; }
+      .redesign-desc { font-size: 0.95rem; }
+      .hero-arrow { width: 36px; height: 36px; font-size: 1.2rem; }
       .hero-prev { left: 0.5rem; }
       .hero-next { right: 0.5rem; }
-      .section { padding: 2.5rem 1rem; }
-      .section-title { font-size: 1.5rem; margin-bottom: 1.5rem; }
-      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
-      .features-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-      .feature-card { padding: 1.5rem 1rem; }
     }
     @media (max-width: 600px) {
-      .hero { height: 60vh; min-height: 360px; }
-      .hero-content { padding: 0 0.8rem; }
-      .hero-title { font-size: 1.5rem !important; }
-      .hero-desc { font-size: 0.95rem !important; }
-      .btn-primary-lg, .btn-outline-lg { padding: 0.65rem 1.1rem; font-size: 0.88rem; }
+      .hero.hero-redesign { height: 38vh; min-height: 180px; max-height: 260px; }
+      .hero-content.redesign-content { padding: 0 1vw; }
+      .redesign-title { font-size: 1.05rem !important; }
+      .redesign-desc { font-size: 0.82rem !important; }
+      .btn-primary-lg, .btn-outline-lg { padding: 0.55rem 0.9rem; font-size: 0.78rem; }
       .hero-arrow { display: none; }
-      .products-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-      .product-img { height: 150px; }
-      .product-info { padding: 0.8rem; }
-      .product-info h3 { font-size: 0.9rem; }
-      .product-desc { display: none; }
-      .product-price { font-size: 1.05rem; }
-      .features-grid { grid-template-columns: 1fr; gap: 0.8rem; }
-      .logos-equipos-container { gap: 1rem; padding: 1rem 0; }
-      .logo-equipo { height: 55px; }
     }
   `]
 })
