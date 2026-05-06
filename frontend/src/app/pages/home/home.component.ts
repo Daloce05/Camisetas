@@ -14,18 +14,18 @@ import { Category } from '../../models/category.model';
   imports: [CommonModule, RouterLink],
   template: `
     <!-- Hero en tres columnas: izquierda (header 1), centro (header 2), derecha (header 3) -->
-    <section class="hero hero-redesign hero-grid" style="align-items: center;">
-      <!-- Izquierda: Imagen header 1 (sin opacidad) -->
-      <div class="hero-col hero-left" style="display: flex; justify-content: center; align-items: center;">
-        <img src="assets/images/imagen header 1.jpg" alt="Camiseta header 1" class="hero-header-img" />
+    <section class="hero hero-redesign hero-grid" style="align-items: stretch;">
+      <!-- Izquierda: Imagen header 1 -->
+      <div class="hero-col hero-left hero-img-fill" style="padding: 0;">
+        <img src="assets/images/imagen header 1.jpg" alt="Camiseta header 1" class="hero-img-fill" />
       </div>
       <!-- Centro: Imagen header 2 -->
-      <div class="hero-col hero-center" style="display: flex; justify-content: center; align-items: center;">
-        <img src="assets/images/imagen header 2.jpg" alt="Camiseta header 2" class="hero-header-img" />
+      <div class="hero-col hero-center hero-img-fill" style="padding: 0;">
+        <img src="assets/images/imagen header 2.jpg" alt="Camiseta header 2" class="hero-img-fill" />
       </div>
-      <!-- Derecha: Imagen header 3 (sin opacidad) -->
-      <div class="hero-col hero-right" style="display: flex; justify-content: center; align-items: center;">
-        <img src="assets/images/imagen header 3.jpg" alt="Camiseta header 3" class="hero-header-img" />
+      <!-- Derecha: Imagen header 3 -->
+      <div class="hero-col hero-right hero-img-fill" style="padding: 0;">
+        <img src="assets/images/imagen header 3.jpg" alt="Camiseta header 3" class="hero-img-fill" />
         <div class="hero-buttons hero-btns-right" style="display: none;"></div>
       </div>
     </section>
@@ -97,16 +97,16 @@ import { Category } from '../../models/category.model';
     </section>
   `,
   styles: [`
-    .hero-header-img {
-      width: 95%;
-      max-width: 320px;
-      aspect-ratio: 1/1;
+    .hero-img-fill {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 2px 12px #0003;
-      background: #fff;
-      margin: 0 auto;
+      border-radius: 0;
+      box-shadow: none;
+      margin: 0;
       display: block;
+      background: none;
+      padding: 0;
     }
             .hero-grid {
               display: grid;
