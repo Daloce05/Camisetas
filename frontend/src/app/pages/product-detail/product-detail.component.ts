@@ -17,9 +17,36 @@ import { Product, TallaStock } from '../../models/product.model';
         <a routerLink="/productos" class="back-link">&larr; Volver a productos</a>
         <div class="detail-grid">
           <div class="detail-img">
-            <img *ngIf="product.imagen" [src]="product.imagen.startsWith('http') ? product.imagen : 'https://sabina-utf1.onrender.com' + product.imagen" [alt]="product.nombre">
-            <div *ngIf="!product.imagen" class="placeholder">🍄</div>
+            <ng-container *ngIf="product.imagenes && product.imagenes.length > 0; else noImgs">
+              <div class="carousel">
+                <button class="carousel-btn" (click)="prevImg()" [disabled]="currentImgIndex === 0">‹</button>
+                <img [src]="getImgUrl(product.imagenes[currentImgIndex])" [alt]="product.nombre" class="carousel-img">
+                <button class="carousel-btn" (click)="nextImg()" [disabled]="currentImgIndex === product.imagenes.length - 1">›</button>
+              </div>
+              <div class="carousel-dots">
+                <span *ngFor="let img of product.imagenes; let i = index"
+                      [class.active]="i === currentImgIndex"
+                      (click)="goToImg(i)"></span>
+              </div>
+            </ng-container>
+            <ng-template #noImgs>
+              <div class="placeholder">🍄</div>
+            </ng-template>
           </div>
+            currentImgIndex = 0;
+
+            getImgUrl(img: string): string {
+              return img.startsWith('http') ? img : 'https://sabina-utf1.onrender.com' + img;
+            }
+            prevImg() {
+              if (this.currentImgIndex > 0) this.currentImgIndex--;
+            }
+            nextImg() {
+              if (this.product && this.product.imagenes && this.currentImgIndex < this.product.imagenes.length - 1) this.currentImgIndex++;
+            }
+            goToImg(i: number) {
+              this.currentImgIndex = i;
+            }
           <div class="detail-info">
             <span class="category-tag">{{ product.categoria?.nombre }}</span>
             <h1>{{ product.nombre }}</h1>
@@ -70,7 +97,13 @@ import { Product, TallaStock } from '../../models/product.model';
       background: linear-gradient(135deg, #1e335c 0%, #3a5ba0 100%);
       display: flex; align-items: center; justify-content: center; min-height: 400px;
     }
-    .detail-img img { width: 100%; height: 100%; object-fit: cover; }
+    .carousel { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+    .carousel-img { width: 350px; height: 350px; object-fit: cover; border-radius: 12px; }
+    .carousel-btn { background: #fff; border: 1px solid #b388ff; border-radius: 50%; width: 36px; height: 36px; font-size: 1.5rem; color: #3a5ba0; cursor: pointer; transition: background 0.2s; }
+    .carousel-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .carousel-dots { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
+    .carousel-dots span { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; display: inline-block; }
+    .carousel-dots .active { background: #3a5ba0; }
     .placeholder { font-size: 6rem; }
     .category-tag {
       color: #181818; font-size: 0.85rem; font-weight: 600;

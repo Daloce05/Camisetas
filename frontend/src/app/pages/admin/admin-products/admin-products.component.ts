@@ -62,8 +62,8 @@ import { CategoryService } from '../../../services/category.service';
         </div>
         <div class="form-row">
           <div class="form-group">
-            <label>Imagen</label>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*">
+            <label>Imágenes (máx. 3)</label>
+            <input type="file" (change)="onFilesSelected($event)" accept="image/*" multiple>
           </div>
           <div class="form-group">
             <label class="checkbox-label">
@@ -204,7 +204,7 @@ export class AdminProductsComponent implements OnInit {
   editingId: number | null = null;
   search = '';
   error = '';
-  selectedFile: File | null = null;
+  selectedFiles: File[] = [];
   form = { nombre: '', descripcion: '', precio: 0, tallas: [] as { talla: string; stock: number }[], categoryId: null as number | null, destacado: false };
 
   // Para gestión de tallas
@@ -243,14 +243,18 @@ export class AdminProductsComponent implements OnInit {
     });
   }
 
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0] || null;
+  onFilesSelected(event: any) {
+    const files: FileList = event.target.files;
+    this.selectedFiles = [];
+    for (let i = 0; i < Math.min(files.length, 3); i++) {
+      this.selectedFiles.push(files[i]);
+    }
   }
 
   resetForm() {
     this.form = { nombre: '', descripcion: '', precio: 0, tallas: [], categoryId: null, destacado: false };
     this.editingId = null;
-    this.selectedFile = null;
+    this.selectedFiles = [];
     this.error = '';
   }
 
@@ -277,7 +281,11 @@ export class AdminProductsComponent implements OnInit {
     formData.append('tallas', JSON.stringify(tallas));
     formData.append('categoryId', this.form.categoryId!.toString());
     formData.append('destacado', this.form.destacado.toString());
-    if (this.selectedFile) formData.append('imagen', this.selectedFile);
+    if (this.selectedFiles && this.selectedFiles.length > 0) {
+      this.selectedFiles.forEach((file, idx) => {
+        formData.append('imagenes', file);
+      });
+    }
 
     const req = this.editingId
       ? this.productService.updateProduct(this.editingId, formData)

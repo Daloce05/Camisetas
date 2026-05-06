@@ -65,7 +65,7 @@ const productController = {
     try {
       const { nombre, descripcion, precio, categoryId, destacado } = req.body;
       let { tallas } = req.body;
-      let imagen = null;
+      let imagenes = [];
 
       // Normalizar tallas: debe ser array de objetos { talla, stock }
       if (typeof tallas === 'string') {
@@ -78,17 +78,21 @@ const productController = {
       if (!Array.isArray(tallas)) tallas = [];
       tallas = tallas.filter(t => t && typeof t.talla === 'string' && typeof t.stock === 'number');
 
-      if (req.file) {
-        try {
-          imagen = await uploadToSupabase(req.file, 'products');
-        } catch (imgErr) {
-          console.warn('Advertencia: No se pudo subir la imagen, se creará el producto sin imagen. Detalle:', imgErr.message || imgErr);
-          imagen = null;
+
+      if (req.files && Array.isArray(req.files)) {
+        for (const file of req.files.slice(0, 3)) {
+          try {
+            const url = await uploadToSupabase(file, 'products');
+            if (url) imagenes.push(url);
+          } catch (imgErr) {
+            console.warn('Advertencia: No se pudo subir una imagen:', imgErr.message || imgErr);
+          }
         }
       }
 
+
       const product = await Product.create({
-        nombre, descripcion, precio, tallas, categoryId, destacado, imagen
+        nombre, descripcion, precio, tallas, categoryId, destacado, imagenes
       });
 
       res.status(201).json({ success: true, message: 'Producto creado.', data: product });
@@ -120,10 +124,20 @@ const productController = {
       if (!Array.isArray(tallas)) tallas = [];
       tallas = tallas.filter(t => t && typeof t.talla === 'string' && typeof t.stock === 'number');
 
+
       const updateData = { nombre, descripcion, precio, tallas, categoryId, destacado, activo };
 
-      if (req.file) {
-        updateData.imagen = await uploadToSupabase(req.file, 'products');
+      if (req.files && Array.isArray(req.files) && req.files.length > 0) {
+        let nuevasImagenes = [];
+        for (const file of req.files.slice(0, 3)) {
+          try {
+            const url = await uploadToSupabase(file, 'products');
+            if (url) nuevasImagenes.push(url);
+          } catch (imgErr) {
+            console.warn('Advertencia: No se pudo subir una imagen:', imgErr.message || imgErr);
+          }
+        }
+        updateData.imagenes = nuevasImagenes;
       }
 
       await product.update(updateData);

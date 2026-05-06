@@ -10,7 +10,7 @@ export interface Product {
   descripcion: string;
   precio: number;
   tallas: TallaStock[];
-  imagen: string | null;
+  imagenes: string[];
   categoryId: number;
   destacado: boolean;
   activo: boolean;

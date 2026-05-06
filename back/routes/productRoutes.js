@@ -7,8 +7,8 @@ const router = express.Router();
 
 // Rutas admin (antes de /:id para evitar conflicto)
 router.get('/admin/all', auth, adminOnly, productController.listarAdmin);
-router.post('/', auth, adminOnly, upload.single('imagen'), productController.crear);
-router.put('/:id', auth, adminOnly, upload.single('imagen'), productController.actualizar);
+router.post('/', auth, adminOnly, upload.array('imagenes', 3), productController.crear);
+router.put('/:id', auth, adminOnly, upload.array('imagenes', 3), productController.actualizar);
 
 // Eliminación lógica
 router.delete('/:id', auth, adminOnly, productController.eliminar);

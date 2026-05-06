@@ -27,9 +27,10 @@ const Product = sequelize.define('Product', {
     defaultValue: [],
     // Ejemplo: [{ talla: 'S', stock: 10 }, { talla: 'M', stock: 5 }]
   },
-  imagen: {
-    type: DataTypes.STRING(255),
-    allowNull: true
+  imagenes: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
+    defaultValue: []
   },
   categoryId: {
     type: DataTypes.INTEGER,
