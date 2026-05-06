@@ -29,24 +29,19 @@ import { Category } from '../../models/category.model';
         <!-- Products Grid -->
         <div class="products-grid" *ngIf="products.length > 0">
           <div *ngFor="let product of products" class="product-card">
-            <a [routerLink]="['/producto', product.id]" class="product-link">
-              <div class="product-img">
-                <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
-                <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder">🍄</div>
-                <span class="badge" *ngIf="product.destacado">Destacado</span>
+            <div class="product-img">
+              <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
+              <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder">🍄</div>
+              <span class="product-badge" *ngIf="product.destacado">Destacado</span>
+            </div>
+            <div class="product-info">
+              <span class="product-category">{{ product.categoria?.nombre }}</span>
+              <h3>{{ product.nombre }}</h3>
+              <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
+              <div class="product-footer">
+                <span class="product-price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
+                <button class="btn-add" (click)="contactWhatsApp(product)">Cotizar 💬</button>
               </div>
-              <div class="product-info">
-                <span class="product-category">{{ product.categoria?.nombre }}</span>
-                <h3>{{ product.nombre }}</h3>
-                <p>{{ product.descripcion | slice:0:60 }}...</p>
-              </div>
-            </a>
-            <div class="product-actions">
-              <span class="price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
-              <button class="btn-add" (click)="contactWhatsApp(product)" [disabled]="!hasStock(product)">
-                {{ hasStock(product) ? 'Cotizar 💬' : 'Sin Stock' }}
-              </button>
-
             </div>
           </div>
         </div>
@@ -104,44 +99,75 @@ import { Category } from '../../models/category.model';
       color: #fff;
     }
     .product-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(179, 136, 255, 0.12);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(179, 136, 255, 0.12);
     }
-    .product-link { text-decoration: none; }
     .product-img {
-      position: relative; height: 200px;
-      background: linear-gradient(135deg, #1e335c 0%, #3a5ba0 100%);
-      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(179, 136, 255, 0.08), rgba(255, 128, 171, 0.05));
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .product-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .product-placeholder { font-size: 4rem; }
-    .badge {
-      position: absolute; top: 10px; right: 10px;
-      background: linear-gradient(135deg, #1e335c, #3a5ba0);
-      color: white; padding: 0.25rem 0.7rem;
-      border-radius: 15px; font-size: 0.75rem; font-weight: 600;
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
-    .product-info { padding: 1rem 1.2rem 0.5rem; }
-    .product-category { color: #181818; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; }
-    .product-info h3 { color: #fff; margin: 0.3rem 0; font-size: 1rem; }
-    .product-info p { color: #e0e0e0; font-size: 0.85rem; line-height: 1.4; }
-    .product-actions {
-      padding: 0.8rem 1.2rem 1.2rem;
-      display: flex; justify-content: space-between; align-items: center;
+    .product-info { padding: 1.2rem; }
+    .product-category {
+      color: #d3ed05;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
     }
-    .price {
-      font-size: 1.3rem; font-weight: 700;
-      color: #181818;
+    .product-info h3 {
+      color: #fff;
+      margin: 0.3rem 0;
+      font-size: 1.05rem;
+    }
+    .product-desc {
+      color: #e0e0e0;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #d3ed05 60%, #fff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     .btn-add {
       padding: 0.5rem 1rem;
-      background: linear-gradient(135deg, #1e335c, #3a5ba0);
-      border: none; border-radius: 25px;
-      color: white; font-size: 0.85rem;
-      cursor: pointer; transition: opacity 0.3s;
+      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      border: none;
+      border-radius: 25px;
+      color: white;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: opacity 0.3s;
     }
     .btn-add:hover { opacity: 0.85; }
-    .btn-add:disabled { opacity: 0.4; cursor: not-allowed; }
     .empty-state { text-align: center; padding: 4rem; color: #888; font-size: 1.2rem; }
     .pagination {
       display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; padding: 1rem;
