@@ -12,22 +12,25 @@ import { WhatsappService } from '../../services/whatsapp.service';
     <!-- Navbar -->
     <nav class="navbar">
       <div class="nav-container">
-        <a routerLink="/" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-          <img src="assets/images/distrisport.png" alt="Distrisports" class="logo-img" style="height: 40px; width: 40px; border-radius: 50%; object-fit: cover;" />
-          <span style="font-size: 1.7rem; font-weight: 700; letter-spacing: -1px; color: #d3ed05;">Distrisports</span>
+        <a routerLink="/" class="logo">
+          <img src="assets/images/distrisport.png" alt="Distrisports" class="logo-img" />
+          <span class="logo-text">Distrisports</span>
         </a>
 
-        <div class="nav-links">
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" style="color: #d3ed05;">Inicio</a>
-          <a routerLink="/productos" routerLinkActive="active" style="color: #d3ed05;">Productos</a>
-          <a routerLink="/quienes-somos" routerLinkActive="active" style="color: #d3ed05;">¿Quiénes Somos?</a>
-          <a routerLink="/contacto" routerLinkActive="active" style="color: #d3ed05;">Contacto</a>
+        <!-- Hamburger -->
+        <button class="hamburger" (click)="toggleMobile()" [class.open]="mobileOpen" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+
+        <div class="nav-links" [class.mobile-open]="mobileOpen">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="mobileOpen=false">Inicio</a>
+          <a routerLink="/productos" routerLinkActive="active" (click)="mobileOpen=false">Productos</a>
+          <a routerLink="/quienes-somos" routerLinkActive="active" (click)="mobileOpen=false">¿Quiénes Somos?</a>
+          <a routerLink="/contacto" routerLinkActive="active" (click)="mobileOpen=false">Contacto</a>
         </div>
 
         <div class="nav-actions">
-          <a (click)="contactWhatsApp()" class="whatsapp-btn" title="Contáctanos por WhatsApp">
-            💬
-          </a>
+          <a (click)="contactWhatsApp()" class="whatsapp-btn" title="Contáctanos por WhatsApp">💬</a>
 
           <ng-container *ngIf="!authService.isLoggedIn">
             <a routerLink="/login" class="btn-outline">Iniciar Sesión</a>
@@ -61,22 +64,22 @@ import { WhatsappService } from '../../services/whatsapp.service';
         <div class="footer-grid">
           <div>
             <h3 class="footer-logo"><img src="assets/images/distrisport.png" alt="Distrisports" class="footer-logo-img"></h3>
-            <p style="color: #fff;">Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
+            <p>Tu tienda de camisetas, réplicas y accesorios para fanáticos del fútbol.</p>
           </div>
           <div>
-            <h4 style="color: #fff;">Enlaces</h4>
-            <a routerLink="/" style="color: #fff;">Inicio</a>
-            <a routerLink="/productos" style="color: #fff;">Productos</a>
+            <h4>Enlaces</h4>
+            <a routerLink="/">Inicio</a>
+            <a routerLink="/productos">Productos</a>
           </div>
           <div>
-            <h4 style="color: #fff;">Contacto</h4>
-            <p style="color: #fff;">info&#64;camisetas.com</p>
-            <p style="color: #fff;">3177239970</p>
+            <h4>Contacto</h4>
+            <p>Distrisportcamisetasdefutbol&#64;gmail.com</p>
+            <p>3177239970</p>
           </div>
         </div>
         <div class="footer-bottom">
-          <p style="color: #fff;">&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
-          <small style="display:block; margin-top:4px; color:#fff; font-size:0.85em; text-align:right; opacity:0.7;">Creado por David Lopez, ingeniero informático. Contacto: 3195631384</small>
+          <p>&copy; 2024 Distrisports Ecommerce. Todos los derechos reservados.</p>
+          <small>Creado por David Lopez, ingeniero informático.</small>
         </div>
       </div>
       <div class="envio-banner">
@@ -87,22 +90,14 @@ import { WhatsappService } from '../../services/whatsapp.service';
     </footer>
   `,
   styles: [`
-        /* Botón de contacto especial */
-        .contact-btn {
-          color: #fff !important;
-          font-weight: bold;
-          font-size: 1.15rem;
-          text-shadow: 0 1px 8px #0008;
-        }
     .navbar {
       background: rgba(10, 24, 51, 0.98);
-      color: #fff;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #1e335c;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 1px 8px rgba(10, 24, 51, 0.12);
+      box-shadow: 0 1px 8px rgba(10, 24, 51, 0.18);
     }
     .nav-container {
       max-width: 1200px;
@@ -111,130 +106,119 @@ import { WhatsappService } from '../../services/whatsapp.service';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 70px;
+      height: 64px;
     }
     .logo {
       display: flex;
       align-items: center;
       gap: 0.5rem;
       text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: 700;
     }
-    .logo-img { height: 40px; width: auto; border-radius: 50%; }
-    .logo-text {
-      background: linear-gradient(135deg, #1e335c, #3a5ba0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    .logo-img { height: 38px; width: 38px; border-radius: 50%; object-fit: cover; }
+    .logo-text { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.5px; color: #d3ed05; }
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.8rem;
+      align-items: center;
     }
     .nav-links a {
-      color: #fff;
+      color: #d3ed05;
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.3s;
+      font-size: 0.97rem;
+      transition: color 0.2s;
+      white-space: nowrap;
     }
-    .nav-links a:hover, .nav-links a.active {
-      color: #3a5ba0;
-    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.8rem;
     }
-    .whatsapp-btn {
-      font-size: 1.4rem;
-      text-decoration: none;
-      cursor: pointer;
-      transition: transform 0.3s;
-    }
-    .whatsapp-btn:hover {
-      transform: scale(1.2);
-    }
+    .whatsapp-btn { font-size: 1.4rem; cursor: pointer; transition: transform 0.2s; }
+    .whatsapp-btn:hover { transform: scale(1.2); }
     .btn-outline {
-      padding: 0.5rem 1.2rem;
+      padding: 0.4rem 1rem;
       border: 1px solid #3a5ba0;
       border-radius: 25px;
-      color: #3a5ba0;
+      color: #d3ed05;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: all 0.3s;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+      white-space: nowrap;
     }
-    .btn-outline:hover {
-      background: #3a5ba0;
-      color: white;
-    }
+    .btn-outline:hover { background: #3a5ba0; color: white; }
     .btn-primary {
-      padding: 0.5rem 1.2rem;
+      padding: 0.4rem 1rem;
       background: linear-gradient(135deg, #1e335c, #3a5ba0);
       border-radius: 25px;
       color: white;
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: opacity 0.3s;
+      font-size: 0.88rem;
+      transition: opacity 0.2s;
+      white-space: nowrap;
     }
     .btn-primary:hover { opacity: 0.9; }
-    .user-menu { position: relative; }
-    .user-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #b388ff, #ff80ab);
-      color: white;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.85rem;
-    }
-    .dropdown {
-      position: absolute;
-      top: 50px;
-      right: 0;
-      background: #ffffff;
-      border: 1px solid rgba(179, 136, 255, 0.2);
-      border-radius: 12px;
-      padding: 0.5rem 0;
-      min-width: 200px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-    .dropdown-name {
-      display: block;
-      padding: 0.7rem 1rem;
-      color: #9c5cff;
-      font-weight: 600;
-      border-bottom: 1px solid rgba(179, 136, 255, 0.12);
-    }
-    .dropdown a, .dropdown button {
-      display: block;
-      width: 100%;
-      padding: 0.7rem 1rem;
-      color: #555;
-      text-decoration: none;
-      text-align: left;
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 0.9rem;
+      padding: 6px;
+      z-index: 1100;
     }
-    .dropdown a:hover, .dropdown button:hover {
-      background: rgba(179, 136, 255, 0.08);
-      color: #9c5cff;
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #d3ed05;
+      border-radius: 2px;
+      transition: all 0.3s;
     }
-    .main-content { min-height: calc(100vh - 70px - 300px); }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    /* User menu */
+    .user-menu { position: relative; }
+    .user-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #b388ff, #ff80ab);
+      color: white; border: none; cursor: pointer;
+      font-weight: 700; font-size: 0.85rem;
+    }
+    .dropdown {
+      position: absolute; top: 48px; right: 0;
+      background: #fff;
+      border: 1px solid rgba(179, 136, 255, 0.2);
+      border-radius: 12px; padding: 0.5rem 0;
+      min-width: 200px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      z-index: 200;
+    }
+    .dropdown-name {
+      display: block; padding: 0.7rem 1rem;
+      color: #9c5cff; font-weight: 600;
+      border-bottom: 1px solid rgba(179, 136, 255, 0.12);
+    }
+    .dropdown a, .dropdown button {
+      display: block; width: 100%; padding: 0.7rem 1rem;
+      color: #555; text-decoration: none; text-align: left;
+      background: none; border: none; cursor: pointer; font-size: 0.9rem;
+    }
+    .dropdown a:hover, .dropdown button:hover { background: rgba(179, 136, 255, 0.08); color: #9c5cff; }
+    /* Main */
+    .main-content { min-height: calc(100vh - 64px - 260px); padding-bottom: 44px; }
+    /* Footer */
     .footer {
-      background: #1e335c;
-      color: #fff;
+      background: #1e335c; color: #fff;
       border-top: 1px solid rgba(179, 136, 255, 0.12);
-      padding: 3rem 0 1.5rem;
+      padding: 2.5rem 0 1.5rem;
     }
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
+    .footer-container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
     .footer-grid {
       display: grid;
       grid-template-columns: 2fr 1fr 1fr;
@@ -243,68 +227,68 @@ import { WhatsappService } from '../../services/whatsapp.service';
     }
     .footer-logo { display: flex; align-items: center; gap: 0.5rem; }
     .footer-logo-img { height: 30px; width: auto; border-radius: 50%; }
-    .footer-grid h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-    .footer-grid h4 {
-      color: #fff;
-      margin-bottom: 0.8rem;
-    }
-    .footer-grid p { color: #e0e0e0; line-height: 1.6; }
-    .footer-grid a {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-      margin-bottom: 0.4rem;
-    }
-    .footer-grid a:hover { color: #9c5cff; }
+    .footer-grid h3, .footer-grid h4 { color: #fff; margin-bottom: 0.7rem; }
+    .footer-grid p { color: #d0d8e8; line-height: 1.6; font-size: 0.92rem; }
+    .footer-grid a { display: block; color: #d0d8e8; text-decoration: none; margin-bottom: 0.4rem; font-size: 0.92rem; }
+    .footer-grid a:hover { color: #d3ed05; }
     .footer-bottom {
-      border-top: 1px solid rgba(179, 136, 255, 0.12);
-      padding-top: 1.5rem;
-      text-align: center;
-      color: #fff;
-      font-size: 0.85rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.2rem; text-align: center; color: #d0d8e8; font-size: 0.85rem;
     }
+    .footer-bottom small { display: block; margin-top: 4px; opacity: 0.6; }
+    /* Banner */
     .envio-banner {
-      width: 100vw;
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      z-index: 2000;
+      width: 100vw; position: fixed; left: 0; bottom: 0; z-index: 2000;
       background: linear-gradient(90deg, #d3ed05 60%, #3a5ba0 100%);
-      color: #1e335c;
-      font-weight: bold;
-      font-size: 1.1rem;
-      overflow: hidden;
-      height: 38px;
-      display: flex;
-      align-items: center;
+      color: #1e335c; font-weight: bold; font-size: 1rem;
+      overflow: hidden; height: 38px; display: flex; align-items: center;
       box-shadow: 0 -2px 10px rgba(10,24,51,0.08);
       border-top: 2px solid #3a5ba0;
     }
     .envio-banner-track {
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
+      display: flex; align-items: center; white-space: nowrap;
       animation: banner-move 18s linear infinite;
-      width: max-content;
-      padding-left: 100vw;
+      width: max-content; padding-left: 100vw;
     }
-    .envio-banner-track span {
-      padding: 0 2rem;
-      letter-spacing: 1px;
-      text-shadow: 1px 1px 2px #fff8, 0 0 2px #3a5ba044;
-    }
+    .envio-banner-track span { padding: 0 2rem; letter-spacing: 1px; }
     @keyframes banner-move {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100vw); }
+    }
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: fixed;
+        top: 64px; left: 0; right: 0;
+        background: rgba(10,24,51,0.99);
+        border-bottom: 1px solid #1e335c;
+        padding: 1rem 0 1.5rem;
+        z-index: 999;
+      }
+      .nav-links.mobile-open { display: flex; }
+      .nav-links a {
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .hamburger { display: flex; }
+      .btn-outline, .btn-primary { display: none; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-container { padding: 0 1rem; }
+      .logo-text { font-size: 1.2rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .footer { padding: 1.5rem 0 1rem; }
     }
   `]
 })
 export class PublicLayoutComponent {
   menuOpen = false;
+  mobileOpen = false;
 
   constructor(
     public authService: AuthService,
@@ -314,6 +298,10 @@ export class PublicLayoutComponent {
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
+  }
+
+  toggleMobile() {
+    this.mobileOpen = !this.mobileOpen;
   }
 
   contactWhatsApp() {

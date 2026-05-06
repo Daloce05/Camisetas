@@ -1,7 +1,4 @@
-// Letra verde en zonas oscuras
-.section-dark, .navbar, .sidebar, .footer, .hero, .category-card, .product-card {
-  color: #d3ed05 !important;
-}
+// Letra verde en zonas oscuras - solo en componentes oscuros específicos
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 * {
@@ -12,46 +9,25 @@
 
 html, body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background: #f9f7fc;
+  background: #f5f6fa;
   color: #181818;
-  line-height: 1.7;
-  font-weight: 500;
-  font-size: 1.08rem;
+  line-height: 1.6;
+  font-weight: 400;
+  font-size: 1rem;
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
 }
 
-a, h1, h2, h3, h4, h5, h6, label, p, span, button, input, textarea, select {
-  color: #181818;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
+img { max-width: 100%; display: block; }
 
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #f0ecf5;
-}
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #b388ff, #ff80ab);
-  border-radius: 4px;
-}
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f0ecf5; }
+::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #3a5ba0, #1e335c); border-radius: 4px; }
 
-::selection {
-  background: rgba(179, 136, 255, 0.3);
-  color: white;
-}
-
-input, textarea, select, button {
-  font-family: 'Inter', sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+input, textarea, select, button { font-family: 'Inter', sans-serif; }
+a { color: inherit; text-decoration: none; }

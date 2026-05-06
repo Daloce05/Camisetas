@@ -71,20 +71,21 @@ import { Product, TallaStock } from '../../models/product.model';
   `,
   styles: [`
     .detail-page { padding: 2rem 1.5rem; }
-    .container { max-width: 1000px; margin: 0 auto; }
+    .container { max-width: 960px; margin: 0 auto; }
     .back-link {
-      color: #9c5cff; text-decoration: none; font-size: 0.95rem;
-      display: inline-block; margin-bottom: 2rem;
+      color: #3a5ba0; text-decoration: none; font-size: 0.95rem;
+      display: inline-block; margin-bottom: 1.5rem; font-weight: 600;
     }
-    .back-link:hover { color: #ff80ab; }
-    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .back-link:hover { color: #1e335c; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: flex-start; }
     .detail-img {
       border-radius: 16px; overflow: hidden;
       background: linear-gradient(135deg, #1e335c 0%, #3a5ba0 100%);
-      display: flex; align-items: center; justify-content: center; min-height: 400px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 360px;
+      padding: 1rem;
     }
-    .carousel { display: flex; align-items: center; justify-content: center; gap: 1rem; }
-    .carousel-img { width: 350px; height: 350px; object-fit: cover; border-radius: 12px; }
+    .carousel { display: flex; align-items: center; justify-content: center; gap: 0.8rem; width: 100%; }
+    .carousel-img { width: 320px; height: 320px; object-fit: cover; border-radius: 10px; display: block; }
     .carousel-btn { background: #fff; border: 1px solid #b388ff; border-radius: 50%; width: 36px; height: 36px; font-size: 1.5rem; color: #3a5ba0; cursor: pointer; transition: background 0.2s; }
     .carousel-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .carousel-dots { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
@@ -126,6 +127,24 @@ import { Product, TallaStock } from '../../models/product.model';
     }
     .btn-add-lg:hover { opacity: 0.9; }
     .btn-add-lg:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .detail-page { padding: 1.5rem 1rem; }
+      .detail-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .detail-img { min-height: 260px; border-radius: 12px; }
+      .carousel-img { width: 100%; max-width: 340px; height: auto; max-height: 300px; }
+    }
+    @media (max-width: 600px) {
+      .detail-page { padding: 1rem 0.5rem; }
+      .detail-grid { gap: 1rem; }
+      .detail-img { min-height: 200px; border-radius: 8px; padding: 0.5rem; }
+      .carousel-img { width: 100%; max-width: 100%; max-height: 240px; }
+      .detail-info h1 { font-size: 1.3rem; }
+      .price { font-size: 1.5rem; }
+      .btn-add-lg { font-size: 0.95rem; padding: 0.8rem; }
+      .container { padding: 0 0.2rem; }
+    }
   `]
 })
 export class ProductDetailComponent implements OnInit {

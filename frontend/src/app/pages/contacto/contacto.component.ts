@@ -164,10 +164,18 @@ import { CommonModule } from '@angular/common';
       align-items: center;
       gap: 1.2rem;
     }
-    @media (max-width: 700px) {
-      .contact-section-dark { padding: 0.5rem; }
-      .contact-container { padding: 2rem 0.2rem 1.5rem 0.2rem; }
-      .contact-cards-grid { flex-direction: column; gap: 1.2rem; }
+    @media (max-width: 900px) {
+      .contact-container { padding: 2rem 1rem 1.5rem; }
+      .contact-cards-grid { gap: 1rem; }
+      .contact-card { max-width: 100%; min-width: 0; }
+      .contact-main-title { font-size: 1.8rem; }
+    }
+    @media (max-width: 600px) {
+      .contact-container { padding: 1.5rem 0.8rem; }
+      .contact-main-title { font-size: 1.4rem; }
+      .contact-main-desc { font-size: 1rem; }
+      .contact-cards-grid { flex-direction: column; gap: 0.8rem; }
+      .contact-card { padding: 1.5rem 1rem; }
     }
   `]
 })

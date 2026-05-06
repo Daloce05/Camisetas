@@ -156,6 +156,26 @@ import { Category } from '../../models/category.model';
     .page-btn:hover:not(:disabled) { background: #b388ff; color: white; }
     .page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .page-info { color: #888; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .products-page { padding: 1.5rem 1rem; }
+      .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+      .page-title { font-size: 1.5rem; margin-bottom: 1.2rem; }
+    }
+    @media (max-width: 600px) {
+      .products-page { padding: 1rem 0.7rem; }
+      .filters { flex-direction: column; gap: 0.7rem; }
+      .search-input, .filter-select { min-width: 0; width: 100%; }
+      .products-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+      .product-img { height: 150px; }
+      .product-info { padding: 0.7rem 0.8rem 0.3rem; }
+      .product-info h3 { font-size: 0.9rem; }
+      .product-info p { display: none; }
+      .product-actions { padding: 0.5rem 0.8rem 0.8rem; }
+      .price { font-size: 1.05rem; }
+      .btn-add { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+    }
   `]
 })
 export class ProductsComponent implements OnInit {

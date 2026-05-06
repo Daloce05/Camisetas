@@ -261,12 +261,19 @@ import { RouterLink } from '@angular/router';
       text-decoration: none;
     }
     @media (max-width: 900px) {
-      .about-mvv-grid { flex-direction: column; }
-      .about-mvv-card { max-width: 100%; }
+      .about-mvv-grid { flex-direction: column; gap: 1rem; }
+      .about-mvv-card { max-width: 100%; min-width: 0; padding: 1.5rem 1.2rem; }
+      .about-container { padding: 2.5rem 1rem 2rem; }
+      .about-main-title { font-size: 1.8rem; }
     }
-    @media (max-width: 700px) {
-      .about-section-dark { padding: 0.5rem; }
-      .about-container { padding: 2rem 0.2rem 1.5rem 0.2rem; }
+    @media (max-width: 600px) {
+      .about-container { padding: 1.5rem 0.8rem 1.5rem; }
+      .about-main-title { font-size: 1.4rem; letter-spacing: 0; }
+      .about-main-desc { font-size: 1rem; }
+      .about-mvv-card { padding: 1.2rem 1rem; }
+      .about-values-title { font-size: 1.2rem; }
+      .about-value-item { padding: 1rem; gap: 0.8rem; }
+      .about-value-icon { font-size: 1.8rem; }
     }
   `]
 })
