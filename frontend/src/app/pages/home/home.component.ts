@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ProductService } from '../../services/product.service';
@@ -13,10 +13,18 @@ import { Category } from '../../models/category.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <!-- Hero Section -->
+    <!-- Hero Carousel -->
     <section class="hero">
-      <div class="hero-bg-camisetas"></div>
+      <!-- Slides -->
+      <div class="hero-slides">
+        <div *ngFor="let img of heroImages; let i = index"
+             class="hero-slide"
+             [class.active]="i === heroIndex">
+          <img [src]="img" alt="Distrisports header" class="hero-slide-img">
+        </div>
+      </div>
       <div class="hero-overlay"></div>
+      <!-- Content -->
       <div class="hero-content">
         <h1 class="hero-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
         <p class="hero-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
@@ -25,10 +33,14 @@ import { Category } from '../../models/category.model';
           <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
         </div>
       </div>
-      <div class="hero-decoration">
-        <div class="circle c1"></div>
-        <div class="circle c2"></div>
-        <div class="circle c3"></div>
+      <!-- Controles del carrusel -->
+      <button class="hero-arrow hero-prev" (click)="prevHero()" aria-label="Anterior">&#8249;</button>
+      <button class="hero-arrow hero-next" (click)="nextHero()" aria-label="Siguiente">&#8250;</button>
+      <div class="hero-dots">
+        <span *ngFor="let img of heroImages; let i = index"
+              class="hero-dot"
+              [class.active]="i === heroIndex"
+              (click)="goHero(i)"></span>
       </div>
     </section>
 
@@ -126,37 +138,48 @@ import { Category } from '../../models/category.model';
     }
     .hero {
       position: relative;
-      padding: 6rem 1.5rem;
-      text-align: center;
+      height: 88vh;
+      min-height: 520px;
+      max-height: 820px;
       overflow: hidden;
-      background: none;
       color: #fff;
+      display: flex;
+      align-items: center;
     }
-    .hero-bg-camisetas {
+    /* Slides */
+    .hero-slides {
       position: absolute;
       inset: 0;
       z-index: 1;
-      background: url('/assets/images/camisetas.jpg') center center no-repeat;
-      background-size: cover;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-slide-img {
       width: 100%;
       height: 100%;
-      filter: brightness(0.5) grayscale(0.2);
-      pointer-events: none;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: brightness(0.52);
     }
     .hero-overlay {
       position: absolute;
       inset: 0;
       z-index: 2;
-      background: linear-gradient(90deg, rgba(10,24,51,0.85) 0%, rgba(10,24,51,0.45) 50%, rgba(10,24,51,0.05) 100%);
+      background: linear-gradient(90deg, rgba(10,24,51,0.75) 0%, rgba(10,24,51,0.35) 60%, transparent 100%);
       pointer-events: none;
     }
     .hero-content {
       position: relative;
       z-index: 3;
-      max-width: 680px;
-      margin: 0 auto;
+      max-width: 640px;
+      padding: 0 2rem 0 4rem;
       text-align: left;
-      padding-left: 1rem;
     }
     .hero-buttons {
       display: flex;
@@ -164,6 +187,54 @@ import { Category } from '../../models/category.model';
       justify-content: flex-start;
       flex-wrap: wrap;
       margin-top: 2rem;
+    }
+    /* Flechas */
+    .hero-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255,255,255,0.15);
+      border: 2px solid rgba(255,255,255,0.35);
+      color: #fff;
+      font-size: 2.2rem;
+      line-height: 1;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .hero-arrow:hover { background: rgba(255,255,255,0.28); transform: translateY(-50%) scale(1.08); }
+    .hero-prev { left: 1.5rem; }
+    .hero-next { right: 1.5rem; }
+    /* Dots */
+    .hero-dots {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      gap: 10px;
+    }
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .hero-dot.active {
+      background: #d3ed05;
+      border-color: #d3ed05;
+      transform: scale(1.3);
     }
     .btn-primary-lg {
       padding: 0.8rem 2rem;
@@ -191,19 +262,7 @@ import { Category } from '../../models/category.model';
       background: #3a5ba0;
       color: white;
     }
-    .hero-decoration {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .circle {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0.06;
-    }
-    .c1 { width: 400px; height: 400px; background: #b388ff; top: -100px; right: -100px; }
-    .c2 { width: 300px; height: 300px; background: #ff80ab; bottom: -50px; left: -80px; }
-    .c3 { width: 200px; height: 200px; background: #b388ff; top: 50%; left: 60%; }
+    /* Removed decoration circles */
 
     .section {
       padding: 3.5rem 1.5rem;
@@ -451,9 +510,11 @@ import { Category } from '../../models/category.model';
 
     /* ===== RESPONSIVE HOME ===== */
     @media (max-width: 900px) {
-      .hero { padding: 4rem 1rem; }
-      .hero-content { padding-left: 0.5rem; text-align: center; max-width: 100%; }
-      .hero-buttons { justify-content: center; flex-wrap: wrap; }
+      .hero { height: 70vh; min-height: 420px; }
+      .hero-content { padding: 0 1rem 0 1.5rem; max-width: 100%; }
+      .hero-arrow { width: 40px; height: 40px; font-size: 1.6rem; }
+      .hero-prev { left: 0.5rem; }
+      .hero-next { right: 0.5rem; }
       .section { padding: 2.5rem 1rem; }
       .section-title { font-size: 1.5rem; margin-bottom: 1.5rem; }
       .products-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
@@ -461,10 +522,12 @@ import { Category } from '../../models/category.model';
       .feature-card { padding: 1.5rem 1rem; }
     }
     @media (max-width: 600px) {
-      .hero { padding: 3rem 0.8rem; }
-      .hero-title { font-size: 1.6rem !important; }
-      .hero-desc { font-size: 1rem !important; }
-      .btn-primary-lg, .btn-outline-lg { padding: 0.7rem 1.2rem; font-size: 0.9rem; }
+      .hero { height: 60vh; min-height: 360px; }
+      .hero-content { padding: 0 0.8rem; }
+      .hero-title { font-size: 1.5rem !important; }
+      .hero-desc { font-size: 0.95rem !important; }
+      .btn-primary-lg, .btn-outline-lg { padding: 0.65rem 1.1rem; font-size: 0.88rem; }
+      .hero-arrow { display: none; }
       .products-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
       .product-img { height: 150px; }
       .product-info { padding: 0.8rem; }
@@ -477,9 +540,19 @@ import { Category } from '../../models/category.model';
     }
   `]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   featuredProducts: Product[] = [];
   categories: Category[] = [];
+
+  heroImages = [
+    'assets/images/imagen header 1.jpg',
+    'assets/images/imagen header 2.jpg',
+    'assets/images/imagen header 3.jpg',
+    'assets/images/imagen header 4.jpg',
+    'assets/images/imagen header 5.jpg',
+  ];
+  heroIndex = 0;
+  private heroTimer: any;
 
   constructor(
     private productService: ProductService,
@@ -488,6 +561,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.startHeroTimer();
       this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
         this.featuredProducts = res.data.products.map(p => {
           let precioNum: number = 0;
@@ -508,6 +582,36 @@ export class HomeComponent implements OnInit {
     this.categoryService.getCategories().subscribe(res => {
       this.categories = res.data;
     });
+  }
+
+  startHeroTimer() {
+    this.heroTimer = setInterval(() => {
+      this.heroIndex = (this.heroIndex + 1) % this.heroImages.length;
+    }, 4500);
+  }
+
+  ngOnDestroy() {
+    if (this.heroTimer) clearInterval(this.heroTimer);
+  }
+
+  prevHero() {
+    this.heroIndex = (this.heroIndex - 1 + this.heroImages.length) % this.heroImages.length;
+    this.resetHeroTimer();
+  }
+
+  nextHero() {
+    this.heroIndex = (this.heroIndex + 1) % this.heroImages.length;
+    this.resetHeroTimer();
+  }
+
+  goHero(i: number) {
+    this.heroIndex = i;
+    this.resetHeroTimer();
+  }
+
+  resetHeroTimer() {
+    if (this.heroTimer) clearInterval(this.heroTimer);
+    this.startHeroTimer();
   }
 
   contactWhatsApp(product: Product) {
