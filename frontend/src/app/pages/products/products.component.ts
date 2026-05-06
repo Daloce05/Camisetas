@@ -31,8 +31,8 @@ import { Category } from '../../models/category.model';
           <div *ngFor="let product of products" class="product-card">
             <a [routerLink]="['/producto', product.id]" class="product-link">
               <div class="product-img">
-                <img *ngIf="product.imagen" [src]="product.imagen.startsWith('http') ? product.imagen : 'https://sabina-utf1.onrender.com' + product.imagen" [alt]="product.nombre">
-                <div *ngIf="!product.imagen" class="product-placeholder">🍄</div>
+                <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
+                <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder">🍄</div>
                 <span class="badge" *ngIf="product.destacado">Destacado</span>
               </div>
               <div class="product-info">
@@ -198,7 +198,7 @@ export class ProductsComponent implements OnInit {
         p.nombre = typeof p.nombre === 'string' ? p.nombre : '';
         p.descripcion = typeof p.descripcion === 'string' ? p.descripcion : '';
         p.precio = typeof p.precio === 'number' ? p.precio : 0;
-        p.imagen = typeof p.imagen === 'string' ? p.imagen : null;
+        // p.imagen = typeof p.imagen === 'string' ? p.imagen : null;
         p.categoryId = typeof p.categoryId === 'number' ? p.categoryId : 0;
         p.destacado = typeof p.destacado === 'boolean' ? p.destacado : false;
         p.activo = typeof p.activo === 'boolean' ? p.activo : true;

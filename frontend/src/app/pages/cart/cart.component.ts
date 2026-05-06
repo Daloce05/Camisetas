@@ -20,8 +20,8 @@ import { RouterLink } from '@angular/router';
           <div class="cart-items">
             <div *ngFor="let item of cartService.items" class="cart-item">
               <div class="item-img">
-                <img *ngIf="item.product.imagen" [src]="item.product.imagen.startsWith('http') ? item.product.imagen : 'https://sabina-utf1.onrender.com' + item.product.imagen" [alt]="item.product.nombre">
-                <div *ngIf="!item.product.imagen" class="placeholder">🍄</div>
+                <img *ngIf="item.product.imagenes && item.product.imagenes.length" [src]="item.product.imagenes[0].startsWith('http') ? item.product.imagenes[0] : 'https://sabina-utf1.onrender.com' + item.product.imagenes[0]" [alt]="item.product.nombre">
+                <div *ngIf="!item.product.imagenes || !item.product.imagenes.length" class="placeholder">🍄</div>
               </div>
               <div class="item-info">
                 <h3>{{ item.product.nombre }}</h3>

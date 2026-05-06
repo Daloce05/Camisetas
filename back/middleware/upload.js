@@ -32,14 +32,4 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 } // 5MB por archivo
 });
 
-// Exporta funciones para single y multiple
-module.exports = {
-  single: upload.single.bind(upload),
-  array: upload.array.bind(upload),
-  fields: upload.fields.bind(upload),
-  raw: upload.raw.bind(upload),
-  none: upload.none.bind(upload),
-  memoryStorage: multer.memoryStorage,
-  diskStorage: multer.diskStorage,
-  upload // acceso directo
-};
+module.exports = upload;
