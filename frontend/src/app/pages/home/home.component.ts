@@ -13,31 +13,38 @@ import { Category } from '../../models/category.model';
   standalone: true,
   imports: [CommonModule, RouterLink],
   template: `
-    <!-- Hero Carousel Rediseñado -->
-    <section class="hero hero-redesign">
-      <div class="hero-slides">
-        <div *ngFor="let img of heroImages; let i = index"
-             class="hero-slide"
-             [class.active]="i === heroIndex">
-          <img [src]="img" alt="Distrisports header" class="hero-slide-img redesign-img">
+    <!-- Hero en tres columnas: izquierda (bernabeu), centro (carrusel), derecha (distrisport+botones) -->
+    <section class="hero hero-redesign hero-grid">
+      <!-- Izquierda: Imagen Bernabeu -->
+      <div class="hero-col hero-left">
+        <div class="hero-img-bg hero-bernabeu"></div>
+      </div>
+      <!-- Centro: Carrusel (sin modificar) -->
+      <div class="hero-col hero-center">
+        <div class="hero-slides">
+          <div *ngFor="let img of heroImages; let i = index"
+               class="hero-slide"
+               [class.active]="i === heroIndex">
+            <img [src]="img" alt="Distrisports header" class="hero-slide-img redesign-img">
+          </div>
+        </div>
+        <div class="hero-overlay redesign-overlay"></div>
+        <button class="hero-arrow hero-prev" (click)="prevHero()" aria-label="Anterior">&#8249;</button>
+        <button class="hero-arrow hero-next" (click)="nextHero()" aria-label="Siguiente">&#8250;</button>
+        <div class="hero-dots">
+          <span *ngFor="let img of heroImages; let i = index"
+                class="hero-dot"
+                [class.active]="i === heroIndex"
+                (click)="goHero(i)"></span>
         </div>
       </div>
-      <div class="hero-overlay redesign-overlay"></div>
-      <div class="hero-content redesign-content">
-        <h1 class="hero-title redesign-title">¡Vive la Pasión del <span class="highlight">Fútbol</span>!</h1>
-        <p class="hero-desc redesign-desc">Camisetas originales, réplicas y accesorios para verdaderos fanáticos del fútbol.</p>
-        <div class="hero-buttons redesign-buttons">
+      <!-- Derecha: Imagen Distrisport + Botones -->
+      <div class="hero-col hero-right">
+        <div class="hero-img-bg hero-distrisport"></div>
+        <div class="hero-buttons hero-btns-right">
           <a routerLink="/productos" class="btn-primary-lg">Ver Camisetas</a>
           <a routerLink="/productos" [queryParams]="{destacado: true}" class="btn-outline-lg">Destacadas</a>
         </div>
-      </div>
-      <button class="hero-arrow hero-prev" (click)="prevHero()" aria-label="Anterior">&#8249;</button>
-      <button class="hero-arrow hero-next" (click)="nextHero()" aria-label="Siguiente">&#8250;</button>
-      <div class="hero-dots">
-        <span *ngFor="let img of heroImages; let i = index"
-              class="hero-dot"
-              [class.active]="i === heroIndex"
-              (click)="goHero(i)"></span>
       </div>
     </section>
 
@@ -108,6 +115,108 @@ import { Category } from '../../models/category.model';
     </section>
   `,
   styles: [`
+            .hero-grid {
+              display: grid;
+              grid-template-columns: 1fr 1.2fr 1fr;
+              height: 70vh;
+              min-height: 420px;
+              max-height: 700px;
+              background: #101c2c;
+              overflow: hidden;
+              color: #fff;
+            }
+            .hero-col {
+              position: relative;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+            }
+            .hero-left, .hero-right {
+              min-width: 0;
+              width: 100%;
+              height: 100%;
+            }
+            .hero-img-bg {
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center center;
+              z-index: 1;
+              filter: brightness(0.38) grayscale(0.1);
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center center;
+            }
+            .hero-bernabeu {
+              background-image: url('/assets/images/bernabeu.jpg');
+            }
+            .hero-distrisport {
+              background-image: url('/assets/images/distrisport.png');
+            }
+            .hero-center {
+              position: relative;
+              z-index: 2;
+              width: 100%;
+              height: 100%;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-direction: column;
+            }
+            .hero-btns-right {
+              position: relative;
+              z-index: 2;
+              display: flex;
+              flex-direction: column;
+              gap: 1.2rem;
+              align-items: flex-end;
+              justify-content: center;
+              margin-right: 2vw;
+            }
+            .hero-btns-right .btn-primary-lg,
+            .hero-btns-right .btn-outline-lg {
+              min-width: 180px;
+              font-size: 1.1rem;
+              margin-bottom: 0.2rem;
+            }
+            @media (max-width: 900px) {
+              .hero-grid {
+                grid-template-columns: 1fr 1.5fr 1fr;
+                height: 48vh;
+                min-height: 180px;
+                max-height: 320px;
+              }
+              .hero-btns-right .btn-primary-lg,
+              .hero-btns-right .btn-outline-lg {
+                min-width: 120px;
+                font-size: 0.9rem;
+              }
+            }
+            @media (max-width: 600px) {
+              .hero-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: 120px 1fr 120px;
+                height: 340px;
+                min-height: 120px;
+                max-height: 400px;
+              }
+              .hero-left, .hero-right, .hero-center {
+                min-width: 0;
+                width: 100%;
+                height: 100%;
+              }
+              .hero-btns-right {
+                flex-direction: row;
+                gap: 0.7rem;
+                margin: 0 auto;
+                align-items: center;
+                justify-content: center;
+              }
+            }
         .hero .highlight {
           color: #fff !important;
         }
