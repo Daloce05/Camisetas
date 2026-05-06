@@ -75,7 +75,7 @@ import { Category } from '../../models/category.model';
           <div class="feature-card">
             <div class="feature-icon">⚽</div>
             <h3>100% Originales</h3>
-            <p>Solo vendemos camisetas originales y réplicas de la mejor calidad.</p>
+            <p>Solo vendemos camisetas 1.1 y AAA de la mejor calidad.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🚚</div>
