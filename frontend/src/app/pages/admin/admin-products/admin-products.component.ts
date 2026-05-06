@@ -308,7 +308,7 @@ export class AdminProductsComponent implements OnInit {
       destacado: product.destacado
     };
     this.showForm = true;
-    this.selectedFile = null;
+    // this.selectedFile = null;
     this.error = '';
   }
 

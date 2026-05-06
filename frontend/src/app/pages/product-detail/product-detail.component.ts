@@ -33,20 +33,6 @@ import { Product, TallaStock } from '../../models/product.model';
               <div class="placeholder">🍄</div>
             </ng-template>
           </div>
-            currentImgIndex = 0;
-
-            getImgUrl(img: string): string {
-              return img.startsWith('http') ? img : 'https://sabina-utf1.onrender.com' + img;
-            }
-            prevImg() {
-              if (this.currentImgIndex > 0) this.currentImgIndex--;
-            }
-            nextImg() {
-              if (this.product && this.product.imagenes && this.currentImgIndex < this.product.imagenes.length - 1) this.currentImgIndex++;
-            }
-            goToImg(i: number) {
-              this.currentImgIndex = i;
-            }
           <div class="detail-info">
             <span class="category-tag">{{ product.categoria?.nombre }}</span>
             <h1>{{ product.nombre }}</h1>
@@ -146,6 +132,7 @@ export class ProductDetailComponent implements OnInit {
   product!: Product;
   selectedTalla: string = '';
   quantity: number = 1;
+  currentImgIndex: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -158,15 +145,20 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(id).subscribe(res => {
       this.product = res.data;
       // Normalizar tallas a array siempre
-      if (!Array.isArray(this.product.tallas)) {
-        try {
-          this.product.tallas = JSON.parse(this.product.tallas);
-        } catch {
-          this.product.tallas = [];
-        }
-      }
-      if (!Array.isArray(this.product.tallas)) this.product.tallas = [];
     });
+  }
+
+  getImgUrl(img: string): string {
+    return img.startsWith('http') ? img : 'https://sabina-utf1.onrender.com' + img;
+  }
+  prevImg() {
+    if (this.currentImgIndex > 0) this.currentImgIndex--;
+  }
+  nextImg() {
+    if (this.product && this.product.imagenes && this.currentImgIndex < this.product.imagenes.length - 1) this.currentImgIndex++;
+  }
+  goToImg(i: number) {
+    this.currentImgIndex = i;
   }
 
   hasStock(): boolean {
