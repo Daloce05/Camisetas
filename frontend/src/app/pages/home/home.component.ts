@@ -163,9 +163,9 @@ import { Category } from '../../models/category.model';
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center top;
       display: block;
-      filter: brightness(0.52);
+      filter: brightness(0.55);
     }
     .hero-overlay {
       position: absolute;
