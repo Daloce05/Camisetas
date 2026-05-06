@@ -79,7 +79,7 @@ import { Category } from '../../models/category.model';
           </div>
           <div class="feature-card">
             <div class="feature-icon" style="display: flex; justify-content: center; align-items: center; height: 64px;">
-              <img src="assets/images/interapidisimo.jpeg" alt="Interrapidísimo" style="width:64px;height:64px;object-fit:contain;display:block;" />
+              <img src="assets/images/interapidisimo.jpeg" alt="Interrapidísimo" style="width:120px;height:120px;object-fit:contain;display:block;" />
             </div>
             <h3>Envío Rápido</h3>
             <p>Envíos a todo el país con empaque seguro para tus camisetas.</p>
