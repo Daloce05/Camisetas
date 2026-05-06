@@ -30,7 +30,7 @@ import { Product, TallaStock } from '../../models/product.model';
               </div>
             </ng-container>
             <ng-template #noImgs>
-              <div class="placeholder">🍄</div>
+              <div class="placeholder">⭐</div>
             </ng-template>
           </div>
           <div class="detail-info">
