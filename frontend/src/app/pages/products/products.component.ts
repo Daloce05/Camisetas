@@ -28,7 +28,7 @@ import { Category } from '../../models/category.model';
 
         <!-- Products Grid -->
         <div class="products-grid" *ngIf="products.length > 0">
-          <div *ngFor="let product of products" class="product-card">
+          <a *ngFor="let product of products" class="product-card" [routerLink]="['/producto', product.id]">
             <div class="product-img">
               <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
               <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder">🍄</div>
@@ -39,11 +39,13 @@ import { Category } from '../../models/category.model';
               <h3>{{ product.nombre }}</h3>
               <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
               <div class="product-footer">
-                <span class="product-price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
-                <button class="btn-add" (click)="contactWhatsApp(product)">Cotizar 💬</button>
+                <span class="product-price">
+                  {{ product.precio > 0 ? (product.precio | currency:'COP':'symbol':'1.0-0':'es-CO') : 'Consultar' }}
+                </span>
+                <button class="btn-add" (click)="$event.preventDefault(); contactWhatsApp(product)">Cotizar 💬</button>
               </div>
             </div>
-          </div>
+          </a>
         </div>
 
         <div *ngIf="products.length === 0" class="empty-state">
@@ -243,7 +245,12 @@ export class ProductsComponent implements OnInit {
         p.id = typeof p.id === 'number' ? p.id : 0;
         p.nombre = typeof p.nombre === 'string' ? p.nombre : '';
         p.descripcion = typeof p.descripcion === 'string' ? p.descripcion : '';
-        p.precio = typeof p.precio === 'number' ? p.precio : 0;
+        if (typeof p.precio === 'string') {
+          const parsed = parseFloat(p.precio.replace(/[^\d.]/g, ''));
+          p.precio = !isNaN(parsed) ? parsed : 0;
+        } else if (typeof p.precio !== 'number') {
+          p.precio = 0;
+        }
         // p.imagen = typeof p.imagen === 'string' ? p.imagen : null;
         p.categoryId = typeof p.categoryId === 'number' ? p.categoryId : 0;
         p.destacado = typeof p.destacado === 'boolean' ? p.destacado : false;
