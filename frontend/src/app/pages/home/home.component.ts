@@ -34,9 +34,9 @@ import { Category } from '../../models/category.model';
     <!-- Featured Products -->
     <section class="section">
       <div class="container">
-        <h2 class="section-title">Camisetas Destacadas</h2>
-        <div class="products-grid" *ngIf="featuredProducts.length > 0">
-          <div *ngFor="let product of featuredProducts" class="product-card">
+        <h2 class="section-title">Nuestros Productos</h2>
+        <div class="products-grid" *ngIf="products.length > 0">
+          <a *ngFor="let product of products" class="product-card" [routerLink]="['/producto', product.id]">
             <div class="product-img">
               <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
               <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder"></div>
@@ -47,11 +47,11 @@ import { Category } from '../../models/category.model';
               <h3>{{ product.nombre }}</h3>
               <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
               <div class="product-footer">
-                <span class="product-price">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
-                <button class="btn-add" (click)="contactWhatsApp(product)">Cotizar 💬</button>
+                <span class="product-price">{{ product.precio > 0 ? (product.precio | currency:'COP':'symbol':'1.0-0':'es-CO') : 'Consultar' }}</span>
+                <button class="btn-add" (click)="$event.preventDefault(); contactWhatsApp(product)">Cotizar 💬</button>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -658,7 +658,7 @@ import { Category } from '../../models/category.model';
   `]
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  featuredProducts: Product[] = [];
+  products: Product[] = [];
   categories: Category[] = [];
 
   // Eliminado carrusel, solo imágenes fijas en el hero
@@ -670,8 +670,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.productService.getProducts({ destacado: true, limit: 4 }).subscribe(res => {
-      this.featuredProducts = res.data.products.map(p => {
+    this.productService.getProducts({ limit: 100 }).subscribe(res => {
+      this.products = res.data.products.map(p => {
         let precioNum: number = 0;
         if (typeof p.precio === 'number') {
           precioNum = p.precio;
