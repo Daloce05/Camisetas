@@ -49,7 +49,7 @@ import { Category } from '../../models/category.model';
         </div>
 
         <div *ngIf="products.length === 0" class="empty-state">
-          <p>🍄 No se encontraron productos</p>
+          <p> No se encontraron productos</p>
         </div>
 
         <!-- Pagination -->

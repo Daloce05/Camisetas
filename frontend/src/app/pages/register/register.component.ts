@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth.service';
     <div class="auth-page">
       <div class="auth-card">
         <div class="auth-header">
-          <span class="logo">🍄</span>
+          <span class="logo"></span>
           <h2>Crear Cuenta</h2>
           <p>Únete a la familia Camisetas</p>
         </div>
