@@ -27,6 +27,17 @@ import { WhatsappService } from '../../services/whatsapp.service';
           <a routerLink="/productos" routerLinkActive="active" (click)="mobileOpen=false">Productos</a>
           <a routerLink="/quienes-somos" routerLinkActive="active" (click)="mobileOpen=false">¿Quiénes Somos?</a>
           <a routerLink="/contacto" routerLinkActive="active" (click)="mobileOpen=false">Contacto</a>
+          <!-- Auth buttons solo en móvil -->
+          <ng-container *ngIf="!authService.isLoggedIn">
+            <div class="mobile-auth-divider"></div>
+            <a routerLink="/login" class="mobile-auth-btn mobile-auth-outline" (click)="mobileOpen=false">Iniciar Sesión</a>
+            <a routerLink="/registro" class="mobile-auth-btn mobile-auth-primary" (click)="mobileOpen=false">Registrarse</a>
+          </ng-container>
+          <ng-container *ngIf="authService.isLoggedIn">
+            <div class="mobile-auth-divider"></div>
+            <a routerLink="/admin" *ngIf="authService.isAdmin" class="mobile-auth-btn mobile-auth-admin" (click)="mobileOpen=false">Panel Admin</a>
+            <button class="mobile-auth-btn mobile-auth-logout" (click)="logout(); mobileOpen=false">Cerrar Sesión</button>
+          </ng-container>
         </div>
 
         <div class="nav-actions">
@@ -160,6 +171,8 @@ import { WhatsappService } from '../../services/whatsapp.service';
       white-space: nowrap;
     }
     .btn-primary:hover { opacity: 0.9; }
+    /* Mobile auth - hidden on desktop */
+    .mobile-auth-divider, .mobile-auth-btn { display: none; }
     /* Hamburger */
     .hamburger {
       display: none;
@@ -276,7 +289,41 @@ import { WhatsappService } from '../../services/whatsapp.service';
         border-bottom: 1px solid rgba(255,255,255,0.06);
       }
       .hamburger { display: flex; }
-      .btn-outline, .btn-primary { display: none; }
+      .nav-actions .btn-outline, .nav-actions .btn-primary { display: none; }
+      .mobile-auth-divider, .mobile-auth-btn { display: block; }
+      .mobile-auth-divider {
+        height: 1px;
+        background: rgba(255,255,255,0.1);
+        margin: 0.5rem 1.5rem;
+      }
+      .mobile-auth-btn {
+        display: block;
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        background: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+      }
+      .mobile-auth-outline {
+        color: #d3ed05;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .mobile-auth-primary {
+        color: #fff;
+        background: rgba(58,91,160,0.4);
+        border-radius: 0;
+      }
+      .mobile-auth-admin {
+        color: #d3ed05;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+      .mobile-auth-logout {
+        color: #ff80ab;
+      }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
     }
     @media (max-width: 600px) {
