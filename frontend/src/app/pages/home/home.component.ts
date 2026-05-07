@@ -39,7 +39,7 @@ import { Category } from '../../models/category.model';
           <div *ngFor="let product of featuredProducts" class="product-card">
             <div class="product-img">
               <img *ngIf="product.imagenes && product.imagenes.length" [src]="product.imagenes[0].startsWith('http') ? product.imagenes[0] : 'https://sabina-utf1.onrender.com' + product.imagenes[0]" [alt]="product.nombre">
-              <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder">🍄</div>
+              <div *ngIf="!product.imagenes || !product.imagenes.length" class="product-placeholder"></div>
               <span class="product-badge" *ngIf="product.destacado">Destacado</span>
             </div>
             <div class="product-info">
