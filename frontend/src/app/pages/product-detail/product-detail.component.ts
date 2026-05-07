@@ -20,7 +20,10 @@ import { Product, TallaStock } from '../../models/product.model';
             <ng-container *ngIf="product.imagenes && product.imagenes.length > 0; else noImgs">
               <div class="carousel">
                 <button class="carousel-btn" (click)="prevImg()" [disabled]="currentImgIndex === 0">‹</button>
-                <img [src]="getImgUrl(product.imagenes[currentImgIndex])" [alt]="product.nombre" class="carousel-img">
+                <div class="img-zoom-wrapper" (click)="openLightbox()">
+                  <img [src]="getImgUrl(product.imagenes[currentImgIndex])" [alt]="product.nombre" class="carousel-img">
+                  <div class="zoom-icon">🔍</div>
+                </div>
                 <button class="carousel-btn" (click)="nextImg()" [disabled]="currentImgIndex === product.imagenes.length - 1">›</button>
               </div>
               <div class="carousel-dots">
@@ -75,6 +78,19 @@ import { Product, TallaStock } from '../../models/product.model';
         </div>
       </div>
     </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
+      <button class="lightbox-close" (click)="closeLightbox()">✕</button>
+      <button class="lightbox-nav lightbox-prev" (click)="$event.stopPropagation(); prevImg()" [disabled]="currentImgIndex === 0">‹</button>
+      <img [src]="getImgUrl(product!.imagenes[currentImgIndex])" [alt]="product!.nombre" class="lightbox-img" (click)="$event.stopPropagation()">
+      <button class="lightbox-nav lightbox-next" (click)="$event.stopPropagation(); nextImg()" [disabled]="currentImgIndex === product!.imagenes.length - 1">›</button>
+      <div class="lightbox-dots">
+        <span *ngFor="let img of product!.imagenes; let i = index"
+              [class.active]="i === currentImgIndex"
+              (click)="$event.stopPropagation(); goToImg(i)"></span>
+      </div>
+    </div>
   `,
   styles: [`
     .detail-page { padding: 2rem 1.5rem; }
@@ -92,6 +108,17 @@ import { Product, TallaStock } from '../../models/product.model';
       padding: 0;
     }
     .carousel { display: flex; align-items: center; justify-content: center; gap: 0.8rem; width: 100%; }
+    .img-zoom-wrapper {
+      position: relative; cursor: zoom-in; display: inline-flex;
+      border-radius: 10px; overflow: hidden;
+    }
+    .img-zoom-wrapper:hover .zoom-icon { opacity: 1; }
+    .zoom-icon {
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(0,0,0,0.55); color: #fff; border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; opacity: 0; transition: opacity 0.2s; pointer-events: none;
+    }
     .carousel-img { width: 320px; height: 320px; object-fit: cover; border-radius: 10px; display: block; }
     .carousel-btn { background: #fff; border: 1px solid #b388ff; border-radius: 50%; width: 36px; height: 36px; font-size: 1.5rem; color: #3a5ba0; cursor: pointer; transition: background 0.2s; }
     .carousel-btn:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -138,18 +165,63 @@ import { Product, TallaStock } from '../../models/product.model';
     .btn-add-lg:hover { opacity: 0.9; }
     .btn-add-lg:disabled { opacity: 0.4; cursor: not-allowed; }
 
+    /* Lightbox */
+    .lightbox-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.92);
+      display: flex; align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox-img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain; border-radius: 8px;
+      box-shadow: 0 8px 48px #000a;
+      cursor: default;
+    }
+    .lightbox-close {
+      position: fixed; top: 1.2rem; right: 1.5rem;
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      font-size: 1.8rem; width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; z-index: 10000; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      font-size: 2.5rem; width: 52px; height: 52px; border-radius: 50%;
+      cursor: pointer; z-index: 10000; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.28); }
+    .lightbox-nav:disabled { opacity: 0.25; cursor: not-allowed; }
+    .lightbox-prev { left: 1.2rem; }
+    .lightbox-next { right: 1.2rem; }
+    .lightbox-dots {
+      position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 8px; z-index: 10000;
+    }
+    .lightbox-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: rgba(255,255,255,0.4); cursor: pointer; display: inline-block;
+      transition: background 0.2s;
+    }
+    .lightbox-dots span.active { background: #fff; }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 900px) {
       .detail-page { padding: 1.5rem 1rem; }
       .detail-grid { grid-template-columns: 1fr; gap: 1.5rem; }
       .detail-img { min-height: 260px; border-radius: 12px; }
       .carousel-img { width: 100%; max-width: 340px; height: auto; max-height: 300px; }
+      .img-zoom-wrapper { width: 100%; max-width: 340px; }
     }
     @media (max-width: 600px) {
       .detail-page { padding: 1rem 0.5rem; }
       .detail-grid { gap: 1rem; }
       .detail-img { min-height: 200px; border-radius: 8px; padding: 0.5rem; }
       .carousel-img { width: 100%; max-width: 100%; max-height: 240px; }
+      .img-zoom-wrapper { width: 100%; max-width: 100%; }
       .detail-info h1 { font-size: 1.3rem; }
       .price { font-size: 1.5rem; }
       .btn-add-lg { font-size: 0.95rem; padding: 0.8rem; }
@@ -162,6 +234,10 @@ export class ProductDetailComponent implements OnInit {
   selectedTalla: string = '';
   quantity: number = 1;
   currentImgIndex: number = 0;
+  lightboxOpen: boolean = false;
+
+  openLightbox() { this.lightboxOpen = true; }
+  closeLightbox() { this.lightboxOpen = false; }
 
   constructor(
     private route: ActivatedRoute,
