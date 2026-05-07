@@ -18,7 +18,7 @@ import { SettingService } from '../../../services/setting.service';
       <div *ngIf="!loading" class="settings-container">
         <!-- Nombre empresa -->
         <div class="form-card">
-          <h3>🍄 Información de la Empresa</h3>
+          <h3> Información de la Empresa</h3>
           <div class="form-group">
             <label>Nombre de la empresa</label>
             <input type="text" [(ngModel)]="form.nombre_empresa" placeholder="Nombre de la empresa">
@@ -60,7 +60,7 @@ import { SettingService } from '../../../services/setting.service';
               💬 Número de WhatsApp
               <span *ngIf="form.contacto_metodo === 'whatsapp'" class="badge-active">Activo</span>
             </label>
-            <input type="text" [(ngModel)]="form.contacto_whatsapp" placeholder="Ej: 573195631384 (con código de país, sin +)">
+            <input type="text" [(ngModel)]="form.contacto_whatsapp" placeholder="Ej: 57311111111 (con código de país, sin +)">
             <small class="field-hint">Incluye el código de país sin el signo +. Ej: 57 para Colombia</small>
           </div>
 
@@ -77,7 +77,7 @@ import { SettingService } from '../../../services/setting.service';
               📧 Email
               <span *ngIf="form.contacto_metodo === 'email'" class="badge-active">Activo</span>
             </label>
-            <input type="email" [(ngModel)]="form.contacto_email" placeholder="Ej: contacto@sabinafungi.com">
+            <input type="email" [(ngModel)]="form.contacto_email" placeholder="Ej: contacto@distrisport.com">
           </div>
 
           <div class="form-group">
@@ -87,7 +87,7 @@ import { SettingService } from '../../../services/setting.service';
             </label>
             <div class="input-with-prefix">
               <span class="input-prefix">&#64;</span>
-              <input type="text" [(ngModel)]="form.contacto_instagram" placeholder="Ej: sabinafungi">
+              <input type="text" [(ngModel)]="form.contacto_instagram" placeholder="Ej: distrisport">
             </div>
           </div>
         </div>
