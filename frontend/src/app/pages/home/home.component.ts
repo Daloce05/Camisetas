@@ -544,6 +544,7 @@ import { Category } from '../../models/category.model';
     .price-block { display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; }
     .price-original { font-size: 0.85rem; color: #aaa; text-decoration: line-through; -webkit-text-fill-color: #aaa; }
     .discount-badge { display: inline-block; background: #e74c3c; color: #fff; font-size: 0.75rem; font-weight: 700; border-radius: 8px; padding: 0.1rem 0.5rem; }
+    .logos-equipos-section {
       width: 100%;
       background: none;
       margin: 0;
