@@ -60,7 +60,7 @@ import { SettingService } from '../../../services/setting.service';
               💬 Número de WhatsApp
               <span *ngIf="form.contacto_metodo === 'whatsapp'" class="badge-active">Activo</span>
             </label>
-            <input type="text" [(ngModel)]="form.contacto_whatsapp" placeholder="Ej: 57311111111 (con código de país, sin +)">
+            <input type="text" [(ngModel)]="form.contacto_whatsapp" placeholder="Ej: 3177239970 (con código de país, sin +)">
             <small class="field-hint">Incluye el código de país sin el signo +. Ej: 57 para Colombia</small>
           </div>
 
@@ -69,7 +69,7 @@ import { SettingService } from '../../../services/setting.service';
               📞 Teléfono
               <span *ngIf="form.contacto_metodo === 'telefono'" class="badge-active">Activo</span>
             </label>
-            <input type="text" [(ngModel)]="form.contacto_telefono" placeholder="Ej: 3195631384">
+            <input type="text" [(ngModel)]="form.contacto_telefono" placeholder="Ej: 3177239970">
           </div>
 
           <div class="form-group">
