@@ -82,7 +82,7 @@ import { Category } from '../../models/category.model';
               <img src="assets/images/interapidisimo.jpeg" alt="Interrapidísimo" style="width:120px;height:120px;object-fit:contain;display:block;" />
             </div>
             <h3>Envío Rápido</h3>
-            <p>Envíos a todo el país con empaque seguro para tus camisetas.</p>
+            <p>Envíos seguros a todo el país con Interrapidísimo, para que tus camisetas lleguen protegidas y en perfectas condiciones..</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">⭐</div>

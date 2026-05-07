@@ -11,9 +11,9 @@ import { RouterLink } from '@angular/router';
       <div class="about-container">
         <div class="about-header-block">
           <span class="about-label">¿QUIÉNES <span class="about-accent">SOMOS</span>?</span>
-          <h1 class="about-main-title">Camisetas: Pasión, Calidad y Comunidad</h1>
+          <h1 class="about-main-title">Distrisport: Pasión, Calidad y Comunidad</h1>
           <p class="about-main-desc">
-            En <b>Camisetas</b> unimos la pasión por el fútbol con la autenticidad y la atención personalizada. Creamos experiencias para hinchas que buscan calidad, historia y cercanía en cada camiseta.
+            En <b>Distrisport</b> unimos la pasión por el fútbol con la autenticidad y la atención personalizada. Creamos experiencias para hinchas que buscan calidad, historia y cercanía en cada camiseta.
           </p>
         </div>
 
