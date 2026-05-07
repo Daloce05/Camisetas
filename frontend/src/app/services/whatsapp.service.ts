@@ -54,7 +54,7 @@ export class WhatsappService {
 
     if (method === 'whatsapp') {
       const phone = this.settings['contacto_whatsapp'] || '573195631384';
-      const message = `¡Hola! 🍄 Estoy interesado en el producto:\n\n` +
+      const message = `¡Hola! 👕 Estoy interesado en el producto:\n\n` +
         `*${product.nombre}*\n` +
         `Precio: $${product.precio}\n` +
         `Cantidad: ${cantidad}\n\n` +
@@ -69,7 +69,7 @@ export class WhatsappService {
       const email = this.settings['contacto_email'] || '';
       const subject = encodeURIComponent(`Consulta sobre: ${product.nombre}`);
       const body = encodeURIComponent(
-        `¡Hola! 🍄 Estoy interesado en el producto:\n\n` +
+        `¡Hola! 👕 Estoy interesado en el producto:\n\n` +
         `${product.nombre}\n` +
         `Precio: $${product.precio}\n` +
         `Cantidad: ${cantidad}\n\n` +
@@ -94,7 +94,7 @@ export class WhatsappService {
 
     if (method === 'whatsapp') {
       const phone = this.settings['contacto_whatsapp'] || '573195631384';
-      const message = `¡Hola! 🍄 Me gustaría obtener información sobre sus productos.`;
+      const message = `¡Hola! 👕 Me gustaría obtener información sobre sus productos.`;
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 
     } else if (method === 'telefono') {
@@ -104,7 +104,7 @@ export class WhatsappService {
     } else if (method === 'email') {
       const email = this.settings['contacto_email'] || '';
       const subject = encodeURIComponent('Consulta general');
-      const body = encodeURIComponent('¡Hola! 🍄 Me gustaría obtener información sobre sus productos.');
+      const body = encodeURIComponent('¡Hola! 👕 Me gustaría obtener información sobre sus productos.');
       window.open(`mailto:${email}?subject=${subject}&body=${body}`, '_blank');
 
     } else if (method === 'instagram') {
