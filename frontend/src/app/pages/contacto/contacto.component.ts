@@ -31,7 +31,7 @@ import { CommonModule } from '@angular/common';
           <div class="contact-card">
             <div class="contact-icon">📘</div>
             <div class="contact-card-title">Facebook</div>
-            <a class="contact-link" href="https://www.facebook.com/profile.php?id=61565100985005" target="_blank" rel="noopener">Distrisports Facebook</a>
+            <a class="contact-link" href="https://www.facebook.com/profile.php?id=61569492541957" target="_blank" rel="noopener">Distrisports Facebook</a>
             <div class="contact-card-desc">Síguenos y contáctanos por Facebook.</div>
           </div>
         </div>
