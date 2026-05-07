@@ -61,7 +61,7 @@ import { CommonModule } from '@angular/common';
       width: 100vw;
     }
     .contact-container {
-      max-width: 700px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 3.5rem 1.5rem 2.5rem 1.5rem;
     }
@@ -94,7 +94,7 @@ import { CommonModule } from '@angular/common';
       display: flex;
       gap: 2rem;
       margin: 2.5rem 0 2.5rem 0;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       justify-content: center;
     }
     .contact-card {
@@ -103,8 +103,8 @@ import { CommonModule } from '@angular/common';
       box-shadow: 0 2px 16px #0002;
       padding: 2rem 1.5rem 1.5rem 1.5rem;
       min-width: 240px;
-      max-width: 320px;
-      flex: 1 1 220px;
+      max-width: 340px;
+      flex: 1 1 300px;
       margin-bottom: 1rem;
       border-left: 5px solid #ffe066;
       text-align: center;
@@ -166,7 +166,7 @@ import { CommonModule } from '@angular/common';
     }
     @media (max-width: 900px) {
       .contact-container { padding: 2rem 1rem 1.5rem; }
-      .contact-cards-grid { gap: 1rem; }
+      .contact-cards-grid { gap: 1rem; flex-wrap: wrap; }
       .contact-card { max-width: 100%; min-width: 0; }
       .contact-main-title { font-size: 1.8rem; }
     }
