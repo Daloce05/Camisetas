@@ -32,6 +32,11 @@ import { CategoryService } from '../../../services/category.service';
             <input type="number" [(ngModel)]="form.precio" placeholder="0.00" step="0.01">
           </div>
           <div class="form-group">
+            <label>Descuento (%)</label>
+            <input type="number" [(ngModel)]="form.descuento" placeholder="0" min="0" max="100" step="1">
+            <small style="color:#888;">Dejar en 0 si no hay descuento. Ej: 10 = 10% OFF</small>
+          </div>
+          <div class="form-group">
             <label>Tallas y stock</label>
             <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
               <select [(ngModel)]="tallaInput" style="width: 100px;">
@@ -90,6 +95,7 @@ import { CategoryService } from '../../../services/category.service';
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
+              <th>Descuento</th>
               <th>Tallas/Stock</th>
               <th>Destacado</th>
               <th>Activo</th>
@@ -102,6 +108,10 @@ import { CategoryService } from '../../../services/category.service';
               <td>{{ p.nombre }}</td>
               <td>{{ p.categoria?.nombre }}</td>
               <td>\${{ p.precio }}</td>
+              <td>
+                <span *ngIf="p.descuento > 0" style="color:#e74c3c;font-weight:700;">{{ p.descuento }}% OFF</span>
+                <span *ngIf="!p.descuento || p.descuento === 0" style="color:#aaa;">-</span>
+              </td>
               <td>
                 <ng-container *ngIf="p.tallas && p.tallas.length > 0; else noTallas">
                   <span *ngFor="let t of p.tallas" style="display:inline-block; background:#f3e8ff; color:#3a5ba0; border-radius:8px; padding:0.1rem 0.5rem; margin-right:0.3rem; margin-bottom:0.2rem;">
@@ -217,7 +227,7 @@ export class AdminProductsComponent implements OnInit {
   search = '';
   error = '';
   selectedFiles: File[] = [];
-  form = { nombre: '', descripcion: '', precio: 0, tallas: [] as { talla: string; stock: number }[], categoryId: null as number | null, destacado: false };
+  form = { nombre: '', descripcion: '', precio: 0, descuento: 0, tallas: [] as { talla: string; stock: number }[], categoryId: null as number | null, destacado: false };
 
   // Para gestión de tallas
   tallaInput: string = '';
@@ -264,7 +274,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   resetForm() {
-    this.form = { nombre: '', descripcion: '', precio: 0, tallas: [], categoryId: null, destacado: false };
+    this.form = { nombre: '', descripcion: '', precio: 0, descuento: 0, tallas: [], categoryId: null, destacado: false };
     this.editingId = null;
     this.selectedFiles = [];
     this.error = '';
@@ -290,6 +300,7 @@ export class AdminProductsComponent implements OnInit {
     formData.append('nombre', this.form.nombre);
     formData.append('descripcion', this.form.descripcion);
     formData.append('precio', this.form.precio.toString());
+    formData.append('descuento', (this.form.descuento || 0).toString());
     formData.append('tallas', JSON.stringify(tallas));
     formData.append('categoryId', this.form.categoryId!.toString());
     formData.append('destacado', this.form.destacado.toString());
@@ -315,6 +326,7 @@ export class AdminProductsComponent implements OnInit {
       nombre: product.nombre,
       descripcion: product.descripcion,
       precio: product.precio,
+      descuento: product.descuento || 0,
       tallas: product.tallas ? [...product.tallas] : [],
       categoryId: product.categoria?.id || null,
       destacado: product.destacado

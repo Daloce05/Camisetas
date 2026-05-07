@@ -36,7 +36,14 @@ import { Product, TallaStock } from '../../models/product.model';
           <div class="detail-info">
             <span class="category-tag">{{ product.categoria?.nombre }}</span>
             <h1>{{ product.nombre }}</h1>
-            <p class="price" style="margin-bottom: 0.5rem;">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
+            <ng-container *ngIf="product.descuento && product.descuento > 0; else sinDescuentoDetail">
+              <p class="price-original-detail">Antes: <span>{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span></p>
+              <span class="discount-badge-detail">-{{ product.descuento }}% OFF</span>
+              <p class="price" style="margin-bottom: 0.5rem;">Ahora: {{ (product.precio * (1 - product.descuento / 100)) | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
+            </ng-container>
+            <ng-template #sinDescuentoDetail>
+              <p class="price" style="margin-bottom: 0.5rem;">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</p>
+            </ng-template>
             <p class="description">{{ product.descripcion }}</p>
             <div class="stock-info">
               <ng-container *ngIf="product.tallas && product.tallas.length > 0; else noTallas">
@@ -98,9 +105,12 @@ import { Product, TallaStock } from '../../models/product.model';
     }
     .detail-info h1 { color: #2d2d3f; font-size: 1.8rem; margin: 0.5rem 0; }
     .price {
-      font-size: 2rem; font-weight: 700; margin: 0.5rem 0;
+      font-size: 2rem; font-weight: 700; margin: 0.3rem 0;
       color: #181818;
     }
+    .price-original-detail { color: #888; font-size: 1.1rem; margin: 0.2rem 0; text-decoration: line-through; }
+    .price-original-detail span { text-decoration: line-through; }
+    .discount-badge-detail { display: inline-block; background: #e74c3c; color: #fff; font-size: 0.9rem; font-weight: 700; border-radius: 8px; padding: 0.2rem 0.8rem; margin-bottom: 0.3rem; }
     .description { color: #666; line-height: 1.7; margin: 1rem 0; }
     .stock-info { margin: 1rem 0; }
     .in-stock { color: #2ecc71; }

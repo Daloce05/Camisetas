@@ -13,6 +13,7 @@ export interface Product {
   imagenes: string[];
   categoryId: number;
   destacado: boolean;
+  descuento: number;
   activo: boolean;
   categoria?: {
     id: number;

@@ -91,8 +91,10 @@ const productController = {
       }
 
 
+      const descuento = parseInt(req.body.descuento) || 0;
+
       const product = await Product.create({
-        nombre, descripcion, precio, tallas, categoryId, destacado, imagenes
+        nombre, descripcion, precio, tallas, categoryId, destacado, imagenes, descuento
       });
 
       res.status(201).json({ success: true, message: 'Producto creado.', data: product });
@@ -111,6 +113,7 @@ const productController = {
       }
 
       const { nombre, descripcion, precio, categoryId, destacado, activo } = req.body;
+      const descuento = parseInt(req.body.descuento) || 0;
       let { tallas } = req.body;
 
       // Normalizar tallas: debe ser array de objetos { talla, stock }
@@ -125,7 +128,7 @@ const productController = {
       tallas = tallas.filter(t => t && typeof t.talla === 'string' && typeof t.stock === 'number');
 
 
-      const updateData = { nombre, descripcion, precio, tallas, categoryId, destacado, activo };
+      const updateData = { nombre, descripcion, precio, tallas, categoryId, destacado, activo, descuento };
 
       if (req.files && Array.isArray(req.files) && req.files.length > 0) {
         let nuevasImagenes = [];

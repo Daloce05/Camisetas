@@ -39,9 +39,18 @@ import { Category } from '../../models/category.model';
               <h3>{{ product.nombre }}</h3>
               <p class="product-desc">{{ product.descripcion | slice:0:60 }}...</p>
               <div class="product-footer">
-                <span class="product-price">
-                  {{ product.precio > 0 ? (product.precio | currency:'COP':'symbol':'1.0-0':'es-CO') : 'Consultar' }}
-                </span>
+                <div class="price-block">
+                  <ng-container *ngIf="product.descuento && product.descuento > 0; else sinDescuento">
+                    <span class="price-original">{{ product.precio | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
+                    <span class="discount-badge">-{{ product.descuento }}%</span>
+                    <span class="product-price">{{ (product.precio * (1 - product.descuento / 100)) | currency:'COP':'symbol':'1.0-0':'es-CO' }}</span>
+                  </ng-container>
+                  <ng-template #sinDescuento>
+                    <span class="product-price">
+                      {{ product.precio > 0 ? (product.precio | currency:'COP':'symbol':'1.0-0':'es-CO') : 'Consultar' }}
+                    </span>
+                  </ng-template>
+                </div>
                 <button class="btn-add" (click)="$event.preventDefault(); contactWhatsApp(product)">Cotizar 💬</button>
               </div>
             </div>
@@ -170,6 +179,9 @@ import { Category } from '../../models/category.model';
       transition: opacity 0.3s;
     }
     .btn-add:hover { opacity: 0.85; }
+    .price-block { display: flex; flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+    .price-original { font-size: 0.85rem; color: #aaa; text-decoration: line-through; -webkit-text-fill-color: #aaa; }
+    .discount-badge { display: inline-block; background: #e74c3c; color: #fff; font-size: 0.75rem; font-weight: 700; border-radius: 8px; padding: 0.1rem 0.5rem; }
     .empty-state { text-align: center; padding: 4rem; color: #888; font-size: 1.2rem; }
     .pagination {
       display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; padding: 1rem;
