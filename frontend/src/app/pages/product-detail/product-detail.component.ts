@@ -80,9 +80,9 @@ import { Product, TallaStock } from '../../models/product.model';
     .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: flex-start; }
     .detail-img {
       border-radius: 16px; overflow: hidden;
-      background: linear-gradient(135deg, #1e335c 0%, #3a5ba0 100%);
+      background: transparent;
       display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 360px;
-      padding: 1rem;
+      padding: 0;
     }
     .carousel { display: flex; align-items: center; justify-content: center; gap: 0.8rem; width: 100%; }
     .carousel-img { width: 320px; height: 320px; object-fit: cover; border-radius: 10px; display: block; }
