@@ -80,15 +80,33 @@ import { Product, TallaStock } from '../../models/product.model';
     </div>
 
     <!-- Lightbox -->
-    <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="closeLightbox()">
+    <div class="lightbox-overlay" *ngIf="lightboxOpen" (click)="onOverlayClick($event)" (wheel)="onWheel($event)">
       <button class="lightbox-close" (click)="closeLightbox()">✕</button>
-      <button class="lightbox-nav lightbox-prev" (click)="$event.stopPropagation(); prevImg()" [disabled]="currentImgIndex === 0">‹</button>
-      <img [src]="getImgUrl(product!.imagenes[currentImgIndex])" [alt]="product!.nombre" class="lightbox-img" (click)="$event.stopPropagation()">
-      <button class="lightbox-nav lightbox-next" (click)="$event.stopPropagation(); nextImg()" [disabled]="currentImgIndex === product!.imagenes.length - 1">›</button>
+      <button class="lightbox-nav lightbox-prev" (click)="$event.stopPropagation(); prevImg(); resetZoom()" [disabled]="currentImgIndex === 0">‹</button>
+      <div class="lightbox-img-container"
+           [style.transform]="'scale(' + zoomLevel + ') translate(' + panX + 'px,' + panY + 'px)'"
+           [style.cursor]="zoomLevel > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in'"
+           (mousedown)="onMouseDown($event)"
+           (mousemove)="onMouseMove($event)"
+           (mouseup)="onMouseUp()"
+           (mouseleave)="onMouseUp()"
+           (click)="onImgClick($event)"
+           (touchstart)="onTouchStart($event)"
+           (touchmove)="onTouchMove($event)"
+           (touchend)="onTouchEnd($event)">
+        <img [src]="getImgUrl(product!.imagenes[currentImgIndex])" [alt]="product!.nombre" class="lightbox-img" draggable="false">
+      </div>
+      <button class="lightbox-nav lightbox-next" (click)="$event.stopPropagation(); nextImg(); resetZoom()" [disabled]="currentImgIndex === product!.imagenes.length - 1">›</button>
+      <div class="lightbox-zoom-controls" (click)="$event.stopPropagation()">
+        <button (click)="zoomIn()">+</button>
+        <span>{{ (zoomLevel * 100) | number:'1.0-0' }}%</span>
+        <button (click)="zoomOut()">−</button>
+        <button (click)="resetZoom()" *ngIf="zoomLevel !== 1">↺</button>
+      </div>
       <div class="lightbox-dots">
         <span *ngFor="let img of product!.imagenes; let i = index"
               [class.active]="i === currentImgIndex"
-              (click)="$event.stopPropagation(); goToImg(i)"></span>
+              (click)="$event.stopPropagation(); goToImg(i); resetZoom()"></span>
       </div>
     </div>
   `,
@@ -170,14 +188,35 @@ import { Product, TallaStock } from '../../models/product.model';
       position: fixed; inset: 0; z-index: 9999;
       background: rgba(0,0,0,0.92);
       display: flex; align-items: center; justify-content: center;
-      cursor: zoom-out;
+      overflow: hidden;
+    }
+    .lightbox-img-container {
+      display: flex; align-items: center; justify-content: center;
+      transform-origin: center center;
+      transition: transform 0.08s ease;
+      will-change: transform;
+      max-width: 90vw; max-height: 88vh;
     }
     .lightbox-img {
       max-width: 90vw; max-height: 88vh;
       object-fit: contain; border-radius: 8px;
       box-shadow: 0 8px 48px #000a;
-      cursor: default;
+      user-select: none; pointer-events: none;
+      display: block;
     }
+    .lightbox-zoom-controls {
+      position: fixed; bottom: 3.5rem; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 0.5rem; z-index: 10001;
+      background: rgba(0,0,0,0.55); border-radius: 20px; padding: 0.35rem 1rem;
+    }
+    .lightbox-zoom-controls button {
+      background: rgba(255,255,255,0.15); border: none; color: #fff;
+      font-size: 1.2rem; width: 32px; height: 32px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-zoom-controls button:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-zoom-controls span { color: #fff; font-size: 0.85rem; min-width: 42px; text-align: center; }
     .lightbox-close {
       position: fixed; top: 1.2rem; right: 1.5rem;
       background: rgba(255,255,255,0.15); border: none; color: #fff;
@@ -236,8 +275,95 @@ export class ProductDetailComponent implements OnInit {
   currentImgIndex: number = 0;
   lightboxOpen: boolean = false;
 
-  openLightbox() { this.lightboxOpen = true; }
-  closeLightbox() { this.lightboxOpen = false; }
+  // Zoom & pan
+  zoomLevel = 1;
+  panX = 0;
+  panY = 0;
+  isDragging = false;
+  private dragStartX = 0;
+  private dragStartY = 0;
+  private panStartX = 0;
+  private panStartY = 0;
+  // Pinch
+  private lastPinchDist = 0;
+
+  openLightbox() { this.lightboxOpen = true; this.resetZoom(); }
+  closeLightbox() { this.lightboxOpen = false; this.resetZoom(); }
+
+  onOverlayClick(e: MouseEvent) {
+    if ((e.target as HTMLElement).classList.contains('lightbox-overlay')) this.closeLightbox();
+  }
+
+  resetZoom() { this.zoomLevel = 1; this.panX = 0; this.panY = 0; }
+  zoomIn() { this.zoomLevel = Math.min(this.zoomLevel + 0.5, 5); }
+  zoomOut() { this.zoomLevel = Math.max(this.zoomLevel - 0.5, 1); if (this.zoomLevel === 1) { this.panX = 0; this.panY = 0; } }
+
+  onWheel(e: WheelEvent) {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.25 : -0.25;
+    this.zoomLevel = Math.min(Math.max(this.zoomLevel + delta, 1), 5);
+    if (this.zoomLevel === 1) { this.panX = 0; this.panY = 0; }
+  }
+
+  onImgClick(e: MouseEvent) {
+    e.stopPropagation();
+    if (!this.isDragging) {
+      if (this.zoomLevel === 1) this.zoomLevel = 2;
+      else this.resetZoom();
+    }
+  }
+
+  onMouseDown(e: MouseEvent) {
+    if (this.zoomLevel <= 1) return;
+    e.preventDefault();
+    this.isDragging = true;
+    this.dragStartX = e.clientX;
+    this.dragStartY = e.clientY;
+    this.panStartX = this.panX;
+    this.panStartY = this.panY;
+  }
+
+  onMouseMove(e: MouseEvent) {
+    if (!this.isDragging) return;
+    this.panX = this.panStartX + (e.clientX - this.dragStartX) / this.zoomLevel;
+    this.panY = this.panStartY + (e.clientY - this.dragStartY) / this.zoomLevel;
+  }
+
+  onMouseUp() { this.isDragging = false; }
+
+  onTouchStart(e: TouchEvent) {
+    if (e.touches.length === 2) {
+      this.lastPinchDist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+    } else if (e.touches.length === 1 && this.zoomLevel > 1) {
+      this.isDragging = true;
+      this.dragStartX = e.touches[0].clientX;
+      this.dragStartY = e.touches[0].clientY;
+      this.panStartX = this.panX;
+      this.panStartY = this.panY;
+    }
+  }
+
+  onTouchMove(e: TouchEvent) {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+      const dist = Math.hypot(
+        e.touches[0].clientX - e.touches[1].clientX,
+        e.touches[0].clientY - e.touches[1].clientY
+      );
+      const scale = dist / this.lastPinchDist;
+      this.zoomLevel = Math.min(Math.max(this.zoomLevel * scale, 1), 5);
+      this.lastPinchDist = dist;
+      if (this.zoomLevel === 1) { this.panX = 0; this.panY = 0; }
+    } else if (e.touches.length === 1 && this.isDragging) {
+      this.panX = this.panStartX + (e.touches[0].clientX - this.dragStartX) / this.zoomLevel;
+      this.panY = this.panStartY + (e.touches[0].clientY - this.dragStartY) / this.zoomLevel;
+    }
+  }
+
+  onTouchEnd() { this.isDragging = false; }
 
   constructor(
     private route: ActivatedRoute,
