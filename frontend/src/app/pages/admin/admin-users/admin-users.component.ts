@@ -79,6 +79,20 @@ import { User } from '../../../models/user.model';
     .btn-toggle, .btn-role {
       background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 0.3rem;
     }
+    @media (max-width: 768px) {
+      .admin-section h1 { font-size: 1.3rem; }
+      th:nth-child(1), td:nth-child(1),
+      th:nth-child(4), td:nth-child(4),
+      th:nth-child(7), td:nth-child(7) {
+        display: none;
+      }
+    }
+    @media (max-width: 480px) {
+      th:nth-child(3), td:nth-child(3) {
+        display: none;
+      }
+      td, th { padding: 0.6rem 0.5rem; font-size: 0.8rem; }
+    }
   `]
 })
 export class AdminUsersComponent implements OnInit {

@@ -199,6 +199,17 @@ import { SettingService } from '../../../services/setting.service';
     }
     .btn-save:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(179,136,255,0.15); }
     .btn-save:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    @media (max-width: 768px) {
+      .settings-container { max-width: 100%; }
+      .contact-methods { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .form-card { padding: 1.2rem; }
+      .section-header h1 { font-size: 1.3rem; }
+      .btn-save { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .contact-methods { grid-template-columns: 1fr; }
+      .method-option { padding: 0.8rem 1rem; }
+    }
   `]
 })
 export class AdminSettingsComponent implements OnInit {

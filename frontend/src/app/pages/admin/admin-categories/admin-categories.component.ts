@@ -86,7 +86,7 @@ import { Category } from '../../../models/category.model';
       background: linear-gradient(135deg, #b388ff, #ff80ab);
       border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: 600;
     }
-    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
     .cat-card {
       background: #ffffff;
       border: 1px solid rgba(179,136,255,0.12);
@@ -105,6 +105,13 @@ import { Category } from '../../../models/category.model';
     }
     .btn-edit { background: rgba(52,152,219,0.12); color: #2980b9; }
     .btn-delete { background: rgba(231,76,60,0.12); color: #c0392b; }
+    @media (max-width: 768px) {
+      .section-header { flex-wrap: wrap; gap: 0.8rem; }
+      .section-header h1 { font-size: 1.3rem; }
+      .btn-new { width: 100%; text-align: center; justify-content: center; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .cat-actions { flex-wrap: wrap; }
+    }
   `]
 })
 export class AdminCategoriesComponent implements OnInit {

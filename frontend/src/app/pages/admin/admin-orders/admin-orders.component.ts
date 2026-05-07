@@ -84,7 +84,7 @@ import { Order } from '../../../models/order.model';
     }
     .order-id { color: #9c5cff; font-weight: 700; margin-right: 1rem; }
     .order-date { color: #888; font-size: 0.85rem; margin-right: 1rem; }
-    .order-user { color: #666; font-size: 0.85rem; }
+    .order-user { color: #666; font-size: 0.85rem; word-break: break-all; }
     .status-select {
       padding: 0.4rem 0.8rem; border-radius: 8px; border: none;
       font-size: 0.85rem; cursor: pointer; font-weight: 600;
@@ -107,6 +107,13 @@ import { Order } from '../../../models/order.model';
     .order-address { color: #888; font-size: 0.85rem; }
     .order-total { color: #ff80ab; font-weight: 700; font-size: 1.1rem; }
     .empty { text-align: center; padding: 3rem; color: #888; }
+    @media (max-width: 768px) {
+      .order-header { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
+      .order-meta { flex-wrap: wrap; gap: 0.4rem; }
+      .order-footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .filter-bar select { width: 100%; }
+      .admin-section h1 { font-size: 1.3rem; }
+    }
   `]
 })
 export class AdminOrdersComponent implements OnInit {

@@ -195,6 +195,18 @@ import { CategoryService } from '../../../services/category.service';
     .btn-edit, .btn-delete {
       background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 0.3rem;
     }
+    @media (max-width: 768px) {
+      .section-header { flex-wrap: wrap; gap: 0.8rem; }
+      .section-header h1 { font-size: 1.3rem; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-row { flex-direction: column; gap: 0; }
+      .search-bar input { max-width: 100%; }
+      .btn-new { width: 100%; text-align: center; justify-content: center; }
+    }
+    @media (max-width: 480px) {
+      .form-card { padding: 1.2rem; }
+      .admin-section h1 { font-size: 1.2rem; }
+    }
   `]
 })
 export class AdminProductsComponent implements OnInit {

@@ -233,6 +233,16 @@ import { UserService } from '../../../services/user.service';
 
     @media (max-width: 768px) {
       .section-row { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+      .days-grid { overflow-x: auto; flex-wrap: nowrap; }
+      .actions-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard h1 { font-size: 1.3rem; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+      .stat-card { padding: 1rem; }
+      .stat-icon { font-size: 1.5rem; }
+      .stat-value { font-size: 1.2rem; }
     }
   `]
 })
