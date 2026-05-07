@@ -252,12 +252,16 @@ import { WhatsappService } from '../../services/whatsapp.service';
     .footer-bottom small { display: block; margin-top: 4px; opacity: 0.6; }
     /* Banner */
     .envio-banner {
-      width: 100vw; position: fixed; left: 0; bottom: 0; z-index: 2000;
+      width: 100vw !important;
+      position: fixed !important;
+      left: 0; bottom: 0;
+      z-index: 9999 !important;
       background: linear-gradient(90deg, #d3ed05 60%, #3a5ba0 100%);
       color: #1e335c; font-weight: bold; font-size: 1rem;
       overflow: hidden; height: 38px; display: flex; align-items: center;
       box-shadow: 0 -2px 10px rgba(10,24,51,0.08);
       border-top: 2px solid #3a5ba0;
+      pointer-events: auto;
     }
     .envio-banner-track {
       display: flex; align-items: center; white-space: nowrap;
