@@ -93,7 +93,7 @@ import { Product, TallaStock } from '../../models/product.model';
            (click)="onImgClick($event)"
            (touchstart)="onTouchStart($event)"
            (touchmove)="onTouchMove($event)"
-           (touchend)="onTouchEnd($event)">
+           (touchend)="onTouchEnd()">
         <img [src]="getImgUrl(product!.imagenes[currentImgIndex])" [alt]="product!.nombre" class="lightbox-img" draggable="false">
       </div>
       <button class="lightbox-nav lightbox-next" (click)="$event.stopPropagation(); nextImg(); resetZoom()" [disabled]="currentImgIndex === product!.imagenes.length - 1">›</button>
