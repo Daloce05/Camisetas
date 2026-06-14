@@ -30,7 +30,7 @@ export class WhatsappService {
         // Fallback values
         this.settings = {
           contacto_metodo: 'whatsapp',
-          contacto_whatsapp: '573195631384'
+          contacto_whatsapp: '573124775193'
         };
         this.loaded = true;
       }
@@ -53,7 +53,7 @@ export class WhatsappService {
     }).subscribe();
 
     if (method === 'whatsapp') {
-      const phone = this.settings['contacto_whatsapp'] || '573195631384';
+      const phone = this.settings['contacto_whatsapp'] || '573124775193';
       const message = `¡Hola! 👕 Estoy interesado en el producto:\n\n` +
         `*${product.nombre}*\n` +
         `Precio: $${product.precio}\n` +
@@ -93,7 +93,7 @@ export class WhatsappService {
     }).subscribe();
 
     if (method === 'whatsapp') {
-      const phone = this.settings['contacto_whatsapp'] || '573195631384';
+      const phone = this.settings['contacto_whatsapp'] || '573124775193';
       const message = `¡Hola! 👕 Me gustaría obtener información sobre sus productos.`;
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
 

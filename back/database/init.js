@@ -49,7 +49,7 @@ async function initDatabase() {
     await Setting.bulkCreate([
       { clave: 'nombre_empresa', valor: 'Camisetas Fútbol', descripcion: 'Nombre de la empresa' },
       { clave: 'contacto_metodo', valor: 'whatsapp', descripcion: 'Método de contacto principal (whatsapp, telefono, email, instagram)' },
-      { clave: 'contacto_whatsapp', valor: '573195631384', descripcion: 'Número de WhatsApp (con código de país)' },
+      { clave: 'contacto_whatsapp', valor: '573124775193', descripcion: 'Número de WhatsApp (con código de país)' },
       { clave: 'contacto_telefono', valor: '', descripcion: 'Número de teléfono' },
       { clave: 'contacto_email', valor: '', descripcion: 'Correo electrónico de contacto' },
       { clave: 'contacto_instagram', valor: '', descripcion: 'Usuario de Instagram (sin @)' },
